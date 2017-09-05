@@ -1,0 +1,15 @@
+EXPORTS
+dllModel_M_
+dllModel_M
+dllModel_U
+dllModel_Y
+dllModel_initialize
+dllModel_step
+dllModel_terminate
+
+
+SignalIn
+SimulationSignal2
+SignalOut
+K
+dllModel_P
