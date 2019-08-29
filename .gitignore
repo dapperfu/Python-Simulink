@@ -103,3 +103,5 @@ ENV/
 **/castxml/*
 **/dllModel/*
 **/slprj/**
+Scripts 
+pyvenv.cfg 
