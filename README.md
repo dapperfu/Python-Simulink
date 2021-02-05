@@ -1,28 +1,91 @@
 # Python SimulinkDLL
 
-Run your Simulink models in Python.
+Run your Simulink models & libraries in Python.
 
 ## Motivation
 
-Running model in the loop tests with Simulink becomes time consuming with Matlab & Simulink overhead. There are ways to reduce it (Model reference, etc) however nothing has shown to be as fast as a precompiled binary.
+1. Running model in the loop tests with Simulink becomes time consuming with Matlab & Simulink overhead. There are ways to reduce it (Model reference, etc) however nothing has shown to be as fast as a precompiled shared library.
 
-Python has a very mature set of tools and packages to automate testing and put out JUnit test results.
+2. Python has a very mature set of tools and packages to automate testing.
 
-It also means the testing can be distributed to machines without Simulink licenses.
+3. This means the testing can be distributed to machines without Simulink licenses.
 
 ## Use cases
 
 1. Use Python and it's ecosystem to run complex Simulink models.
-2. Use Python & pytest to run MIL tests on Simulink subsystems.
+2. Use Python & pytest to run Model-in-the-Loop (MIL) tests on Simulink subsystems.
 3. Give Simulink algorithms to developers without Matlab/Simulink licenses to use.
 4. Start a programming language war at your company.
 
-## Requirements
+##  Disclaimer
+
+This repository is a set of instructions, with examples, on how to create a Pythonic wrapper for Simulink models. It is not a turnkey Python module to do this:
+
+```python
+import simulinkdll
+simulinkdll.run("my_model.slx")
+```
+
+For a given library or model this should only need done when the Python interface changes.
+
+### High level instructions.
+
+1. [Create a shared library in Simulink.](https://www.mathworks.com/help/ecoder/ug/creating-and-using-host-based-shared-libraries.html)
+2. Create Python representations of all items in the header file.
+3. Open the DLL in Python and run the model.
+
+# Examples
+
+### [Simple DLL Export](Example1)
+
+For demonstrating minimal dll functionality.
+
+![](Example1/dllModel.png)
+
+### [First Order Transfer Function](Example2)
+
+A Simple plant model with two different time signals
+
+![](Example2/first_order_tf.png)
+
+### ![Bouncing Ball](Example3/)
+
+Adapted from [Mathworks's Simulation of a Bouncing Ball](https://www.mathworks.com/help/simulink/slref/simulation-of-a-bouncing-ball.html)
+
+
+
+![](Example3/bouncing_ball.png)
+
+
+
+# Questions, Issues, & Feedback
+
+https://github.com/AutomotiveDevops/python_SimulinkDLL/issuest
+
+
+
+# Development Instructions
+
+### Development Requirements
 
 - [CastXML](https://github.com/CastXML/CastXML)
-  - [Windows binaries](https://midas3.kitware.com/midas/item/318228)
-- MinGW gcc.
-- Simulink.
-- A model.
+  
+  - [Windows binaries](https://data.kitware.com/#collection/57b5c9e58d777f126827f5a1/folder/57b5de948d777f10f2696370)
+  
+- [MinGW gcc](https://nuwen.net/mingw.html) 
 
-## Caveats 
+- Simulink & Model for testing.
+
+- Python with Jupyter Notebooks & `pygccxml`
+
+  ​    ```pip install notebook pygccxml```
+
+  
+
+## Notebook Instructions
+
+1. CastXML & MinGW extracted repo directory.
+
+   ```
+   python_SimulinkDLL\MinGW
+   ```
