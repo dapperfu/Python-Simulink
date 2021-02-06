@@ -13,6 +13,8 @@ function RTW_rtwnameSIDMap() {
 	this.sidHashMap["bouncing_ball:1"] = {rtwname: "<Root>/Constant"};
 	this.rtwnameHashMap["<Root>/Constant1"] = {sid: "bouncing_ball:14"};
 	this.sidHashMap["bouncing_ball:14"] = {rtwname: "<Root>/Constant1"};
+	this.rtwnameHashMap["<Root>/Digital Clock"] = {sid: "bouncing_ball:20"};
+	this.sidHashMap["bouncing_ball:20"] = {rtwname: "<Root>/Digital Clock"};
 	this.rtwnameHashMap["<Root>/Ground"] = {sid: "bouncing_ball:8"};
 	this.sidHashMap["bouncing_ball:8"] = {rtwname: "<Root>/Ground"};
 	this.rtwnameHashMap["<Root>/IC"] = {sid: "bouncing_ball:4"};
@@ -25,6 +27,8 @@ function RTW_rtwnameSIDMap() {
 	this.sidHashMap["bouncing_ball:12"] = {rtwname: "<Root>/Scope"};
 	this.rtwnameHashMap["<Root>/Terminator"] = {sid: "bouncing_ball:11"};
 	this.sidHashMap["bouncing_ball:11"] = {rtwname: "<Root>/Terminator"};
+	this.rtwnameHashMap["<Root>/Terminator1"] = {sid: "bouncing_ball:22"};
+	this.sidHashMap["bouncing_ball:22"] = {rtwname: "<Root>/Terminator1"};
 	this.rtwnameHashMap["<Root>/Velocity Integrator"] = {sid: "bouncing_ball:7"};
 	this.sidHashMap["bouncing_ball:7"] = {rtwname: "<Root>/Velocity Integrator"};
 	this.rtwnameHashMap["<S1>/u"] = {sid: "bouncing_ball:10:1"};

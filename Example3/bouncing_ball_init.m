@@ -1,6 +1,4 @@
-Ts = Simulink.Parameter;
-Ts.Value = 1e-3;
-Ts.CoderInfo.StorageClass='ExportedGlobal';
+Ts = 1e-3;
 
 gravitational_constant = Simulink.Parameter;
 gravitational_constant.Value = -9.81;
@@ -15,3 +13,7 @@ ball_position.CoderInfo.StorageClass='ExportedGlobal';
 
 ball_velocity = Simulink.Signal;
 ball_velocity.CoderInfo.StorageClass='ExportedGlobal';
+
+
+SimTime = Simulink.Signal;
+SimTime.CoderInfo.StorageClass='ExportedGlobal';

@@ -2,128 +2,6 @@
 
 ![](dllModel.png)
 
-# Model Parameter/Signal Setup
-
-### `SimulinkGlobal` vs `ExportedGlobal`
-
-- `SimulinkGlobal`: parameters/signals inside of a global struct.
-
-- `ExportedGlobal`: parameters/signals are global themselves.
-
-# Block Parameters
-
-### `SimulinkGlobal`
-
-```matlab
-K2=Simulink.Parameter;
-K2.Value=2;
-K2.CoderInfo.StorageClass='SimulinkGlobal';
-```
-
-```c
-struct P_dllModel_T_ {
-  uint16_T K2;                         /* Variable: K2
-                                        * Referenced by: '<Root>/Gain1'
-                                        */
-};
-
-/* Block parameters (default storage) */
-extern P_dllModel_T dllModel_P;
-```
-
-### `ExportedGlobal`
-
-```matlab
-%% Tunable parameters.
-K=Simulink.Parameter;
-K.Value=1;
-K.CoderInfo.StorageClass='ExportedGlobal';
-```
-
-```c
-/*
- * Exported Global Parameters
- *
- * Note: Exported global parameters are tunable parameters with an exported
- * global storage class designation.  Code generation will declare the memory for
- * these parameters and exports their symbols.
- *
- */
-extern real32_T K;                     /* Variable: K
-                                        * Referenced by: '<Root>/Gain'
-                                        */
-```
-
-
-## Block signals
-
-### `SimulinkGlobal`
-
-```matlab
-SignalOut2=Simulink.Signal;
-SignalOut2.CoderInfo.StorageClass='SimulinkGlobal';
-
-SignalOut3=Simulink.Signal;
-SignalOut3.CoderInfo.StorageClass='SimulinkGlobal';
-
-SimulationSignal1=Simulink.Signal;
-SimulationSignal1.CoderInfo.StorageClass='SimulinkGlobal';
-```
-
-```c
-/* Block signals (default storage) */
-typedef struct {
-  real_T SimulationSignal1;            /* '<Root>/Digital Clock' */
-  real32_T SignalOut3;                 /* '<Root>/Sum' */
-  uint16_T SignalOut2;                 /* '<Root>/Gain1' */
-} B_dllModel_T;
-
-/* Block signals (default storage) */
-extern B_dllModel_T dllModel_B;
-```
-
-### `ExportedGlobal`
-
-## External inputs
-
-### `ExportedGlobal`
-```matlab
-SignalIn2=Simulink.Signal;
-SignalIn2.CoderInfo.StorageClass='SimulinkGlobal';
-```
-
-```
-/* External inputs (root inport signals with default storage) */
-typedef struct {
-  uint16_T SignalIn2;                  /* '<Root>/InputPort2' */
-} ExtU_dllModel_T;
-
-/* External inputs (root inport signals with default storage) */
-extern ExtU_dllModel_T dllModel_U;
-```
-
-## External Outputs
-
-### `ExportedGlobal`
-
-```matlab
-SignalOut3=Simulink.Signal;
-SignalOut3.CoderInfo.StorageClass='SimulinkGlobal';
-```
-
-```c
-/* External outputs (root outports fed by signals with default storage) */
-typedef struct {
-  real32_T OutputPort2;                /* '<Root>/OutputPort2' */
-} ExtY_dllModel_T;
-
-/* External outputs (root outports fed by signals with default storage) */
-extern ExtY_dllModel_T dllModel_Y;
-```
-
-
-
-
 # `rtwtypes.h`
 
 `rtwtypes.h` contains multiple typedefs that need to be specified in python using ctypes.
@@ -324,4 +202,129 @@ class cuint64_T(ctypes.Structure):
         ("im", uint64_T),
     ]
 
+```
+
+# Model Parameter/Signal Setup
+
+### `SimulinkGlobal` vs `ExportedGlobal`
+
+- `SimulinkGlobal`: parameters/signals inside of a global struct.
+
+- `ExportedGlobal`: parameters/signals are global themselves.
+
+# Block Parameters
+
+### `SimulinkGlobal`
+
+```matlab
+K2=Simulink.Parameter;
+K2.Value=2;
+K2.CoderInfo.StorageClass='SimulinkGlobal';
+```
+
+```c
+struct P_dllModel_T_ {
+  uint16_T K2;                         /* Variable: K2
+                                        * Referenced by: '<Root>/Gain1'
+                                        */
+};
+
+/* Block parameters (default storage) */
+extern P_dllModel_T dllModel_P;
+```
+
+
+```python
+
+
+```
+
+### `ExportedGlobal`
+
+```matlab
+%% Tunable parameters.
+K=Simulink.Parameter;
+K.Value=1;
+K.CoderInfo.StorageClass='ExportedGlobal';
+```
+
+```c
+/*
+ * Exported Global Parameters
+ *
+ * Note: Exported global parameters are tunable parameters with an exported
+ * global storage class designation.  Code generation will declare the memory for
+ * these parameters and exports their symbols.
+ *
+ */
+extern real32_T K;                     /* Variable: K
+                                        * Referenced by: '<Root>/Gain'
+                                        */
+```
+
+
+## Block signals
+
+### `SimulinkGlobal`
+
+```matlab
+SignalOut2=Simulink.Signal;
+SignalOut2.CoderInfo.StorageClass='SimulinkGlobal';
+
+SignalOut3=Simulink.Signal;
+SignalOut3.CoderInfo.StorageClass='SimulinkGlobal';
+
+SimulationSignal1=Simulink.Signal;
+SimulationSignal1.CoderInfo.StorageClass='SimulinkGlobal';
+```
+
+```c
+/* Block signals (default storage) */
+typedef struct {
+  real_T SimulationSignal1;            /* '<Root>/Digital Clock' */
+  real32_T SignalOut3;                 /* '<Root>/Sum' */
+  uint16_T SignalOut2;                 /* '<Root>/Gain1' */
+} B_dllModel_T;
+
+/* Block signals (default storage) */
+extern B_dllModel_T dllModel_B;
+```
+
+### `ExportedGlobal`
+
+## External inputs
+
+### `ExportedGlobal`
+```matlab
+SignalIn2=Simulink.Signal;
+SignalIn2.CoderInfo.StorageClass='SimulinkGlobal';
+```
+
+```
+/* External inputs (root inport signals with default storage) */
+typedef struct {
+  uint16_T SignalIn2;                  /* '<Root>/InputPort2' */
+} ExtU_dllModel_T;
+
+/* External inputs (root inport signals with default storage) */
+extern ExtU_dllModel_T dllModel_U;
+```
+
+## External Outputs
+
+### `ExportedGlobal`
+
+```matlab
+SignalOut3=Simulink.Signal;
+SignalOut3.CoderInfo.StorageClass='SimulinkGlobal';
+```
+
+```c
+/* External outputs (root outports fed by signals with default storage) */
+typedef struct {
+  real32_T OutputPort2;                /* '<Root>/OutputPort2' */
+} ExtY_dllModel_T;
+
+/* External outputs (root outports fed by signals with default storage) */
+extern ExtY_dllModel_T dllModel_Y;
 ```

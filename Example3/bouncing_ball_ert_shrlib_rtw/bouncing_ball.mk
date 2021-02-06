@@ -2,7 +2,7 @@
 ## Makefile generated for Simulink model 'bouncing_ball'. 
 ## 
 ## Makefile     : bouncing_ball.mk
-## Generated on : Fri Feb 05 05:41:08 2021
+## Generated on : Sat Feb 06 16:13:33 2021
 ## MATLAB Coder version: 4.1 (R2018b)
 ## 
 ## Build Info:

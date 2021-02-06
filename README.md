@@ -38,7 +38,7 @@ For a given library or model this should only need done when the Python interfac
 
 ### [Simple DLL Export](Example1)
 
-For demonstrating minimal dll functionality.
+For demonstrating minimal dll functionality and the steps required to run a model in Simulink.
 
 ![](Example1/dllModel.png)
 
@@ -52,40 +52,8 @@ A Simple plant model with two different time signals
 
 Adapted from [Mathworks's Simulation of a Bouncing Ball](https://www.mathworks.com/help/simulink/slref/simulation-of-a-bouncing-ball.html)
 
-
-
 ![](Example3/bouncing_ball.png)
-
-
 
 # Questions, Issues, & Feedback
 
 https://github.com/AutomotiveDevops/python_SimulinkDLL/issuest
-
-
-
-# Development Instructions
-
-### Development Requirements
-
-- [CastXML](https://github.com/CastXML/CastXML)
-  
-  - [Windows binaries](https://data.kitware.com/#collection/57b5c9e58d777f126827f5a1/folder/57b5de948d777f10f2696370)
-  
-- [MinGW gcc](https://nuwen.net/mingw.html) 
-
-- Simulink & Model for testing.
-
-- Python with Jupyter Notebooks & `pygccxml`
-
-  ​    ```pip install notebook pygccxml```
-
-  
-
-## Notebook Instructions
-
-1. CastXML & MinGW extracted repo directory.
-
-   ```
-   python_SimulinkDLL\MinGW
-   ```

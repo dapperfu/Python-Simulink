@@ -6,6 +6,7 @@ bouncing_ball_step
 bouncing_ball_terminate
 
 
+SimTime
 ball_position
 ball_velocity
 coefficient_of_restitution

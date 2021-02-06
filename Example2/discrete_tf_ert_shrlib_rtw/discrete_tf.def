@@ -1,0 +1,13 @@
+EXPORTS
+discrete_tf_M_
+discrete_tf_M
+discrete_tf_initialize
+discrete_tf_step
+discrete_tf_terminate
+
+
+OutputSignal
+SimTime
+InputSignal
+den
+num

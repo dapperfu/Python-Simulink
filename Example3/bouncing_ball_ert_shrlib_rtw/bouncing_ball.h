@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'bouncing_ball'.
  *
- * Model version                  : 1.17
+ * Model version                  : 1.20
  * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
- * C/C++ source code generated on : Fri Feb  5 05:40:56 2021
+ * C/C++ source code generated on : Sat Feb  6 16:13:51 2021
  *
  * Target selection: ert_shrlib.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -15,7 +15,6 @@
 
 #ifndef RTW_HEADER_bouncing_ball_h_
 #define RTW_HEADER_bouncing_ball_h_
-#include <stddef.h>
 #include <string.h>
 #ifndef bouncing_ball_COMMON_INCLUDES_
 # define bouncing_ball_COMMON_INCLUDES_
@@ -46,6 +45,15 @@ typedef struct {
 /* Real-time Model Data Structure */
 struct tag_RTM_bouncing_ball_T {
   const char_T * volatile errorStatus;
+
+  /*
+   * Timing:
+   * The following substructure contains information regarding
+   * the timing information for the model.
+   */
+  struct {
+    uint32_T clockTick0;
+  } Timing;
 };
 
 /* Block states (default storage) */
@@ -59,6 +67,7 @@ extern DW_bouncing_ball_T bouncing_ball_DW;
  * these signals and export their symbols.
  *
  */
+extern real_T SimTime;                 /* '<Root>/Digital Clock' */
 extern real32_T ball_position;         /* '<Root>/Velocity Integrator' */
 extern real32_T ball_velocity;         /* '<Root>/Acceleration Integrator' */
 

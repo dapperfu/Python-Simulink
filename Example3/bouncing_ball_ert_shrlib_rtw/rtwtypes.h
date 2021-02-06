@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'bouncing_ball'.
  *
- * Model version                  : 1.17
+ * Model version                  : 1.20
  * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
- * C/C++ source code generated on : Fri Feb  5 05:40:56 2021
+ * C/C++ source code generated on : Sat Feb  6 16:13:51 2021
  *
  * Target selection: ert_shrlib.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)

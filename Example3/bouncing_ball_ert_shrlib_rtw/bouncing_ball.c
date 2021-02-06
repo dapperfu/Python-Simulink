@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'bouncing_ball'.
  *
- * Model version                  : 1.17
+ * Model version                  : 1.20
  * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
- * C/C++ source code generated on : Fri Feb  5 05:40:56 2021
+ * C/C++ source code generated on : Sat Feb  6 16:13:51 2021
  *
  * Target selection: ert_shrlib.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -17,6 +17,7 @@
 #include "bouncing_ball_private.h"
 
 /* Exported block signals */
+real_T SimTime;                        /* '<Root>/Digital Clock' */
 real32_T ball_position;                /* '<Root>/Velocity Integrator' */
 real32_T ball_velocity;                /* '<Root>/Acceleration Integrator' */
 
@@ -89,6 +90,9 @@ void bouncing_ball_step(void)
 
   /* End of DiscreteIntegrator: '<Root>/Acceleration Integrator' */
 
+  /* DigitalClock: '<Root>/Digital Clock' */
+  SimTime = ((bouncing_ball_M->Timing.clockTick0) * 0.001);
+
   /* Update for DiscreteIntegrator: '<Root>/Velocity Integrator' */
   bouncing_ball_DW.VelocityIntegrator_DSTATE += 0.001F * ball_velocity;
   bouncing_ball_DW.VelocityIntegrator_PrevResetSta = (int8_T)rtb_Compare;
@@ -99,6 +103,14 @@ void bouncing_ball_step(void)
   bouncing_ball_DW.AccelerationIntegrator_DSTATE += 0.001F *
     gravitational_constant;
   bouncing_ball_DW.AccelerationIntegrator_PrevRese = (int8_T)rtb_Compare;
+
+  /* Update absolute time for base rate */
+  /* The "clockTick0" counts the number of times the code of this task has
+   * been executed. The resolution of this integer timer is 0.001, which is the step size
+   * of the task. Size of "clockTick0" ensures timer will not overflow during the
+   * application lifespan selected.
+   */
+  bouncing_ball_M->Timing.clockTick0++;
 }
 
 /* Model initialize function */
@@ -106,12 +118,14 @@ void bouncing_ball_initialize(void)
 {
   /* Registration code */
 
-  /* initialize error status */
-  rtmSetErrorStatus(bouncing_ball_M, (NULL));
+  /* initialize real-time model */
+  (void) memset((void *)bouncing_ball_M, 0,
+                sizeof(RT_MODEL_bouncing_ball_T));
 
   /* block I/O */
 
   /* exported global signals */
+  SimTime = 0.0;
   ball_position = 0.0F;
   ball_velocity = 0.0F;
 
