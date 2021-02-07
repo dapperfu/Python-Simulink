@@ -56,4 +56,4 @@ Adapted from [Mathworks's Simulation of a Bouncing Ball](https://www.mathworks.c
 
 # Questions, Issues, & Feedback
 
-https://github.com/AutomotiveDevops/python_SimulinkDLL/issuest
+https://github.com/AutomotiveDevops/python_SimulinkDLL/issues
