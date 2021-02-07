@@ -26,7 +26,7 @@ import simulinkdll
 simulinkdll.run("my_model.slx")
 ```
 
-For a given library or model this should only need done when the Python interface changes.
+For a given library or model this should only need done when the Simulink interface changes.
 
 ### High level instructions.
 
