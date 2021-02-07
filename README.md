@@ -8,7 +8,7 @@ Run your Simulink models & libraries in Python.
 
 2. Python has a very mature set of tools and packages to automate testing.
 
-3. This means the testing can be distributed to machines without Simulink licenses.
+3. Testing can be distributed to machines without Matlab/Simulink licenses.
 
 ## Use cases
 
@@ -38,7 +38,7 @@ For a given library or model this should only need done when the Python interfac
 
 ### [Simple DLL Export](Example1)
 
-For demonstrating minimal dll functionality and the steps required to run a model in Simulink.
+For demonstrating minimal dll functionality and the steps required to run a model in Python.
 
 ![](Example1/dllModel.png)
 
