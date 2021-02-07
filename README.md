@@ -42,11 +42,11 @@ For demonstrating minimal dll functionality and the steps required to run a mode
 
 ![](Example1/dllModel.png)
 
-### [First Order Transfer Function](Example2)
+### [Discrete Transfer Function](Example2)
 
-A Simple plant model with two different time signals
+A simple discrete transfer function. Compiled with a 1st order low pass filter.
 
-![](Example2/first_order_tf.png)
+![](Example2/discrete_tf.png)
 
 ### ![Bouncing Ball](Example3/)
 
