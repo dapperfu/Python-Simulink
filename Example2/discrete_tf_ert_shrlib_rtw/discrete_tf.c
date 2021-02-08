@@ -3,12 +3,14 @@
  *
  * Code generated for Simulink model 'discrete_tf'.
  *
- * Model version                  : 1.19
- * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
- * C/C++ source code generated on : Sat Feb  6 15:20:52 2021
+ * Model version                  : 1.20
+ * Simulink Coder version         : 8.14 (R2018a) 06-Feb-2018
+ * C/C++ source code generated on : Sun Feb  7 20:06:09 2021
  *
  * Target selection: ert_shrlib.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
+ * Emulation hardware selection:
+ *    Differs from embedded hardware (MATLAB Host)
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */

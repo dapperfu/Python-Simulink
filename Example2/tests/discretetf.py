@@ -34,11 +34,13 @@ class DiscreteTF(object):
 
     def initialize(self):
         """Initialize the Model."""
+        self.step_num=-1
         self.__initialize()
 
     def step(self):
         """Step through the model Model."""
-        self.step_num = self.__step()
+        self.step_num+=1
+        self.__step()
 
     def terminate(self):
         """Terminate the model Model."""

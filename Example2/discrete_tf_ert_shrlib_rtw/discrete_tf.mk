@@ -2,12 +2,12 @@
 ## Makefile generated for Simulink model 'discrete_tf'. 
 ## 
 ## Makefile     : discrete_tf.mk
-## Generated on : Sat Feb 06 15:20:54 2021
-## MATLAB Coder version: 4.1 (R2018b)
+## Generated on : Sun Feb 07 20:06:12 2021
+## MATLAB Coder version: 4.0 (R2018a)
 ## 
 ## Build Info:
 ## 
-## Final product: $(RELATIVE_PATH_TO_ANCHOR)/discrete_tf_win64.dll
+## Final product: $(RELATIVE_PATH_TO_ANCHOR)/discrete_tf.so
 ## Product type : shared library
 ## Build type   : Shared Library Target
 ## 
@@ -21,27 +21,24 @@
 # PRODUCT_NAME            Name of the system to build
 # MAKEFILE                Name of this makefile
 # COMPUTER                Computer type. See the MATLAB "computer" command.
-# COMPILER_COMMAND_FILE   Compiler command listing model reference header paths
-# CMD_FILE                Command file
 # DEF_FILE                Definition file
 
 PRODUCT_NAME              = discrete_tf
 MAKEFILE                  = discrete_tf.mk
-COMPUTER                  = PCWIN64
-MATLAB_ROOT               = C:/R2018b
-MATLAB_BIN                = C:/R2018b/bin
-MATLAB_ARCH_BIN           = $(MATLAB_BIN)/win64
+COMPUTER                  = GLNXA64
+MATLAB_ROOT               = /usr/local/MATLAB/R2018a
+MATLAB_BIN                = /usr/local/MATLAB/R2018a/bin
+MATLAB_ARCH_BIN           = $(MATLAB_BIN)/glnxa64
 MASTER_ANCHOR_DIR         = 
-START_DIR                 = C:/WPy64-3910/notebooks/python_SimulinkDLL/Example2
-ARCH                      = win64
+START_DIR                 = /home/user1/projects/python_SimulinkDLL/Example2
+ARCH                      = glnxa64
 SOLVER                    = 
 SOLVER_OBJ                = 
 CLASSIC_INTERFACE         = 0
 TGT_FCN_LIB               = None
 MODEL_HAS_DYNAMICALLY_LOADED_SFCNS = 0
+MODELREF_LINK_RSPFILE_NAME = discrete_tf_ref.rsp
 RELATIVE_PATH_TO_ANCHOR   = ..
-COMPILER_COMMAND_FILE     = discrete_tf_comp.rsp
-CMD_FILE                  = discrete_tf.rsp
 DEF_FILE                  = $(PRODUCT_NAME).def
 C_STANDARD_OPTS           = -ansi -pedantic -Wno-long-long -fwrapv
 CPP_STANDARD_OPTS         = -std=c++98 -pedantic -Wno-long-long -fwrapv
@@ -50,9 +47,9 @@ CPP_STANDARD_OPTS         = -std=c++98 -pedantic -Wno-long-long -fwrapv
 ## TOOLCHAIN SPECIFICATIONS
 ###########################################################################
 
-# Toolchain Name:          MinGW64 | gmake (64-bit Windows)
-# Supported Version(s):    5.x
-# ToolchainInfo Version:   R2018b
+# Toolchain Name:          GNU gcc/g++ v4.4.x | gmake (64-bit Linux)
+# Supported Version(s):    4.4.x
+# ToolchainInfo Version:   R2018a
 # Specification Revision:  1.0
 # 
 #-------------------------------------------
@@ -61,52 +58,41 @@ CPP_STANDARD_OPTS         = -std=c++98 -pedantic -Wno-long-long -fwrapv
 
 # C_STANDARD_OPTS
 # CPP_STANDARD_OPTS
-# MINGW_ROOT
-# MINGW_C_STANDARD_OPTS
 
 #-----------
 # MACROS
 #-----------
 
-WARN_FLAGS            = -Wall -W -Wwrite-strings -Winline -Wstrict-prototypes -Wnested-externs -Wpointer-arith -Wcast-align
-WARN_FLAGS_MAX        = $(WARN_FLAGS) -Wcast-qual -Wshadow
-CPP_WARN_FLAGS        = -Wall -W -Wwrite-strings -Winline -Wpointer-arith -Wcast-align
-CPP_WARN_FLAGS_MAX    = $(CPP_WARN_FLAGS) -Wcast-qual -Wshadow
-MEX_OPTS_FILE         = $(MATLAB_ROOT)/bin/win64/mexopts/mingw64.xml
-MEX_CPP_OPTS_FILE     = $(MATLAB_ROOT)/bin/win64/mexopts/mingw64_g++.xml
-MW_EXTERNLIB_DIR      = $(MATLAB_ROOT)/extern/lib/win64/mingw64
-SHELL                 = %SystemRoot%/system32/cmd.exe
+WARN_FLAGS         = -Wall -W -Wwrite-strings -Winline -Wstrict-prototypes -Wnested-externs -Wpointer-arith -Wcast-align
+WARN_FLAGS_MAX     = $(WARN_FLAGS) -Wcast-qual -Wshadow
+CPP_WARN_FLAGS     = -Wall -W -Wwrite-strings -Winline -Wpointer-arith -Wcast-align
+CPP_WARN_FLAGS_MAX = $(CPP_WARN_FLAGS) -Wcast-qual -Wshadow
 
 TOOLCHAIN_SRCS = 
 TOOLCHAIN_INCS = 
-TOOLCHAIN_LIBS = -lws2_32
+TOOLCHAIN_LIBS = 
 
 #------------------------
 # BUILD TOOL COMMANDS
 #------------------------
 
 # C Compiler: GNU C Compiler
-CC_PATH = $(MINGW_ROOT)
-CC = "$(CC_PATH)/gcc"
+CC = gcc
 
 # Linker: GNU Linker
-LD_PATH = $(MINGW_ROOT)
-LD = "$(LD_PATH)/g++"
+LD = g++
 
 # C++ Compiler: GNU C++ Compiler
-CPP_PATH = $(MINGW_ROOT)
-CPP = "$(CPP_PATH)/g++"
+CPP = g++
 
 # C++ Linker: GNU C++ Linker
-CPP_LD_PATH = $(MINGW_ROOT)
-CPP_LD = "$(CPP_LD_PATH)/g++"
+CPP_LD = g++
 
 # Archiver: GNU Archiver
-AR_PATH = $(MINGW_ROOT)
-AR = "$(AR_PATH)/ar"
+AR = ar
 
 # MEX Tool: MEX Tool
-MEX_PATH = $(MATLAB_BIN)/win64
+MEX_PATH = $(MATLAB_ARCH_BIN)
 MEX = "$(MEX_PATH)/mex"
 
 # Download: Download
@@ -116,7 +102,7 @@ DOWNLOAD =
 EXECUTE = $(PRODUCT)
 
 # Builder: GMAKE Utility
-MAKE_PATH = %MATLAB%/bin/win64
+MAKE_PATH = %MATLAB%/bin/glnxa64
 MAKE = "$(MAKE_PATH)/gmake"
 
 
@@ -135,9 +121,9 @@ OUTPUT_FLAG         = -o
 ARDEBUG             =
 STATICLIB_OUTPUT_FLAG =
 MEX_DEBUG           = -g
-RM                  = @del
+RM                  = @rm -f
 ECHO                = @echo
-MV                  = @move
+MV                  = @mv
 RUN                 =
 
 #--------------------------------------
@@ -145,19 +131,18 @@ RUN                 =
 #--------------------------------------
 
 ARFLAGS              = ruvs
-CFLAGS               = -c $(MINGW_C_STANDARD_OPTS) -m64 \
+CFLAGS               = -c $(C_STANDARD_OPTS) -fPIC \
                        -O3 -fno-loop-optimize -fno-aggressive-loop-optimizations
-CPPFLAGS             = -c $(CPP_STANDARD_OPTS) -m64 \
+CPPFLAGS             = -c $(CPP_STANDARD_OPTS) -fPIC \
                        -O3 -fno-loop-optimize -fno-aggressive-loop-optimizations
-CPP_LDFLAGS          = -Wl,-rpath,"$(MATLAB_ARCH_BIN)",-L"$(MATLAB_ARCH_BIN)" -static -m64
-CPP_SHAREDLIB_LDFLAGS  = -shared -Wl,-rpath,"$(MATLAB_ARCH_BIN)",-L"$(MATLAB_ARCH_BIN)" -Wl,--no-undefined \
-                         -Wl,--out-implib,$(basename $(PRODUCT))$(STATICLIB_EXT)
+CPP_LDFLAGS          = -Wl,-rpath,"$(MATLAB_ARCH_BIN)",-L"$(MATLAB_ARCH_BIN)"
+CPP_SHAREDLIB_LDFLAGS  = -shared -Wl,-rpath,"$(MATLAB_ARCH_BIN)",-L"$(MATLAB_ARCH_BIN)" -Wl,--no-undefined
 DOWNLOAD_FLAGS       =
 EXECUTE_FLAGS        =
-LDFLAGS              = -Wl,-rpath,"$(MATLAB_ARCH_BIN)",-L"$(MATLAB_ARCH_BIN)" -static -m64
+LDFLAGS              = -Wl,-rpath,"$(MATLAB_ARCH_BIN)",-L"$(MATLAB_ARCH_BIN)"
 MEX_CPPFLAGS         = -R2018a -MATLAB_ARCH=$(ARCH) $(INCLUDES) \
                          \
-                       CXXOPTIMFLAGS="$(MINGW_C_STANDARD_OPTS)  \
+                       CXXOPTIMFLAGS="$(C_STANDARD_OPTS)  \
                        -O3 -fno-loop-optimize -fno-aggressive-loop-optimizations \
                         $(DEFINES)" \
                          \
@@ -165,32 +150,31 @@ MEX_CPPFLAGS         = -R2018a -MATLAB_ARCH=$(ARCH) $(INCLUDES) \
 MEX_CPPLDFLAGS       = LDFLAGS=='$$LDFLAGS'
 MEX_CFLAGS           = -R2018a -MATLAB_ARCH=$(ARCH) $(INCLUDES) \
                          \
-                       COPTIMFLAGS="$(MINGW_C_STANDARD_OPTS)  \
+                       COPTIMFLAGS="$(C_STANDARD_OPTS)  \
                        -O3 -fno-loop-optimize -fno-aggressive-loop-optimizations \
                         $(DEFINES)" \
                          \
                        -silent
 MEX_LDFLAGS          = LDFLAGS=='$$LDFLAGS'
 MAKE_FLAGS           = -f $(MAKEFILE)
-SHAREDLIB_LDFLAGS    = -shared -Wl,-rpath,"$(MATLAB_ARCH_BIN)",-L"$(MATLAB_ARCH_BIN)" -Wl,--no-undefined \
-                       -Wl,--out-implib,$(basename $(PRODUCT))$(STATICLIB_EXT)
+SHAREDLIB_LDFLAGS    = -shared -Wl,-rpath,"$(MATLAB_ARCH_BIN)",-L"$(MATLAB_ARCH_BIN)" -Wl,--no-undefined
 
 #--------------------
 # File extensions
 #--------------------
 
 H_EXT               = .h
-OBJ_EXT             = .obj
+OBJ_EXT             = .o
 C_EXT               = .c
-EXE_EXT             = .exe
-SHAREDLIB_EXT       = .dll
+EXE_EXT             =
+SHAREDLIB_EXT       = .so
 HPP_EXT             = .hpp
-OBJ_EXT             = .obj
+OBJ_EXT             = .o
 CPP_EXT             = .cpp
-EXE_EXT             = .exe
-SHAREDLIB_EXT       = .dll
-STATICLIB_EXT       = .lib
-MEX_EXT             = .mexw64
+EXE_EXT             =
+SHAREDLIB_EXT       = .so
+STATICLIB_EXT       = .a
+MEX_EXT             = .mexa64
 MAKE_EXT            = .mk
 
 
@@ -198,7 +182,7 @@ MAKE_EXT            = .mk
 ## OUTPUT INFO
 ###########################################################################
 
-PRODUCT = $(RELATIVE_PATH_TO_ANCHOR)/discrete_tf_win64.dll
+PRODUCT = $(RELATIVE_PATH_TO_ANCHOR)/discrete_tf.so
 PRODUCT_TYPE = "shared library"
 BUILD_TYPE = "Shared Library Target"
 
@@ -216,7 +200,7 @@ INCLUDES = $(INCLUDES_BUILDINFO)
 
 DEFINES_BUILD_ARGS = -DCLASSIC_INTERFACE=0 -DALLOCATIONFCN=0 -DTERMFCN=1 -DONESTEPFCN=1 -DMAT_FILE=0 -DMULTI_INSTANCE_CODE=0 -DINTEGER_CODE=0 -DMT=0
 DEFINES_IMPLIED = -DTID01EQ=0
-DEFINES_STANDARD = -DMODEL=discrete_tf -DNUMST=1 -DNCSTATES=0 -DHAVESTDIO -DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0
+DEFINES_STANDARD = -DMODEL=discrete_tf -DNUMST=1 -DNCSTATES=0 -DHAVESTDIO -DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0 -DUNIX
 
 DEFINES = $(DEFINES_BUILD_ARGS) $(DEFINES_IMPLIED) $(DEFINES_STANDARD)
 
@@ -234,9 +218,9 @@ ALL_SRCS = $(SRCS) $(MAIN_SRC)
 ## OBJECTS
 ###########################################################################
 
-OBJS = discrete_tf.obj
+OBJS = discrete_tf.o
 
-MAIN_OBJ = ert_main.obj
+MAIN_OBJ = ert_main.o
 
 ALL_OBJS = $(OBJS) $(MAIN_OBJ)
 
@@ -256,7 +240,7 @@ LIBS =
 ## SYSTEM LIBRARIES
 ###########################################################################
 
-SYSTEM_LIBS = 
+SYSTEM_LIBS =  -lm
 
 ###########################################################################
 ## ADDITIONAL TOOLCHAIN FLAGS
@@ -266,7 +250,7 @@ SYSTEM_LIBS =
 # C Compiler
 #---------------
 
-CFLAGS_BASIC = $(DEFINES) $(INCLUDES) @$(COMPILER_COMMAND_FILE)
+CFLAGS_BASIC = $(DEFINES) $(INCLUDES)
 
 CFLAGS += $(CFLAGS_BASIC)
 
@@ -274,37 +258,13 @@ CFLAGS += $(CFLAGS_BASIC)
 # C++ Compiler
 #-----------------
 
-CPPFLAGS_BASIC = $(DEFINES) $(INCLUDES) @$(COMPILER_COMMAND_FILE)
+CPPFLAGS_BASIC = $(DEFINES) $(INCLUDES)
 
 CPPFLAGS += $(CPPFLAGS_BASIC)
-
-#---------------------
-# MEX C++ Compiler
-#---------------------
-
-MEX_CPP_Compiler_BASIC =  @$(COMPILER_COMMAND_FILE)
-
-MEX_CPPFLAGS += $(MEX_CPP_Compiler_BASIC)
-
-#-----------------
-# MEX Compiler
-#-----------------
-
-MEX_Compiler_BASIC =  @$(COMPILER_COMMAND_FILE)
-
-MEX_CFLAGS += $(MEX_Compiler_BASIC)
 
 ###########################################################################
 ## INLINED COMMANDS
 ###########################################################################
-
-
-ifdef SIM_TARGET_BUILD
-MINGW_C_STANDARD_OPTS = $(filter-out -ansi, $(C_STANDARD_OPTS))
-else
-MINGW_C_STANDARD_OPTS = $(C_STANDARD_OPTS)
-endif
-
 
 ###########################################################################
 ## PHONY TARGETS
@@ -339,7 +299,7 @@ execute : download
 
 $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 	@echo "### Creating shared library "$(PRODUCT)" ..."
-	$(LD) $(SHAREDLIB_LDFLAGS) -o $(PRODUCT) @$(CMD_FILE) $(SYSTEM_LIBS) $(TOOLCHAIN_LIBS)
+	$(LD) $(SHAREDLIB_LDFLAGS) -o $(PRODUCT) $(OBJS) $(SYSTEM_LIBS) $(TOOLCHAIN_LIBS)
 	@echo "### Created: $(PRODUCT)"
 
 
@@ -351,51 +311,51 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 # SOURCE-TO-OBJECT
 #---------------------
 
-%.obj : %.c
+%.o : %.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : %.cpp
+%.o : %.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.c
+%.o : $(RELATIVE_PATH_TO_ANCHOR)/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.cpp
+%.o : $(RELATIVE_PATH_TO_ANCHOR)/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/%.c
+%.o : $(MATLAB_ROOT)/rtw/c/src/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/%.cpp
+%.o : $(MATLAB_ROOT)/rtw/c/src/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/discrete_tf_ert_shrlib_rtw/%.c
+%.o : $(MATLAB_ROOT)/simulink/src/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/discrete_tf_ert_shrlib_rtw/%.cpp
+%.o : $(MATLAB_ROOT)/simulink/src/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/rtw/c/src/%.c
+%.o : $(START_DIR)/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/rtw/c/src/%.cpp
+%.o : $(START_DIR)/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/simulink/src/%.c
+%.o : $(START_DIR)/discrete_tf_ert_shrlib_rtw/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/simulink/src/%.cpp
+%.o : $(START_DIR)/discrete_tf_ert_shrlib_rtw/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
@@ -403,7 +363,7 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 ## DEPENDENCIES
 ###########################################################################
 
-$(ALL_OBJS) : rtw_proj.tmw $(MAKEFILE)
+$(ALL_OBJS) : $(MAKEFILE) rtw_proj.tmw
 
 
 ###########################################################################
@@ -440,8 +400,8 @@ info :
 
 clean : 
 	$(ECHO) "### Deleting all derived files..."
-	$(RM) $(subst /,\,$(PRODUCT))
-	$(RM) $(subst /,\,$(ALL_OBJS))
+	$(RM) $(PRODUCT)
+	$(RM) $(ALL_OBJS)
 	$(ECHO) "### Deleted all derived files."
 
 
