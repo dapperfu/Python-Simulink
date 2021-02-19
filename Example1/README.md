@@ -4,7 +4,7 @@
 
 # Python Setup
 
-This is the boilerplate setup needed before running the model. For readability the `rtwtypes.h` is in a separate file.
+This is the boilerplate setup needed before running the model. For readability the [`rtwtypes.h`](https://github.com/dapperfu/python_SimulinkDLL/blob/master/Example1/rtwtypes.py) is in a separate file.
 
 
 ```python
