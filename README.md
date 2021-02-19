@@ -57,3 +57,12 @@ Adapted from [Mathworks's Simulation of a Bouncing Ball](https://www.mathworks.c
 # Questions, Issues, & Feedback
 
 https://github.com/AutomotiveDevops/python_SimulinkDLL/issues
+
+
+Google Indexing:
+
+MIL Python, Model-In-The-Loop Python.
+SIL Python, Software-In-The-Loop Python.
+Model-in-the-loop testing with Python.
+Software-in-the-loop testing with Python.
+Using Python for SIL testing. Using Python for MIL testing.
