@@ -1,20 +1,18 @@
 import ctypes
 import os
-
-import pandas as pd
-
-from rtwtypes import *
-
 import platform
 
+import pandas as pd
+from rtwtypes import *
 
-class DiscreteTF(object):
+
+class DiscreteTF:
     def __init__(self, model="discrete_tf"):
         self.model = model
-        if platform.system()=="Linux":
-            self.dll_path = os.path.abspath('discrete_tf.so')
+        if platform.system() == "Linux":
+            self.dll_path = os.path.abspath("discrete_tf.so")
             self.dll = ctypes.cdll.LoadLibrary(self.dll_path)
-        elif platform.system()=="Windows":
+        elif platform.system() == "Windows":
             self.dll_path = os.path.abspath(f"{model}_win64.dll")
             self.dll = ctypes.windll.LoadLibrary(self.dll_path)
         else:
@@ -34,12 +32,12 @@ class DiscreteTF(object):
 
     def initialize(self):
         """Initialize the Model."""
-        self.step_num=-1
+        self.step_num = -1
         self.__initialize()
 
     def step(self):
         """Step through the model Model."""
-        self.step_num+=1
+        self.step_num += 1
         self.__step()
 
     def terminate(self):

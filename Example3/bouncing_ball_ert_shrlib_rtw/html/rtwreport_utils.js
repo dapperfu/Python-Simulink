@@ -20,7 +20,7 @@ var utils = (function() {
     // Load via Microsoft.XMLDOM--for older versions of IE
     function loadXML_MSXMLDOM(filename, callback, async) {
         if (navigator.appName == "Microsoft Internet Explorer") {
-            // Internet Explorer 5/6 
+            // Internet Explorer 5/6
             try {
                 var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
                 xmlDoc.async = async;

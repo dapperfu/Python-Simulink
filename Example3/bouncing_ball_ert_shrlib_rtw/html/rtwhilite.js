@@ -3,9 +3,9 @@
 // Class RTW_Hash ------------------------------------------------------------
 // Internal web browser doesn't change window.location.hash if the link points
 // to the same page.
-// RTW_Hash remembers the hash value when the page is loaded in the first time 
+// RTW_Hash remembers the hash value when the page is loaded in the first time
 // or a link is clicked.
-// removeHiliteByHash cleans the high lighted elements according to the stored 
+// removeHiliteByHash cleans the high lighted elements according to the stored
 // hash value
 function RTW_Hash(aHash) {
     if (aHash == null) {
@@ -13,7 +13,7 @@ function RTW_Hash(aHash) {
     } else {
         this.fHash = aHash;
     };
-    
+
     this.getHash = function() {
         return this.fHash;
     }
@@ -133,7 +133,7 @@ function RTW_TraceInfo(aFileLinks) {
             if (this.fCurrCodeNode != null)
                 this.highlightLines(getCodeNode(),"");
         } catch (e) {};
-        this.fCurrCodeNode = null;    
+        this.fCurrCodeNode = null;
         if (this.getPrevButton()) { this.getPrevButton().disabled = true; }
         if (this.getNextButton()) { this.getNextButton().disabled = true; }
         if (this.getPanel()) { this.getPanel().style.display = "none"; }
@@ -272,7 +272,7 @@ function RTW_TraceInfo(aFileLinks) {
         }
         return file;
     }
-    
+
     this.getCurrentHRef = function(offset) {
         return this.getHRef(this.fCurrFileIdx, this.fCurrLineIdx, offset);
     }
@@ -285,7 +285,7 @@ function RTW_TraceInfo(aFileLinks) {
                 if (lines[i] == aLine) {
                     lineIdx = i;
                     break;
-                } 
+                }
             }
         }
         if (fileIdx == null || lineIdx == null)
@@ -316,7 +316,7 @@ RTW_TraceInfo.toSrcFileName = function(aHtmlFileName) {
 RTW_TraceInfo.instance = null;
 
 // Class RTW_TraceArgs --------------------------------------------------------
-// file.c:10,20,30&file.h:10,20,30[&color=value] or 
+// file.c:10,20,30&file.h:10,20,30[&color=value] or
 // sid=model:1[&color=value]
 RTW_TraceArgs = function(aHash) {
     this.fColor = null;
@@ -327,7 +327,7 @@ RTW_TraceArgs = function(aHash) {
     this.fFiles = new Array();
     this.fLines = new Array();
     this.fMessage = null;
-    this.fBlock = null;  
+    this.fBlock = null;
     this.fNumBlocks = 0;
     this.fUseExternalBrowser = true;
     this.fInStudio = false;
@@ -394,7 +394,7 @@ RTW_TraceArgs = function(aHash) {
                     break;
                 }
             }
-        }    
+        }
     }
     this.parseUrlHash = function(aHash) {
         var rows, sep, assignSep;
@@ -424,11 +424,11 @@ RTW_TraceArgs = function(aHash) {
         }
     }
     this.parseUrlHash2 = function(aHash) {
-        aHash = decodeURI(aHash);    
+        aHash = decodeURI(aHash);
         var rows;
         var ids;
         if (aHash && aHash.length > 0 && aHash[0] === "[") {
-            var input = eval(aHash);  
+            var input = eval(aHash);
             var i;
             var j;
             // set highlight files from url
@@ -441,7 +441,7 @@ RTW_TraceArgs = function(aHash) {
                 for (j=0; j<ids.length;j++) {
                     // get row number
                     if (ids[j].indexOf("c") !== -1)
-                        rows.push(Number(ids[j].substring(0,ids[j].indexOf("c")))); 
+                        rows.push(Number(ids[j].substring(0,ids[j].indexOf("c"))));
                     else
                         rows.push(Number(ids[j]));
                 }
@@ -476,15 +476,15 @@ RTW_TraceArgs = function(aHash) {
     this.getNumFiles = function() { return this.fFiles.length; }
     this.getSID = function() { return this.fSID; }
     this.getFile = function(aIdx) { if (isNaN(aIdx)) return this.fFiles; return this.fFiles[aIdx];}
-    this.getLines = function(aIdx) { return this.fLines[aIdx]; } 
-    this.getUseExternalBrowser = function() { return this.fUseExternalBrowser; } 
-    this.getInStudio = function() { return this.fInStudio; } 
-    this.getInCodeTrace = function() { return this.fInCodeTrace; } 
-    this.getTraceData = function() { return this.fTraceData; } 
+    this.getLines = function(aIdx) { return this.fLines[aIdx]; }
+    this.getUseExternalBrowser = function() { return this.fUseExternalBrowser; }
+    this.getInStudio = function() { return this.fInStudio; }
+    this.getInCodeTrace = function() { return this.fInCodeTrace; }
+    this.getTraceData = function() { return this.fTraceData; }
     this.getModel2CodeSrc = function() { return this.fModel2CodeSrc; }
-    this.setUseExternalBrowser = function(val) { this.fUseExternalBrowser = val; } 
-    this.setInCodeTrace = function(val) { this.fInCodeTrace = val; } 
-    this.setTraceData = function(val) { this.fTraceData = val; } 
+    this.setUseExternalBrowser = function(val) { this.fUseExternalBrowser = val; }
+    this.setInCodeTrace = function(val) { this.fInCodeTrace = val; }
+    this.setTraceData = function(val) { this.fTraceData = val; }
     this.setModel2CodeSrc = function(val) { this.fModel2CodeSrc = val; }
     this.getRows = function(aIdx) { return this.fRows[aIdx];}
     this.getIDs = function(aIdx) { return this.fIDs[aIdx]; }
@@ -507,7 +507,7 @@ RTW_TraceArgs.instance = null;
 RTW_MessageWindow = function(aWindow, aParagraph) {
     this.fWindow    = aWindow;
     this.fParagraph = aParagraph;
-    
+
     this.print = function(msg) {
         this.fParagraph.innerHTML = msg;
         if (msg)
@@ -530,7 +530,7 @@ RTW_MessageWindowFactory = function(aDocObj) {
             return this.fInstance;
         if (!this.fDocObj)
             return;
-        
+
         var table     = this.fDocObj.getElementById("rtwIdMsgWindow");
         var paragraph = this.fDocObj.getElementById("rtwIdMsg");
         var button    = this.fDocObj.getElementById("rtwIdButtonMsg");
@@ -602,7 +602,7 @@ function expandFileGroup(docObj, tagID) {
                     category_table = category_table.parentNode;
                 } else {
                     return;
-                }        
+                }
             }
             var o = category_table.id + "_button";
             o = docObj.getElementById(o);
@@ -619,7 +619,7 @@ function setBGColorByElementId(docObj, tagID, bgColor) {
     if (bgColor == "") {
         bgColor = "TRANSPARENT";
     }
-    
+
     if (docObj.getElementById) {
         var obj2Hilite = docObj.getElementById(tagID);
         if (obj2Hilite && obj2Hilite.parentNode) {
@@ -635,10 +635,10 @@ function setBGColorByElementId(docObj, tagID, bgColor) {
 function setBGColorByElementsName(docObj, tagName, bgColor) {
     if (bgColor == "") {
         bgColor = "TRANSPARENT";
-    }  
+    }
     if (docObj.getElementsByName) {
         var objs2Hilite = docObj.getElementsByName(tagName);
-        for (var objIndex = 0; objIndex < objs2Hilite.length; ++objIndex) {     
+        for (var objIndex = 0; objIndex < objs2Hilite.length; ++objIndex) {
             if (objs2Hilite[objIndex].parentNode)
                 objs2Hilite[objIndex].parentNode.style.backgroundColor = bgColor;
         }
@@ -660,7 +660,7 @@ function removeHiliteByElementsName(winObj, tagName) {
 }
 
 // Help function to set the background color based on the URL's hash
-function setBGColorByHash(docObj, bgColor) {    
+function setBGColorByHash(docObj, bgColor) {
     if (docObj.location) {
         var tagName = docObj.location.hash;
         // Use the stored hash value if it exists because the location.hash
@@ -669,19 +669,19 @@ function setBGColorByHash(docObj, bgColor) {
             tagName = RTW_Hash.instance.getHash();
         if (tagName != null)
             tagName = tagName.substring(1);
-        
+
         var codeNode = docObj.getElementById("RTWcode");
-        if (tagName != null && tagName != "") {        
+        if (tagName != null && tagName != "") {
             if (!isNaN(tagName))
-                tagName = Number(tagName) + 10;            
+                tagName = Number(tagName) + 10;
             setBGColorByElementsName(docObj, tagName, bgColor);
         }
     }
 }
 
 // Highlight the lines in document frame based on the URL's hash
-function hiliteByHash(docObj) {       
-    var hiliteColor = "#aaffff";  
+function hiliteByHash(docObj) {
+    var hiliteColor = "#aaffff";
     setBGColorByHash(docObj, hiliteColor);
 }
 
@@ -692,12 +692,12 @@ function removeHiliteByHash(winObj) {
 }
 
 // Highlight the filename Element in TOC frame based on the URL's filename
-function hiliteByFileName(aHref) {       
+function hiliteByFileName(aHref) {
     var status = false;
     if (!top.rtwreport_contents_frame)
         return status;
     var hiliteColor = GlobalConfig.fileLinkHiliteColor;
-    var fileName = rtwGetFileName(aHref);    
+    var fileName = rtwGetFileName(aHref);
     if (top.rtwreport_contents_frame.document) {
         removeHiliteFileList(top.rtwreport_contents_frame);
         status = setBGColorByElementId(top.rtwreport_contents_frame.document, fileName, hiliteColor);
@@ -708,23 +708,23 @@ function hiliteByFileName(aHref) {
 }
 
 // Clear the highlights in the code navigation frame.
-function removeHiliteCodeNav(winObj) {    
+function removeHiliteCodeNav(winObj) {
     removeHiliteTOC(winObj);
     removeHiliteFileList(winObj);
 }
 // Clear the highlights in TOC frame. TOC links are named TOC_List
-function removeHiliteTOC(winObj) {    
-    removeHiliteByElementsName(winObj, "TOC_List"); 
+function removeHiliteTOC(winObj) {
+    removeHiliteByElementsName(winObj, "TOC_List");
 }
-// Clear the highlights in Generated File List. 
+// Clear the highlights in Generated File List.
 // The filename links are named rtwIdGenFileLinks,
-function removeHiliteFileList(winObj) {    
+function removeHiliteFileList(winObj) {
     removeHiliteByElementsName(winObj, "rtwIdGenFileLinks");
 }
 
 // Highlight TOC hyperlinks by their Ids.
 function tocHiliteById(id) {
-    hiliteColor = GlobalConfig.fileLinkHiliteColor;    
+    hiliteColor = GlobalConfig.fileLinkHiliteColor;
     if (top && top.rtwreport_contents_frame && top.rtwreport_contents_frame.document) {
         removeHiliteCodeNav(top.rtwreport_contents_frame);
         setBGColorByElementId(top.rtwreport_contents_frame.document, id, hiliteColor);
@@ -737,14 +737,14 @@ function tocHiliteMe(winObj, linkObj, bCleanTrace) {
     // remove the trace info (previous highlighted source code and the navigate
     // panel)
     // Clean Trace info only when links in TOC clicked. Links of filenames won't
-    // clean trace info. 
+    // clean trace info.
     if (bCleanTrace) {
         if (RTW_TraceInfo.instance) {
             RTW_TraceInfo.instance.setDisablePanel(true);
             rtwRemoveHighlighting();
         }
-        closeInspectWindow();        
-    }        
+        closeInspectWindow();
+    }
     removeHiliteCodeNav(winObj);
     if (linkObj.parentNode) {
         linkObj.parentNode.style.backgroundColor= hiliteColor;
@@ -754,7 +754,7 @@ function tocHiliteMe(winObj, linkObj, bCleanTrace) {
 // onClick function to clean the currently highlighed lines in document frame
 // based on URL's hash
 // Then highlight lines in document frame based on Element's name
-// It works for links to some elements in the same page, otherwise, 
+// It works for links to some elements in the same page, otherwise,
 // rtwFileOnLoad() in loading page does the job.
 function docHiliteMe(winObj, elementName) {
     // First, remove the highlighted elements by stored hash value
@@ -777,8 +777,8 @@ function rtwFileOnLoad(docObj) {
         RTW_Hash.instance = new RTW_Hash(docObj.location.hash);
     } else {
         RTW_Hash.instance.setHash(docObj.location.hash);
-    }  
-    
+    }
+
     updateHyperlinks();
     // highlight lines in source code file according to the URL hash
     hiliteByHash(docObj);
@@ -789,7 +789,7 @@ function rtwFileOnLoad(docObj) {
             removeHiliteTOC(top.rtwreport_contents_frame);
         }
     }
-    
+
     if (!RTW_TraceInfo.instance)
         return;
     if (!docObj.getElementById)
@@ -823,7 +823,7 @@ function Nav(fileIdx1, fileIdx2) {
         top.rtwreport_document_frame.document.location.href = RTW_TraceInfo.instance.getCurrentHRef();
         top.initLine = top.rtwreport_document_frame.document.location.hash.substr(1);
         addTagToCurrentLine();
-        if (top.rtwreport_contents_frame) {            
+        if (top.rtwreport_contents_frame) {
             if (hiliteByFileName(top.rtwreport_document_frame.location.href))
                 removeHiliteTOC(top.rtwreport_contents_frame);
         }
@@ -902,13 +902,13 @@ function addTagToCurrentLine() {
 function rmTagToCurrentLine() {
     tagCurrentLine(false);
 }
-// tag current line by changing the bacgkround color of the line 
+// tag current line by changing the bacgkround color of the line
 function tagCurrentLine(addColor) {
     if (RTW_TraceInfo.instance) {
         var o = top.rtwreport_document_frame.document.getElementById(RTW_TraceInfo.instance.getCurrLine());
         if (o) {
             if (addColor) {
-                o.className = "hiliteCurrentLine";            
+                o.className = "hiliteCurrentLine";
             } else {
                 o.className = "hilite";
             }
@@ -956,15 +956,15 @@ function rtwMainOnLoadFcn(topDocObj,aLoc,aPanel,forceReload) {
     if (lastArgs !== null) {
         RTW_TraceArgs.instance.setUseExternalBrowser(lastArgs.getUseExternalBrowser());
         RTW_TraceArgs.instance.setModel2CodeSrc(lastArgs.getModel2CodeSrc());
-    }    
+    }
 
     // get highlight url using sid
     if (RTW_TraceArgs.instance.hasSid()) {
-        aHash = getCodeLines();  
+        aHash = getCodeLines();
     }
     // parse hash to look for msg=...&block=... pattern
     RTW_TraceArgs.instance.parseCommand(aHash);
-    // parse hash to look for file.c:10,12&file.h:10,12 
+    // parse hash to look for file.c:10,12&file.h:10,12
     RTW_TraceArgs.instance.parseUrlHash(aHash);
 
     // hide navigation buttons if not in MATLAB
@@ -984,20 +984,20 @@ function rtwMainOnLoadFcn(topDocObj,aLoc,aPanel,forceReload) {
     }
 
     // stop onload when it has been loaded
-    if (window.location.search.indexOf("loaded=true") > 0 
+    if (window.location.search.indexOf("loaded=true") > 0
         && top.rtwreport_document_frame.location.href !== "about:blank" && forceReload !== true) {
         updateHyperlinks();
         return;
-    }  
-    
+    }
+
     // modify modelref links
     update_modelref_report_link(top.rtwreport_contents_frame.document);
     try {
-        // ignore browser security error 
+        // ignore browser security error
         update_modelref_report_link(top.rtwreport_document_frame.document);
     } catch(e) {};
 
-    // redirect the page based on the url    
+    // redirect the page based on the url
     var initPage = null;
     if (RTW_TraceArgs.instance.getNumFiles()) {
         var fileLinks = RTW_TraceInfo.getFileLinks(tocDocObj);
@@ -1042,7 +1042,7 @@ function rtwMainOnLoadFcn(topDocObj,aLoc,aPanel,forceReload) {
         if (msgFile && msgFile.style) {
             msgFile.style.display = "block";
             // Highlight the background of msg link
-            tocHiliteById(linkId);      
+            tocHiliteById(linkId);
         }
         initPage = "rtwmsg.html";
     }
@@ -1051,18 +1051,18 @@ function rtwMainOnLoadFcn(topDocObj,aLoc,aPanel,forceReload) {
         try {
             var fileDocObj = top.rtwreport_document_frame.document;
             is_same_page = isSamePage(fileDocObj.location.href, initPage);
-        } catch(e) {};     
+        } catch(e) {};
         if (document.getElementById("rtwreport_document_frame")) {
             document.getElementById("rtwreport_document_frame").setAttribute("src", initPage);
         } else {
             top.rtwreport_document_frame.location.href = initPage;
         }
-                
+
         if (is_same_page) {
             // Goto the same page won't trigger onload function.
             // Call it manuelly to highligh new code location.
-            rtwFileOnLoad(top.rtwreport_document_frame.document);        
-        } 
+            rtwFileOnLoad(top.rtwreport_document_frame.document);
+        }
     }
 }
 
@@ -1075,11 +1075,11 @@ function isSamePage(href1, href2) {
 }
 
 // Callback for main document loading
-function rtwMainOnLoad() {    
+function rtwMainOnLoad() {
     rtwMainOnLoadFcn(document,null,true, false);
     var newUrl;
-    // modify history state to avoid reload from pressing back 
-    if (RTW_TraceArgs.instance && !RTW_TraceArgs.instance.getUseExternalBrowser() && 
+    // modify history state to avoid reload from pressing back
+    if (RTW_TraceArgs.instance && !RTW_TraceArgs.instance.getUseExternalBrowser() &&
         typeof window.history.replaceState === "function") {
         if (window.location.search.length > 0) {
             if (window.location.search.indexOf("loaded=true") === -1) {
@@ -1098,7 +1098,7 @@ function rtwMainOnLoad() {
 function rtwMainReload(location) {
     // remove highlight filename and lines before reloading the page
     if (RTW_TraceInfo.instance)
-        RTW_TraceInfo.instance.removeHighlighting();  
+        RTW_TraceInfo.instance.removeHighlighting();
     rtwMainOnLoadFcn(document,location,true,true);
 }
 
@@ -1155,7 +1155,7 @@ function updateHyperlinks() {
             var plain_link =  docObj.document.getElementById("linkToText_plain");
             if (plain_link && plain_link.href && plain_link.href.indexOf("matlab:coder.internal.editUrlTextFile") === -1 ) {
                 plain_link.href = "matlab:coder.internal.editUrlTextFile('" + str2StrVar(plain_link.href) + "')";
-            }          
+            }
             var alink = docObj.document.getElementById("linkToCS");
             var linkCmd = "matlab:coder.internal.viewCodeConfigsetFromReport";
             if (alink && alink.href && alink.href.indexOf(linkCmd) === -1) {
@@ -1188,11 +1188,11 @@ function updateHyperlinks() {
                 alink.href = alink.href + "?externalweb=true";
             }
 
-            if (typeof docObj.document.getElementsByName === "function") 
+            if (typeof docObj.document.getElementsByName === "function")
                 var objs = docObj.document.getElementsByName("MATLAB_link");
-            else 
+            else
                 objs = [];
-            for (var objIndex = 0; objIndex < objs.length; ++objIndex) {     
+            for (var objIndex = 0; objIndex < objs.length; ++objIndex) {
                 objs[objIndex].style.display = "none";
             }
         }
@@ -1201,7 +1201,7 @@ function updateHyperlinks() {
     // modify modelref links
     update_modelref_report_link(top.rtwreport_contents_frame.document);
     try {
-        // ignore browser security error 
+        // ignore browser security error
         update_modelref_report_link(top.rtwreport_document_frame.document);
     } catch(e) {};
 }
@@ -1254,9 +1254,9 @@ function rtwChangeSysCallback(sid) {
         return false;
     urlHash = RTW_Sid2UrlHash.instance.getUrlHash(sid);
     if (urlHash != undefined) {
-        if (RTW_TraceArgs && RTW_TraceArgs.instance && 
+        if (RTW_TraceArgs && RTW_TraceArgs.instance &&
             !RTW_TraceArgs.instance.getUseExternalBrowser())
-            urlHash = (urlHash == "")? "?useExternalBrowser=false" : 
+            urlHash = (urlHash == "")? "?useExternalBrowser=false" :
             urlHash+"&useExternalBrowser=false";
         rtwMainReload(urlHash, true);
         return true;
@@ -1271,8 +1271,8 @@ function emlFileOnload(docObj) {
     var loc = docObj.location;
     if (loc.hash) {
         var line = loc.hash.substring(1);
-        hiliteEmlLine(docObj, line);                        
-    }   
+        hiliteEmlLine(docObj, line);
+    }
 }
 
 function hiliteEmlLine(docObj, line) {
@@ -1285,9 +1285,9 @@ function hiliteEmlLine(docObj, line) {
     if (typeof docObj.HiliteLine != "undefined") {
         trObj = docObj.getElementById("LN_"+docObj.HiliteLine);
         if (trObj != null) {
-            trObj.style.backgroundColor = "";                   
+            trObj.style.backgroundColor = "";
         }
-    }   
+    }
     // hilighlight
     trObj = docObj.getElementById("LN_"+line);
     if (trObj != null) {
@@ -1298,7 +1298,7 @@ function hiliteEmlLine(docObj, line) {
 
 function emlLineOnClick(docObj,sid,line) {
     if (top) {
-        top.HiliteCodeStatus = top.rtwChangeSysCallback(sid);        
+        top.HiliteCodeStatus = top.rtwChangeSysCallback(sid);
     }
     hiliteEmlLine(docObj, line);
 }
@@ -1311,7 +1311,7 @@ function updateCode2ModelLinks(docObj) {
         isTestHarness = true;
     }
     if (webviewFrame || isTestHarness) {
-        if (webviewFrame && RTW_TraceArgs.instance && 
+        if (webviewFrame && RTW_TraceArgs.instance &&
             (RTW_TraceArgs.instance.getModel2CodeSrc() !== "model" ||
              RTW_TraceArgs.instance.getUseExternalBrowser())
            ) {
@@ -1325,7 +1325,7 @@ function updateCode2ModelLinks(docObj) {
         var str = '';
         var sid = '';
         var pattern = "'code2model',";
-        for (var objIndex = 0; objIndex < objs.length; ++objIndex) {     
+        for (var objIndex = 0; objIndex < objs.length; ++objIndex) {
             o = objs[objIndex];
             str = o.href.substring(o.href.indexOf('(')+1);
             if (str.indexOf(pattern) > -1) {
@@ -1335,8 +1335,8 @@ function updateCode2ModelLinks(docObj) {
             if (link2model && isTestHarness) {
                 sid = str.substring(0, str.indexOf(")"));
                 o.href = hiliteCmd + sid + ",'" +
-                    top.testHarnessInfo.HarnessName+ "','" + 
-                    top.testHarnessInfo.HarnessOwner+ "','" + 
+                    top.testHarnessInfo.HarnessName+ "','" +
+                    top.testHarnessInfo.HarnessOwner+ "','" +
                     top.testHarnessInfo.OwnerFileName + "');";
             }
         }
@@ -1344,17 +1344,17 @@ function updateCode2ModelLinks(docObj) {
 }
 
 function rtwHilite(aBlock,aParentSID) {
-    if (aBlock.indexOf('-') !== -1) { 
-        // remove sid range: model:sid:2-10 => model:sid 
-        var s; 
-        s = aBlock.split(':'); 
-        if (s.length > 0) { 
-            s = s[s.length-1]; 
-            if (s.indexOf('-') != -1) { 
-                aBlock = aBlock.substring(0, aBlock.lastIndexOf(':')); 
-            } 
-        } 
-    } 
+    if (aBlock.indexOf('-') !== -1) {
+        // remove sid range: model:sid:2-10 => model:sid
+        var s;
+        s = aBlock.split(':');
+        if (s.length > 0) {
+            s = s[s.length-1];
+            if (s.indexOf('-') != -1) {
+                aBlock = aBlock.substring(0, aBlock.lastIndexOf(':'));
+            }
+        }
+    }
     if (typeof aParentSID === "undefined") {
         if (top.RTW_SidParentMap && top.RTW_SidParentMap.instance)
             aParentSID = top.RTW_SidParentMap.instance.getParentSid(aBlock);
@@ -1362,12 +1362,12 @@ function rtwHilite(aBlock,aParentSID) {
             aParentSID = aBlock;
     }
     top.HiliteCodeStatus = true;
-    
+
     // webview 2 defines an interface api, call slwebview.
     if (top.slwebview) {
         // webview 2.x
         top.codeToWebView(aBlock, aParentSID);
-    
+
     } else {
         // webview 1.x
         if (hiliteBlockForRTWReport(aBlock,aParentSID) === false) {
@@ -1384,11 +1384,11 @@ function str2StrVar(str) {
 window.onload=rtwMainOnLoad;
 
 // handle incode traceability highlighting
-function inCodeTraceOnload() {  
+function inCodeTraceOnload() {
     var tocDocObj = top.rtwreport_contents_frame.document;
     if (!top.RTW_TraceArgs.instance) {
-        var summaryPage = tocDocObj.getElementById("rtwIdSummaryPage");                 
-        top.rtwreport_document_frame.location.href = summaryPage.href;  
+        var summaryPage = tocDocObj.getElementById("rtwIdSummaryPage");
+        top.rtwreport_document_frame.location.href = summaryPage.href;
         return;
     }
 
@@ -1454,9 +1454,9 @@ function updateNumHighlightedLines(linkObj, aNumLines) {
 
 function setupInStudio() {
     if (top.whole) {
-        var tmp = top.whole.rows.split(",");    
+        var tmp = top.whole.rows.split(",");
         tmp[0] = "35px";
-        top.whole.rows = tmp.join();    
+        top.whole.rows = tmp.join();
     }
     if (top.main) {
         var tmp = top.main.cols.split(",");
@@ -1471,9 +1471,9 @@ function setupInStudio() {
         fileSelector.onchange = top.fileSelectorOnChange;
         var filename;
         var filelink;
-        fileSelector.innerHTML += "<option value='" + 
+        fileSelector.innerHTML += "<option value='" +
             top.rtwreport_contents_frame.document.getElementById('rtwIdSummaryPage').href +
-            "'>Summary</option>"; 
+            "'>Summary</option>";
         for (var i=0; i < top.fileList.length; i++) {
             filename = top.fileList[i];
             filelink = top.Html2SrcLink.instance.getLink2Src(filename);
@@ -1494,21 +1494,21 @@ function setupInStudio() {
 
 function toggleNavSideBar(val) {
     if (top.main) {
-        var tmp = top.main.cols.split(",");    
+        var tmp = top.main.cols.split(",");
 
         if (val === "on") {
-            tmp[tmp.length-1] = "15px";        
+            tmp[tmp.length-1] = "15px";
         } else {
-            tmp[tmp.length-1] = "0";        
+            tmp[tmp.length-1] = "0";
         }
-        top.main.cols = tmp.join();    
-        if (top.rtwreport_nav_frame) 
-            top.rtwreport_nav_frame.location.href = "nav.html";    
+        top.main.cols = tmp.join();
+        if (top.rtwreport_nav_frame)
+            top.rtwreport_nav_frame.location.href = "nav.html";
     }
 };
 
-function toggleNavToolBar(val) 
-{    
+function toggleNavToolBar(val)
+{
     var midFrame = rtwMidFrame();
     if (midFrame) {
         var tmp1 = midFrame.rows.split(",");
@@ -1517,7 +1517,7 @@ function toggleNavToolBar(val)
             tmp1[frameIdx] = "40px";
         } else {
             tmp1[frameIdx] = "0";
-        }    
+        }
         midFrame.rows = tmp1.join();
         if (top.rtwreport_navToolbar_frame) {
             top.rtwreport_navToolbar_frame.location.href = "navToolbar.html";
@@ -1533,7 +1533,7 @@ var GlobalConfig = {
     hiliteToken: false
 };
 var NavSideBarState = {
-    calLineHeight: 0, 
+    calLineHeight: 0,
     overLink: false,
     linkTarget: null,
     lastLinkTarget: null,
@@ -1542,32 +1542,32 @@ var NavSideBarState = {
 function drawNavSideBar() {
     var rectHeight = 1;
     if (!top || !top.rtwreport_document_frame || !top.rtwreport_nav_frame) return;
-    
+
     if (!top.RTW_TraceArgs.instance) return;
     var fileIdx = top.RTW_TraceArgs.instance.getFileIdx();
     if (fileIdx === undefined) return;
-    var rows = top.RTW_TraceArgs.instance.getRows(fileIdx);                
-    if (rows.length === 0) return; // no highlighted line 
-    
+    var rows = top.RTW_TraceArgs.instance.getRows(fileIdx);
+    if (rows.length === 0) return; // no highlighted line
+
     var codeTbl = top.rtwreport_document_frame.document.getElementById("codeTbl");
     if (!codeTbl) return; // no code table
-    
+
     var nRows = codeTbl.rows.length + 1;
-    var canvas = top.rtwreport_nav_frame.document.getElementById("canvas");                
+    var canvas = top.rtwreport_nav_frame.document.getElementById("canvas");
     canvas.width = top.rtwreport_nav_frame.innerWidth;
     canvas.height = top.rtwreport_nav_frame.innerHeight-2;
     NavSideBarState.calLineHeight = canvas.height/nRows;
     if (canvas.getContext) {
         var ctx = canvas.getContext("2d");
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        // fill background 
+        // fill background
         ctx.fillStyle = GlobalConfig.navToolbarBgcolor;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = GlobalConfig.navHiliteColor;
         for (var i=0;i<rows.length;i++) {
             ctx.fillRect(0, Number(rows[i])*NavSideBarState.calLineHeight, canvas.width, rectHeight);
         }
-        if (canvas.addEventListener) { 
+        if (canvas.addEventListener) {
             canvas.addEventListener("mousemove", navBarOnMousemove, false);
             canvas.addEventListener("click", navBarOnClick, false);
         } else if (canvas.attachEvent) {
@@ -1586,20 +1586,20 @@ function navBarOnMousemove(e) {
     var lineLoc,nextLineLoc;
     top.rtwreport_nav_frame.document.body.style.cursor="";
     NavSideBarState.overLink = false;
-    NavSideBarState.linkTarget = null;                 
+    NavSideBarState.linkTarget = null;
     NavSideBarState.linkTargetIdx = null;
     for (var i=0;i<rows.length;i++) {
         loc = rows[i]*NavSideBarState.calLineHeight;
         // if within the tolerable range
         if (Math.abs(y-loc) <= tolerable_range) {
             top.rtwreport_nav_frame.document.body.style.cursor="pointer";
-            var canvas = top.rtwreport_nav_frame.document.getElementById("canvas");                
+            var canvas = top.rtwreport_nav_frame.document.getElementById("canvas");
             canvas.title = "navigate to line " + rows[i];
             NavSideBarState.overLink = true;
             NavSideBarState.linkTarget = rows[i];
             NavSideBarState.linkTargetIdx = i;
             break;
-        } 
+        }
     }
 }
 
@@ -1610,7 +1610,7 @@ function navBarOnClick(e) {
         top.rtwreport_document_frame.document.location.href=RTW_TraceInfo.instance.getCurrentHRef();
         top.addTagToCurrentLine(); // add current line tag
         RTW_TraceInfo.instance.updateNavState();
-    }                
+    }
 }
 
 function removeInCodeTraceHighlight() {
@@ -1640,17 +1640,17 @@ function removeInCodeTraceHighlight() {
 function getInspectWindow() {
     var divObj = document.createElement("div");
     divObj.id = "popup_window";
-    return divObj;    
+    return divObj;
 }
-function getInspectData(file, anchorObj) {   
+function getInspectData(file, anchorObj) {
     var metricsData = null;
     var propObj = null;
     var type = null;
     var size = null;
-    var cm; 
-    if (top.rtwreport_nav_frame && top.rtwreport_nav_frame.CodeMetrics && 
-        top.rtwreport_nav_frame.CodeMetrics.instance && 
-        top.RTW_TraceArgs && top.RTW_TraceArgs.instance && 
+    var cm;
+    if (top.rtwreport_nav_frame && top.rtwreport_nav_frame.CodeMetrics &&
+        top.rtwreport_nav_frame.CodeMetrics.instance &&
+        top.RTW_TraceArgs && top.RTW_TraceArgs.instance &&
         !top.RTW_TraceArgs.instance.getUseExternalBrowser()) {
         cm = top.rtwreport_nav_frame.CodeMetrics.instance;
     }
@@ -1660,7 +1660,7 @@ function getInspectData(file, anchorObj) {
             // try static token
             metricsData =  cm.getMetrics(RTW_TraceInfo.toSrcFileName(file) + ":" + anchorObj.text);
         }
-        if (metricsData) {            
+        if (metricsData) {
             type = metricsData.type;
             if (type === "var") {
                 type = "Global Variable";
@@ -1673,9 +1673,9 @@ function getInspectData(file, anchorObj) {
                     size = "(stack: " + metricsData.stack + " byte, total stack: "
                         + metricsData.stackTotal + " byte)";
                 }
-            }            
+            }
         }
-    }    
+    }
     if (type === null) {
         var defObj = top.CodeDefine.instance.def[anchorObj.text];
         if (defObj) {
@@ -1689,10 +1689,10 @@ function getInspectData(file, anchorObj) {
             }
             size = "";
         }
-    }   
+    }
     var propObj = document.createElement("div");
     propObj.id = "token_property";
-    
+
     var ulObj = document.createElement("ul");
     ulObj.className = "popup_attrib_list";
     if (type === null) {
@@ -1701,8 +1701,8 @@ function getInspectData(file, anchorObj) {
         ulObj.innerHTML = "<li>" + type + ": <var>" + anchorObj.text + "</var></li><li>"+
             size + "</li>";
     }
-    propObj.appendChild(ulObj);   
-    
+    propObj.appendChild(ulObj);
+
     return propObj;
 }
 function getInspectLink(file, pathname, anchorObj) {
@@ -1716,7 +1716,7 @@ function getInspectLink(file, pathname, anchorObj) {
     var defObj = top.CodeDefine.instance.def[anchorObj.text];
     var line = anchorObj.id.substring(0,anchorObj.id.indexOf("c"));
     // link to model
-    if (top.TraceInfoFlag && top.TraceInfoFlag.instance && 
+    if (top.TraceInfoFlag && top.TraceInfoFlag.instance &&
         top.TraceInfoFlag.instance.traceFlag[RTW_TraceInfo.toSrcFileName(file)+":"+anchorObj.id]) {
         return null;
     }
@@ -1774,7 +1774,7 @@ function scrollToLineBasedOnHash(hashValue) {
                 var lineElem = top.rtwreport_document_frame.document.getElementById(hashValue);
                 initLine = hashValue; // save initLine in case the dom is updated later by anootation
                 if (lineElem) {
-                    lineElem.scrollIntoView(); 
+                    lineElem.scrollIntoView();
                     addTagToCurrentLine();
                 }
 
@@ -1809,7 +1809,7 @@ function scrollToLineBasedOnHash(hashValue) {
         if (!tokenId) {
             tokenId = line;
         }
-        var elem = top.rtwreport_document_frame.document.getElementById(tokenId);               
+        var elem = top.rtwreport_document_frame.document.getElementById(tokenId);
         hiliteClickedToken(elem);
         initLine = offset_line(line);
         scrollToInitLine();
@@ -1827,7 +1827,7 @@ function tokenLinkOnClick(event) {
 function inspectToken(file, pathname, event) {
     var height = "70px";
     // show inspect data
-    if (top.rtwreport_inspect_frame) { 
+    if (top.rtwreport_inspect_frame) {
         var windowObj = getInspectWindow();
         var propObj = getInspectData(file, event.currentTarget);
         var navObj = getInspectLink(file, pathname, event.currentTarget);
@@ -1849,16 +1849,16 @@ function inspectToken(file, pathname, event) {
     var offsetHeight = 0;
     var docHeight = 0;
     if (typeof(top.rtwInspectFrame().document.body.offsetHeight) === "number") {
-        offsetHeight = top.rtwInspectFrame().document.body.offsetHeight;        
+        offsetHeight = top.rtwInspectFrame().document.body.offsetHeight;
     }
     if (typeof(top.rtwInspectFrame().document.height) === "number") {
         docHeight = top.rtwInspectFrame().document.height;
-    }   
+    }
     if (offsetHeight > 0) {
         height = ""+offsetHeight+"px";
     } else if (docHeight > 0) {
         height = ""+docHeight+"px";
-    }   
+    }
     setInspectWindow(height);
     return false;
 }
@@ -1867,7 +1867,7 @@ function setInspectWindow(height) {
     var midFrame = rtwMidFrame();
     if (midFrame) {
         var tmp = midFrame.rows.split(",");
-        tmp[getInspectFrameIdx()] = height;    
+        tmp[getInspectFrameIdx()] = height;
         midFrame.rows = tmp.join();
     }
 }
@@ -1999,11 +1999,11 @@ function getCodeLocation() {
     // make build dir link in report visible by clearing 'display' style
     docObj = top.rtwreport_document_frame;
     var alinkTitle = docObj.document.getElementById("sourceLocationTitle");
-    if (alinkTitle && alinkTitle.style) {        
+    if (alinkTitle && alinkTitle.style) {
         alinkTitle.style.display = "";
-    }    
+    }
     var alink = docObj.document.getElementById("sourceLocation");
-    if (alink && alink.style) {        
+    if (alink && alink.style) {
         alink.style.display = "";
     }
     return codeLocation;
@@ -2015,24 +2015,24 @@ function getCodeLines()
         var sid = RTW_TraceArgs.instance.getSID();
         sid = sid.split(",");
         if(sid.length == 1) {
-            codeLocs = RTW_Sid2UrlHash.instance.getUrlHash(sid[0]);     
+            codeLocs = RTW_Sid2UrlHash.instance.getUrlHash(sid[0]);
         }
         else {
             var fileLocs = [];
             for(var i=0; i < sid.length; ++i) {
-                var locstr = RTW_Sid2UrlHash.instance.getUrlHash(sid[i]);  
+                var locstr = RTW_Sid2UrlHash.instance.getUrlHash(sid[i]);
                 var locs = locstr.split("&");
                 for(var j=0; j< locs.length; ++j) {
                     locElems = locs[j].split(":");
                     if(fileLocs[locElems[0]] == null) {
                         fileLocs[locElems[0]] = locElems[1];
-                    } 
+                    }
                     else {
-                        fileLocs[locElems[0]] = fileLocs[locElems[0]].concat(",", locElems[1]);                        
+                        fileLocs[locElems[0]] = fileLocs[locElems[0]].concat(",", locElems[1]);
                     }
                 }
             }
-    
+
             // join all locations
             Object.keys(fileLocs).forEach(function(key) {
                 if(codeLocs.length != 0) {

@@ -12,5 +12,5 @@ model = 'discrete_tf';
 feval([model '_init']);
 % Open the model.
 open_system(model);
-% RealTimeWorkshop Build 
+% RealTimeWorkshop Build
 rtwbuild(model);

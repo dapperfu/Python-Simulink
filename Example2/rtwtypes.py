@@ -1,4 +1,5 @@
 import ctypes
+
 """
 /*=======================================================================*
  * Fixed width word size data types:                                     *
@@ -38,11 +39,14 @@ char_T = ctypes.c_byte
  * Complex number type definitions                                           *
  *===========================================================================*/
 """
+
+
 class creal32_T(ctypes.Structure):
     _fields_ = [
         ("re", real32_T),
         ("im", real32_T),
     ]
+
 
 class creal64_T(ctypes.Structure):
     _fields_ = [
@@ -50,11 +54,13 @@ class creal64_T(ctypes.Structure):
         ("im", real64_T),
     ]
 
+
 class creal_T(ctypes.Structure):
     _fields_ = [
         ("re", real_T),
         ("im", real_T),
     ]
+
 
 class cint8_T(ctypes.Structure):
     _fields_ = [
@@ -62,11 +68,13 @@ class cint8_T(ctypes.Structure):
         ("im", int8_T),
     ]
 
+
 class cuint8_T(ctypes.Structure):
     _fields_ = [
         ("re", uint8_T),
         ("im", uint8_T),
     ]
+
 
 class cint16_T(ctypes.Structure):
     _fields_ = [
@@ -74,11 +82,13 @@ class cint16_T(ctypes.Structure):
         ("im", int16_T),
     ]
 
+
 class cuint16_T(ctypes.Structure):
     _fields_ = [
         ("re", uint16_T),
         ("im", uint16_T),
     ]
+
 
 class cint32_T(ctypes.Structure):
     _fields_ = [
@@ -86,17 +96,20 @@ class cint32_T(ctypes.Structure):
         ("im", int32_T),
     ]
 
+
 class cuint32_T(ctypes.Structure):
     _fields_ = [
         ("re", uint32_T),
         ("im", uint32_T),
     ]
 
+
 class cint64_T(ctypes.Structure):
     _fields_ = [
         ("re", int64_T),
         ("im", int64_T),
     ]
+
 
 class cuint64_T(ctypes.Structure):
     _fields_ = [

@@ -28,10 +28,10 @@
          }
         if (top.RTW_TraceInfo && top.RTW_TraceInfo.instance) {
            top.RTW_TraceInfo.instance.updateNavState();
-        }        
+        }
    }
    function resize_text() {
-        var node = document.getElementById("rtwIdTraceBlock");        
+        var node = document.getElementById("rtwIdTraceBlock");
         if (node) {
             node.style.maxWidth = "" + (window.innerWidth - 450) + "px";
         }
@@ -51,7 +51,7 @@
         </td>
         <td style="white-space:nowrap">
 	  <INPUT class="button" TYPE="button" VALUE="<<" style="width: 45px; height: 2em" ID="rtwIdButtonFirst" ONCLICK="if (top.rtwGoFirst) top.rtwGoFirst();" title="goto the first highlighted line" />
-	  <INPUT class="button" TYPE="button" VALUE="<" style="width: 45px; height: 2em" ID="rtwIdButtonPrev" ONCLICK="if (top.rtwGoPrev) top.rtwGoPrev();" disabled="disabled" title="goto the previous highlighted line"/>        
+	  <INPUT class="button" TYPE="button" VALUE="<" style="width: 45px; height: 2em" ID="rtwIdButtonPrev" ONCLICK="if (top.rtwGoPrev) top.rtwGoPrev();" disabled="disabled" title="goto the previous highlighted line"/>
 	  <span id="rtwIdTraceNumber"></span>
 	  <INPUT class="button" TYPE="button" VALUE=">" style="width: 45px; height: 2em" ID="rtwIdButtonNext" ONCLICK="if (top.rtwGoNext) top.rtwGoNext();" disabled="disabled" title="goto the next highlighted line"/>
 	  <INPUT class="button" TYPE="button" VALUE=">>" style="width: 45px; height: 2em" ID="rtwIdButtonLast" ONCLICK="if (top.rtwGoLast) top.rtwGoLast();" title="goto the last highlighted line" />

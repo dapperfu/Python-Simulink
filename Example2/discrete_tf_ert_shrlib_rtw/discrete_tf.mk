@@ -1,16 +1,16 @@
 ###########################################################################
-## Makefile generated for Simulink model 'discrete_tf'. 
-## 
+## Makefile generated for Simulink model 'discrete_tf'.
+##
 ## Makefile     : discrete_tf.mk
 ## Generated on : Sun Feb 07 20:06:12 2021
 ## MATLAB Coder version: 4.0 (R2018a)
-## 
+##
 ## Build Info:
-## 
+##
 ## Final product: $(RELATIVE_PATH_TO_ANCHOR)/discrete_tf.so
 ## Product type : shared library
 ## Build type   : Shared Library Target
-## 
+##
 ###########################################################################
 
 ###########################################################################
@@ -29,11 +29,11 @@ COMPUTER                  = GLNXA64
 MATLAB_ROOT               = /usr/local/MATLAB/R2018a
 MATLAB_BIN                = /usr/local/MATLAB/R2018a/bin
 MATLAB_ARCH_BIN           = $(MATLAB_BIN)/glnxa64
-MASTER_ANCHOR_DIR         = 
+MASTER_ANCHOR_DIR         =
 START_DIR                 = /home/user1/projects/python_SimulinkDLL/Example2
 ARCH                      = glnxa64
-SOLVER                    = 
-SOLVER_OBJ                = 
+SOLVER                    =
+SOLVER_OBJ                =
 CLASSIC_INTERFACE         = 0
 TGT_FCN_LIB               = None
 MODEL_HAS_DYNAMICALLY_LOADED_SFCNS = 0
@@ -51,7 +51,7 @@ CPP_STANDARD_OPTS         = -std=c++98 -pedantic -Wno-long-long -fwrapv
 # Supported Version(s):    4.4.x
 # ToolchainInfo Version:   R2018a
 # Specification Revision:  1.0
-# 
+#
 #-------------------------------------------
 # Macros assumed to be defined elsewhere
 #-------------------------------------------
@@ -68,9 +68,9 @@ WARN_FLAGS_MAX     = $(WARN_FLAGS) -Wcast-qual -Wshadow
 CPP_WARN_FLAGS     = -Wall -W -Wwrite-strings -Winline -Wpointer-arith -Wcast-align
 CPP_WARN_FLAGS_MAX = $(CPP_WARN_FLAGS) -Wcast-qual -Wshadow
 
-TOOLCHAIN_SRCS = 
-TOOLCHAIN_INCS = 
-TOOLCHAIN_LIBS = 
+TOOLCHAIN_SRCS =
+TOOLCHAIN_INCS =
+TOOLCHAIN_LIBS =
 
 #------------------------
 # BUILD TOOL COMMANDS
@@ -228,13 +228,13 @@ ALL_OBJS = $(OBJS) $(MAIN_OBJ)
 ## PREBUILT OBJECT FILES
 ###########################################################################
 
-PREBUILT_OBJS = 
+PREBUILT_OBJS =
 
 ###########################################################################
 ## LIBRARIES
 ###########################################################################
 
-LIBS = 
+LIBS =
 
 ###########################################################################
 ## SYSTEM LIBRARIES
@@ -280,7 +280,7 @@ all : build
 build : prebuild $(PRODUCT)
 
 
-prebuild : 
+prebuild :
 
 
 download : build
@@ -370,7 +370,7 @@ $(ALL_OBJS) : $(MAKEFILE) rtw_proj.tmw
 ## MISCELLANEOUS TARGETS
 ###########################################################################
 
-info : 
+info :
 	@echo "### PRODUCT = $(PRODUCT)"
 	@echo "### PRODUCT_TYPE = $(PRODUCT_TYPE)"
 	@echo "### BUILD_TYPE = $(BUILD_TYPE)"
@@ -398,10 +398,8 @@ info :
 	@echo "### MAKE_FLAGS = $(MAKE_FLAGS)"
 
 
-clean : 
+clean :
 	$(ECHO) "### Deleting all derived files..."
 	$(RM) $(PRODUCT)
 	$(RM) $(ALL_OBJS)
 	$(ECHO) "### Deleted all derived files."
-
-

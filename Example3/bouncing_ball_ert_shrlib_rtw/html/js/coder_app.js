@@ -19,10 +19,10 @@ function nav_token_usage_details(direction) {
     }
     var nextIdx = selectedIdx;
     if (direction === -1 && selectedIdx > 0) {
-        nextIdx = selectedIdx-1;                
+        nextIdx = selectedIdx-1;
     } else if (direction === 1 && selectedIdx < els.length - 1) {
         nextIdx = selectedIdx + 1;
-    }   
+    }
     if (nextIdx !== selectedIdx) {
         els[selectedIdx].classList.remove(selectedClassName);
         els[nextIdx].classList.add(selectedClassName);
@@ -31,11 +31,11 @@ function nav_token_usage_details(direction) {
     return false;
 }
 
-function tabrowClicked(event) { 
+function tabrowClicked(event) {
 }
 
 function popupOnload() {
-    var els = queryByClassName("token_usage_details_tabrow");   
+    var els = queryByClassName("token_usage_details_tabrow");
     for (var i=0; i<els.length; i++) {
         els[i].onclick= tabrowClicked;
     }
@@ -58,7 +58,7 @@ function tokenOnclick(event) {
     return false;
 };
 
-function tokenOnMouseOver(event) {    
+function tokenOnMouseOver(event) {
     var filename = location.pathname.split(/\//);
     filename = filename[filename.length-1];
     createPopup(filename, event);
@@ -71,33 +71,33 @@ function blkLinkOnClick(event) {
     top.hiliteClickedToken(event.currentTarget);
     return true;
 }
-function clearTokenLink(id) {    
+function clearTokenLink(id) {
     var codeElement = document.getElementById(id);
     var els = queryByClassName("tk", codeElement);
-    var elem; 
+    var elem;
     if (top.CodeDefine && top.CodeDefine.instance)  {
         for (var i=0; i<els.length; i++) {
             var re = new RegExp('active', 'g');
             els[i].className = els[i].className.replace(re, '');
             re = new RegExp('traceable_token', 'g');
-            els[i].className = els[i].className.replace(re, '');            
+            els[i].className = els[i].className.replace(re, '');
         }
     }
 }
 function updateTokenLink(id) {
     var codeElement = document.getElementById(id);
     var filename = location.pathname.split(/\//);
-    filename = filename[filename.length-1];  
+    filename = filename[filename.length-1];
     var srcFilename;
     if (top.RTW_TraceInfo) {
         srcFilename = top.RTW_TraceInfo.toSrcFileName(filename);
     }
     var els = queryByClassName("tk", codeElement);
-    var elem; 
+    var elem;
     var hasTraceFlag = null;
     if (top.TraceInfoFlag && top.TraceInfoFlag.instance)
         hasTraceFlag =  top.TraceInfoFlag.instance.traceFlag;
-    else 
+    else
         hasTraceFlag = false;
     var defObj;
     var traceObj;
@@ -110,19 +110,19 @@ function updateTokenLink(id) {
             if (traceObj || defObj) {
                 els[i].onclick= tokenOnclick;
                 els[i].oncontextmenu= tokenOnRightclick;
-                els[i].onmouseover = tokenOnMouseOver;    
+                els[i].onmouseover = tokenOnMouseOver;
                 els[i].onmouseout = tokenOnMouseOut;
                 els[i].className += " active";
                 els[i].target = "rtwreport_document_frame";
-                if (traceObj && top.reportModel) {    
+                if (traceObj && top.reportModel) {
                     if (top.testHarnessInfo && top.testHarnessInfo.IsTestHarness==="1") {
-                        els[i].href = "matlab:rtw.report.code2model('" + top.reportModel 
-                            + "','" + location.pathname + "','" + els[i].id 
-                            + "','" + top.testHarnessInfo.HarnessName 
+                        els[i].href = "matlab:rtw.report.code2model('" + top.reportModel
+                            + "','" + location.pathname + "','" + els[i].id
+                            + "','" + top.testHarnessInfo.HarnessName
                             + "','" + top.testHarnessInfo.HarnessOwner
                             + "','" + top.testHarnessInfo.OwnerFileName + "')";
                     } else {
-                        els[i].href = "matlab:rtw.report.code2model(\'" + top.reportModel 
+                        els[i].href = "matlab:rtw.report.code2model(\'" + top.reportModel
                             + "\',\'" + location.pathname + "\',\'" + els[i].id + "')";
                     }
                 } else {
@@ -136,7 +136,7 @@ function updateTokenLink(id) {
 // remove the code table; insert back
 function updateToken(codeElement) {
     var filename = location.pathname.split(/\//);
-    filename = filename[filename.length-1];  
+    filename = filename[filename.length-1];
     var srcFilename;
     if (top.RTW_TraceInfo) {
         srcFilename = top.RTW_TraceInfo.toSrcFileName(filename);
@@ -151,7 +151,7 @@ function updateToken(codeElement) {
                 if (top.testHarnessInfo && top.testHarnessInfo.IsTestHarness==="1") {
                     els[i].href = "matlab:coder.internal.code2model('" + lineSid.sid + "','" +
                         top.testHarnessInfo.HarnessName+ "','" +
-                        top.testHarnessInfo.HarnessOwner+ "','" + 
+                        top.testHarnessInfo.HarnessOwner+ "','" +
                         top.testHarnessInfo.OwnerFileName + "');";
                 } else {
                     els[i].href = "matlab:coder.internal.code2model('" + lineSid.sid + "');";
@@ -161,17 +161,17 @@ function updateToken(codeElement) {
                 els[i].className += " blk_active";
             }
         }
-    }   
+    }
     // update lib block path link in comments
     els = queryByClassName("libblk", codeElement);
-    var lineSid = null;    
+    var lineSid = null;
     for (var i=0; i<els.length; i++) {
         lineSid = els[i].text;
         if (lineSid) {
             if (top.testHarnessInfo && top.testHarnessInfo.IsTestHarness==="1") {
                 els[i].href = "matlab:coder.internal.code2model('" + lineSid + "','" +
                     top.testHarnessInfo.HarnessName+ "','" +
-                    top.testHarnessInfo.HarnessOwner+ "','" + 
+                    top.testHarnessInfo.HarnessOwner+ "','" +
                     top.testHarnessInfo.OwnerFileName + "');";
             } else {
                 els[i].href = "matlab:coder.internal.code2model('" + lineSid + "');";
@@ -199,14 +199,14 @@ function updateToken(codeElement) {
             els[i].className += " req_active";
         }
     }
-    
+
     // add link to source file
     if (top.Html2SrcLink && top.Html2SrcLink.instance) {
         filename = top.rtwGetFileName(location.href);
         var link2Src = top.Html2SrcLink.instance.getLink2Src(filename);
         var link = document.createElement("h4");
-        link.innerHTML = "File: <a href=\"" + link2Src + 
-            "\" target = \"rtwreport_document_frame\" id=\"linkToText_plain\">" + 
+        link.innerHTML = "File: <a href=\"" + link2Src +
+            "\" target = \"rtwreport_document_frame\" id=\"linkToText_plain\">" +
             top.rtwGetFileName(link2Src) + "</a>";
         var bodyNode = document.body;
         bodyNode.insertBefore(link, bodyNode.firstElementChild);
@@ -236,14 +236,14 @@ function updateToken(codeElement) {
             if(lineTraceFlag[srcFilename+":"+ lineNo]) {
                 lines[i].className += " active";
                 if (top.testHarnessInfo && top.testHarnessInfo.IsTestHarness==="1") {
-                    lines[i].href = "matlab:rtw.report.code2model('" + top.reportModel 
+                    lines[i].href = "matlab:rtw.report.code2model('" + top.reportModel
                         + "','" + srcFilename
                         + "','" + lineNo
-                        + "','" + top.testHarnessInfo.HarnessName 
+                        + "','" + top.testHarnessInfo.HarnessName
                         + "','" + top.testHarnessInfo.HarnessOwner
                         + "','" + top.testHarnessInfo.OwnerFileName + "')";
                 } else {
-                    lines[i].href = "matlab:rtw.report.code2model('" + top.reportModel 
+                    lines[i].href = "matlab:rtw.report.code2model('" + top.reportModel
                         + "','" + srcFilename + "','" + lineNo + "')";
                 }
             }
@@ -272,26 +272,26 @@ function getInsertFunction(element) {
 var hovered_line = '';
 var lineOnMouseIn = function (id) {
     if (hovered_line !== id) {
-        hovered_line = id;      
-        updateTokenLink(id);            
+        hovered_line = id;
+        updateTokenLink(id);
     }
 }
-var lineOnMouseOut = function (id) {    
+var lineOnMouseOut = function (id) {
     clearTokenLink(id);
     hovered_line = '';
 }
 function registerDelayedOnMouseOver(elm, onMouseIn, onMouseOut) {
-    var delay = function (elem, onMouseIn, onMouseOut) {                
+    var delay = function (elem, onMouseIn, onMouseOut) {
         var timeout = null;
-        elem.onmouseover = function(e) {                                
+        elem.onmouseover = function(e) {
             timeout = setTimeout(onMouseIn, 200, e.currentTarget.id);
         };
-        elem.onmouseout = function(e) {                 
+        elem.onmouseout = function(e) {
             clearTimeout(timeout);
             if (hovered_line !== '') {
                 onMouseOut(e.currentTarget.id);
             }
-        }               
+        }
     };
     delay(elm, onMouseIn, onMouseOut);
 }
@@ -403,10 +403,10 @@ function fixBoxStyleFnHeaderLineWidths() {
 // the onload function for source file
 function srcFileOnload() {
     var codeElement = document.getElementById("codeTbl");
-    var insertFunction = getInsertFunction(codeElement);                
+    var insertFunction = getInsertFunction(codeElement);
     try {
         var els = codeElement.getElementsByTagName("tr");
-        for (var i = 0; i < els.length; i++) {                          
+        for (var i = 0; i < els.length; i++) {
             registerDelayedOnMouseOver(els[i], lineOnMouseIn, lineOnMouseOut);
         }
         updateToken(codeElement);
@@ -428,7 +428,7 @@ function srcFileOnload() {
 
     fixBoxStyleFnHeaderLineWidths();
 
-    // highlight token and row 
+    // highlight token and row
     if (top.RTW_TraceInfo.instance && top.RTW_TraceArgs.instance) {
         var i;
         // find the highlight file name
@@ -446,7 +446,7 @@ function srcFileOnload() {
             if (top.GlobalConfig.hiliteToken) {
                 for (i=0; i<ids.length;i++) {
                     elem = top.rtwreport_document_frame.document.getElementById(ids[i]);
-                    if (elem) elem.className += " hilite";              
+                    if (elem) elem.className += " hilite";
                 }
             }
         } // end of if current file has highlighted lines
@@ -456,10 +456,10 @@ function srcFileOnload() {
         var myFileIdx = top.RTW_TraceInfo.instance.getFileIdx(filename);
         // update navigation status if the file is loaded first time
         if (currFileIdx !== myFileIdx && document.location.hash === "") {
-            if (rows.length > 0) 
+            if (rows.length > 0)
                 top.RTW_TraceInfo.instance.setInitLocation(filename,rows[0]);
             else {
-                top.toggleNavSideBar("off");                            
+                top.toggleNavSideBar("off");
                 return;
             }
         }
@@ -477,13 +477,13 @@ function srcFileOnload() {
     function getHash() {
         var loc;
         var aHash="";
-        var topDocObj = top.window.document;    
+        var topDocObj = top.window.document;
         // get the hash value from location.
         loc = topDocObj.location;
         loc = loc.search || loc.hash;
         aHash = loc.substring(1);
         aHash = decodeURI(aHash);
-        return aHash;   
+        return aHash;
     }
 }
 
@@ -496,10 +496,10 @@ function createPopup(filename, evt) {
     var windowObj = top.getInspectWindow();
     var propObj = top.getInspectData(filename, anchorObj);
     var navObj = top.getInspectLink(filename, location.pathname, anchorObj);
-    if (propObj) { 
+    if (propObj) {
         windowObj.appendChild(propObj);
         windowObj.style.left = "0px";
-        if (anchorObj.parentElement.nodeName === "TD" && 
+        if (anchorObj.parentElement.nodeName === "TD" &&
             anchorObj.parentElement.parentElement.nodeName === "TR") {
             anchorObj.parentElement.parentElement.lastChild.insertBefore(windowObj,
                                                                          anchorObj.parentElement.parentElement.lastChild.lastChild.nextSibling);

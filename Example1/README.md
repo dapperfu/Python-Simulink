@@ -20,7 +20,7 @@ class B_dllModel_T(ctypes.Structure):
         ("SimulationSignal1", real_T),
         ("SignalOut3", real32_T),
         ("SignalOut2", uint16_T),
-        
+
     ]
 class ExtU_dllModel_T(ctypes.Structure):
     _fields_ = [
@@ -34,14 +34,14 @@ class P_dllModel_T(ctypes.Structure):
     _fields_ = [
         ("K2", uint16_T)
     ]
-    
+
 class Timing(ctypes.Structure):
     _fields_ = [
         ("clockTick0", uint32_T),
         ("clockTickH0", uint32_T),
     ]
 class tag_RTM_dllModel_T(ctypes.Structure):
-    
+
     _fields_ = [
         ("errorStatus", ctypes.c_char_p),
         ("Timing", Timing),

@@ -5,7 +5,7 @@ function createHighlightSpanStart(num)
     return "<span class=\"highlighted\" name=\"highlight" + num + "\">";
 }
 
-var str2pos;   // This is a map between a tag stripped string and the original string. 
+var str2pos;   // This is a map between a tag stripped string and the original string.
 function getTagStrippedStringAndMap(aString)
 {
     var tagStrippedString = new String();
@@ -14,13 +14,13 @@ function getTagStrippedStringAndMap(aString)
 
     var inTag = false;
     var inScript = false;
-    
+
     for (var strPos = 0; strPos < aString.length; strPos++) {
         if (inTag && aString.charAt(strPos) == '>') {
             inTag = false;
             if (inScript && (strPos > 8) && (aString.slice(strPos, strPos - 8) == '/script>')) {
                 inScript = false;
-            }            
+            }
             continue;
         } else if (!inTag && aString.charAt(strPos) == '<') {
             inTag = true;
@@ -29,8 +29,8 @@ function getTagStrippedStringAndMap(aString)
                 strPos += 7;
             }
             continue;
-        }        
-        
+        }
+
         if (inTag == false && inScript == false) {
             tagStrippedString += aString.charAt(strPos);
             str2pos.push(strPos);
@@ -55,13 +55,13 @@ function escapeSpecialChars(string)
 // (i.e. if there is a tag in the middle).
 function insertHighlighting(bodyText, previ, i, length, highlightStartTag, highlightEndTag)
 {
-    var newText = "";    
+    var newText = "";
     newText = bodyText.slice(previ, str2pos[i]);
-    
+
     // insert start
     newText += highlightStartTag;
-    
-    var str2posprev = str2pos[i];    
+
+    var str2posprev = str2pos[i];
     // deal with intermediate tags
     for(var cnt = i; cnt < i+length; cnt++)
     {
@@ -69,21 +69,21 @@ function insertHighlighting(bodyText, previ, i, length, highlightStartTag, highl
         {
             // insert end tag
             newText += highlightEndTag;
-            
+
             // insert intermediate body text tags
             newText += bodyText.slice(str2posprev+1, str2pos[cnt]);
-            
+
             // insert start tag
             newText += highlightStartTag;
         }
         newText += bodyText.charAt(str2pos[cnt]);
         str2posprev=str2pos[cnt];
     }
-    
+
     // insert end
     newText += highlightEndTag;
     return newText;
-    
+
 }
 
 // check to see if the sequence at position 'i' in taglessString is actually in
@@ -93,9 +93,9 @@ function isInEscapedSequence(i, taglessString, searchTerm)
 {
     var escapeSeq = /&nbsp;|&lt;|&gt;|&amp;/gi;
     var maxEscapeSeqLength = 6;
-    var startPos = 0; 
+    var startPos = 0;
     var endPos = 0;
-    
+
     // exit if the search term has an escape sequence inside it
     if (escapeSeq.test(searchTerm)) {
         return false;
@@ -112,14 +112,14 @@ function isInEscapedSequence(i, taglessString, searchTerm)
             startPos = tempI;
             bFound = true;
             break;
-        } 
+        }
         tempI = tempI-1;
-        
+
         // if we hit a ';' in any position other than the first while searching
         // for an ampersand, then we cannot be inside an escape sequence
         if (tempI >= 0 && taglessString.charAt(tempI) == ";") {
             return false;
-        }        
+        }
     }
     if (!bFound) {
         return false;
@@ -134,16 +134,16 @@ function isInEscapedSequence(i, taglessString, searchTerm)
 // Adds highlighting to bodyText around searchTerm. Case sensitivity is optional.
 // hitCount is used to a) count the number of search matches and b) Generate unique
 // name strings for each highlighting SPAN element.
-function addHighlight(bodyText, searchTerm, caseSensitive, hitCount) 
+function addHighlight(bodyText, searchTerm, caseSensitive, hitCount)
 {
-    var highlightStartTag = ""; 
+    var highlightStartTag = "";
     var highlightEndTag = "</span>";
-  
+
     var newText = "";
     var i = 0;
     var previ = 0;
     var bodyTextUC = bodyText.toUpperCase();
-    
+
     if (caseSensitive) {
         var taglessString = getTagStrippedStringAndMap(bodyText);
     } else {
@@ -155,7 +155,7 @@ function addHighlight(bodyText, searchTerm, caseSensitive, hitCount)
 
     if (!caseSensitive) {
         var searchTermUC = searchTerm.toUpperCase();
-    } 
+    }
 
     // search for subsequent matches
     while (true) {
@@ -165,55 +165,55 @@ function addHighlight(bodyText, searchTerm, caseSensitive, hitCount)
             i = taglessString.indexOf(searchTermUC, i);
         }
         if (i < 0) break;
-        
+
         // we have a match!
-        
+
         // make sure that the match is not inside an escaped sequence of text
         // such as &nbsp;
         if (isInEscapedSequence(i, taglessString, searchTerm)) {
             i=i+1;
             continue;
         }
-        
+
         // insert highlight tags that cross tag boundaries
         highlightStartTag = createHighlightSpanStart(hitCount);
         hitCount = hitCount+1;
-        newText += insertHighlighting(bodyText, previ, i, searchTerm.length, highlightStartTag, highlightEndTag);        
+        newText += insertHighlighting(bodyText, previ, i, searchTerm.length, highlightStartTag, highlightEndTag);
         previ = str2pos[i+searchTerm.length-1]+1;
-        
+
         i = i + searchTerm.length;
     }
-    
+
     newText += bodyText.slice(previ, bodyText.length);
     return [newText, hitCount];
 }
 
-function removeHighlight(bodyText) 
+function removeHighlight(bodyText)
 {
-    // We use regular expressions here rather than a straight text search because 
+    // We use regular expressions here rather than a straight text search because
     // some browsers actually insert double quotes and capitalize.  Also, each highlight
     // name is uniquely numbered in order of discovery
     var highlightStartTag = /<span class=[\"]*highlighted(Current)*[\"]* name=[\"]*highlight[0-9]*[\"]*>/i;
     var highlightEndTag = /<\/span>/i;
-    
+
     var newText = "";
 
     var startPatternFirstIndex = -1;
     var startPatternLastIndex = -1;
-    
+
     var endPatternFirstIndex = -1;
     var endPatternLastIndex = -1;
 
     while (highlightStartTag.test(bodyText) === true) {
         startPatternFirstIndex = bodyText.search(highlightStartTag);
-        newText += bodyText.substring(0, startPatternFirstIndex);        
+        newText += bodyText.substring(0, startPatternFirstIndex);
         startPatternLastIndex = bodyText.indexOf('>', startPatternFirstIndex+1);
-        
+
         bodyText = bodyText.substr(startPatternLastIndex+1);
         endPatternFirstIndex = bodyText.search(highlightEndTag);
         newText += bodyText.substring(0, endPatternFirstIndex);
         endPatternLastIndex = endPatternFirstIndex+7;
-        
+
         bodyText = bodyText.substr(endPatternLastIndex);
     }
     if (startPatternFirstIndex < 0) {
@@ -236,14 +236,14 @@ function removeHighlightInAllDocs()
     }
 }
 
-function findInDoc(searchStringFromSubmitBox, doc, caseSensitive, hitCount) 
+function findInDoc(searchStringFromSubmitBox, doc, caseSensitive, hitCount)
 {
     var searchBody = doc.body.innerHTML;
     // if the document is empty, or the documents is invalid, return
     if (!doc.body || typeof(searchBody) === "undefined") {
         return [false, hitCount];
     }
-        
+
     // inject highlighting code into html
     var result = addHighlight(searchBody, searchStringFromSubmitBox, caseSensitive, hitCount);
     doc.body.innerHTML = result[0];
@@ -258,7 +258,7 @@ function getSpansByName(name)
     var allSpans = [];
     for (i = 0; i < top.frames.length; i++) {
         if (top.frames[i].name === "rtwreport_contents_frame" || top.frames[i].name === "rtwreport_document_frame") {
-            var currentDoc = top.frames[i].document; 
+            var currentDoc = top.frames[i].document;
             var highlightedSpans = currentDoc.getElementsByName(name);
             if (highlightedSpans && highlightedSpans.length && highlightedSpans.length > 0) {
             for (j = 0; j < highlightedSpans.length; j++) {
@@ -274,7 +274,7 @@ function isVisibleElement(elementID)
 {
     if (elementID)
         return elementID.offsetWidth > 0 || elementID.offsetHeight > 0;
-    else 
+    else
         return false;
 }
 
@@ -306,8 +306,8 @@ function getNextVisible()
             break;
         }
     }
-    
-    return highlightedSpans;    
+
+    return highlightedSpans;
 }
 
 function clearCurrentSearchMatch()
@@ -319,7 +319,7 @@ function clearCurrentSearchMatch()
         for (i = 0; i < highlightedSpans.length; i++) {
             if (highlightedSpans[i]) {
                 highlightedSpans[i].setAttribute("class", "highlighted");
-            }           
+            }
         }
     }
 }
@@ -348,29 +348,29 @@ function scrollToNextHit(hitNum)
     var spanName = "";
     var highlightedSpans;
     var searchBox = findElement('searchTxtBox');
-    
+
     clearCurrentSearchMatch();
-    
+
     if (hitNum) {
         // if a number is provided, use it
         highlightedSpans = setCurrentSearchMatchIfVisible(hitNum);
-    } else {        
+    } else {
         // start working on next element to highlight
         highlightedSpans = getNextVisible();
-    }    
-    
-    // we found the current 
+    }
+
+    // we found the current
     if (highlightedSpans && highlightedSpans.length > 0) {
         highlightedSpans[0].scrollIntoView();
         for (i = 0; i < highlightedSpans.length; i++) {
             highlightedSpans[i].setAttribute("class", "highlightedCurrent");
         }
         searchBox.setAttribute("class", "search");
-        
+
     // if highlightedSpans is invalid, then we did not find any valid, visible subsequent matches
     // wrap to beginning or indicate no matches
     } else {
-        // Element not found. Scroll to first visible element        
+        // Element not found. Scroll to first visible element
         currentlyHighlightedHit = 0;
         var highlightedSpans = getNextVisible(currentlyHighlightedHit);
         if (highlightedSpans && highlightedSpans.length > 0) {
@@ -393,7 +393,7 @@ function findElement(element)
     for (i = 0; i < top.frames.length; i++) {
         if (top.frames[i].name === "rtwreport_contents_frame" || top.frames[i].name === "rtwreport_document_frame") {
             var elem = top.frames[i].document.getElementById(element);
-            if (elem) { 
+            if (elem) {
                 return elem;
             }
         }
@@ -427,20 +427,20 @@ function findInAllDocs(searchStringFromSubmitBox, caseSensitive)
     if (previousSearchString != searchStringFromSubmitBox) {
         // If the search string has changed or a new page has been loaded, do a new search
         var hitCount = 1;
-        var i = 0;        
+        var i = 0;
         var success = false;
         previousSearchString = searchStringFromSubmitBox;
-               
+
         // start by removing traceinfo highlighting
         rtwRemoveHighlighting();
-        
+
         // remove all previous search highlighting
         removeHighlightInAllDocs();
 
         // 1. Iterate through all frames in window and search
         for (i = 0; i < top.frames.length; i++) {
-            var currentDoc = top.frames[i].document;    
-            
+            var currentDoc = top.frames[i].document;
+
             // if we have no search term, restore
             if (searchStringFromSubmitBox !== "") {
                 // search and highlight in all frames
@@ -450,24 +450,24 @@ function findInAllDocs(searchStringFromSubmitBox, caseSensitive)
             }
         }
 
-        // 2. Restore search term once form is submitted and text highlighted        
+        // 2. Restore search term once form is submitted and text highlighted
         if (searchStringFromSubmitBox != "") {
             strInitValue = searchStringFromSubmitBox;
-        }    
+        }
         initSearchBox(strInitValue);
 
         // 3. Scroll to the first hit encountered
         scrollToNextHit(1);
-        
+
         // 4. Set focus back to text box and select text
         var txtBox = setFocusOnTxtBox();
         if (txtBox) {
             txtBox.select();
         }
-                
+
     } else {
-        // If the search string is the same, then scroll to the next 
-        // hit if the hit is valid. Else wrap back.        
+        // If the search string is the same, then scroll to the next
+        // hit if the hit is valid. Else wrap back.
         scrollToNextHit();
     }
     return false;
@@ -486,7 +486,7 @@ function clearIfEmpty()
 }
 
 function keyPressSwitchyard(keyPressEvent)
-{ 
+{
     var kc;
     keyPressEvent = (keyPressEvent == null ? window.keyPressEvent : keyPressEvent);
 
@@ -494,41 +494,41 @@ function keyPressSwitchyard(keyPressEvent)
     if (!keyPressEvent || (typeof keyPressEvent == "undefined")) {
         return;
     }
-    
-    if (keyPressEvent.keyCode) {    
+
+    if (keyPressEvent.keyCode) {
         kc=keyPressEvent.keyCode;
     } else if (keyPressEvent.which) {
-        kc=keyPressEvent.which;   
+        kc=keyPressEvent.which;
     } else {
         return;
     }
 
-    // we do not care about the browser find appearing. If it does appear, then 
+    // we do not care about the browser find appearing. If it does appear, then
     // we are running an external browser and that is okay.
-    
+
     // handle Ctrl-Key combinations
     if (keyPressEvent.ctrlKey) {
         switch (kc) {
             case 70: // Ctrl-F
-            { 
+            {
               setFocusOnTxtBox();
               break;
             }
-            
+
             default: break;
         }
-    } 
+    }
 }
 
 function installDocumentKeyPressHandler()
 {
     var i = 0;
     for (i = 0; i < top.frames.length; i++) {
-        var currentDoc = top.frames[i].document;    
+        var currentDoc = top.frames[i].document;
         currentDoc.onkeydown = keyPressSwitchyard;
-    }    
+    }
     top.document.onkeydown = keyPressSwitchyard;
-    
+
     // This also clears search related highlighting
     removeHighlightInAllDocs();
     currentlyHighlightedHit = 0;
@@ -541,7 +541,7 @@ function installDocumentKeyPressHandler()
 function setWidthDynamic(frameID, elementID, extraSpace, minSize)
 {
     var frame = document.getElementById(frameID);
-    
+
     // sanity check input args
     if (frame && extraSpace > 0 && minSize > 0) {
         var frameWidth = frame.scrollWidth;

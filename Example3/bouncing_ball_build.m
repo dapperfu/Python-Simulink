@@ -10,5 +10,5 @@ model = 'bouncing_ball';
 feval([model '_init']);
 % Open the model.
 open_system(model);
-% 
+%
 rtwbuild(model);

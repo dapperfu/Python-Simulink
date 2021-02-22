@@ -59,15 +59,15 @@ df.plot(x="time", y=["ball_velocity"])
 
 
 
-    
+
 ![png](bouncing_ball_files/bouncing_ball_4_1.png)
-    
 
 
 
-    
+
+
 ![png](bouncing_ball_files/bouncing_ball_4_2.png)
-    
+
 
 
 ![](sldemo_bounceExample_02.png)
@@ -101,9 +101,9 @@ df.plot(x="time", y=["ball_position", "ball_velocity"])
 
 
 
-    
+
 ![png](bouncing_ball_files/bouncing_ball_7_1.png)
-    
+
 
 
 
@@ -133,7 +133,5 @@ df.plot(x="time", y=["ball_position", "ball_velocity"])
 
 
 
-    
-![png](bouncing_ball_files/bouncing_ball_8_1.png)
-    
 
+![png](bouncing_ball_files/bouncing_ball_8_1.png)

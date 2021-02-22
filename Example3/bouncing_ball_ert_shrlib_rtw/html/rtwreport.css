@@ -1,6 +1,6 @@
 /* Copyright 2011-2016 The MathWorks, Inc. */
 body,p,table {font-family: calibri, verdana, sans-serif;}
-button,.buton {font-family: calibri, verdana, sans-serif;}  
+button,.buton {font-family: calibri, verdana, sans-serif;}
 button,.button {font-size: small;}
 .small_font {font-size: small;}
 h1 { font-weight: normal; color: #000066; }
@@ -197,13 +197,13 @@ a.closeButton:active {
 }
 
 ul.nav_list {
-        list-style-type:none; 
-        display: block;		
+        list-style-type:none;
+        display: block;
 	margin: 0;
 	padding: 0;
 }
 ul.nav_list li {
-        list-style-type:none; 
+        list-style-type:none;
 	display: inline;
 	margin: 0 18px 0 0;
 	padding: 0;
@@ -218,7 +218,7 @@ ul.nav_list li {
     margin: 0;
     margin-bottom: 0;
     display: inline;
-    vertical-align:middle; 
+    vertical-align:middle;
 }
 
 table.nav_table {
@@ -226,13 +226,13 @@ table.nav_table {
     border: none;
     width: 100%;
     display: inline;
-    vertical-align:middle;    
+    vertical-align:middle;
 }
 
 table#rtwIdTracePanel > tr > td {
     white-space: nowrap;
     table-layout:fixed;
-    vertical-align:middle; 
+    vertical-align:middle;
 }
 
 table.nav_table > button {

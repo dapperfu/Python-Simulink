@@ -262,9 +262,9 @@ df.plot("step", "time")
 
 
 
-    
+
 ![png](discrete_tf_files/discrete_tf_15_1.png)
-    
+
 
 
 # Step Response
@@ -419,9 +419,9 @@ df.plot(x='time', y=["input", "output"])
 
 
 
-    
+
 ![png](discrete_tf_files/discrete_tf_18_1.png)
-    
+
 
 
 
@@ -443,9 +443,9 @@ plt.title("Step response modeled in Python")
 
 
 
-    
+
 ![png](discrete_tf_files/discrete_tf_19_1.png)
-    
+
 
 
 
@@ -493,9 +493,9 @@ df.plot(x='time', y=["input", "output"])
 
 
 
-    
+
 ![png](discrete_tf_files/discrete_tf_23_1.png)
-    
+
 
 
 
@@ -513,9 +513,9 @@ plt.legend(["control.forced_response", "simulink shared library response"])
 
 
 
-    
+
 ![png](discrete_tf_files/discrete_tf_24_1.png)
-    
+
 
 
 # Changing the TransferFunction
@@ -579,7 +579,5 @@ plt.vlines([2, 3], ymin=0, ymax=1, colors="g")
 
 
 
-    
-![png](discrete_tf_files/discrete_tf_27_1.png)
-    
 
+![png](discrete_tf_files/discrete_tf_27_1.png)

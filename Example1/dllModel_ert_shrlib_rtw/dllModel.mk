@@ -1,16 +1,16 @@
 ###########################################################################
-## Makefile generated for Simulink model 'dllModel'. 
-## 
+## Makefile generated for Simulink model 'dllModel'.
+##
 ## Makefile     : dllModel.mk
 ## Generated on : Sat Feb 06 10:54:41 2021
 ## MATLAB Coder version: 4.1 (R2018b)
-## 
+##
 ## Build Info:
-## 
+##
 ## Final product: $(RELATIVE_PATH_TO_ANCHOR)/dllModel_win64.dll
 ## Product type : shared library
 ## Build type   : Shared Library Target
-## 
+##
 ###########################################################################
 
 ###########################################################################
@@ -31,11 +31,11 @@ COMPUTER                  = PCWIN64
 MATLAB_ROOT               = C:/R2018b
 MATLAB_BIN                = C:/R2018b/bin
 MATLAB_ARCH_BIN           = $(MATLAB_BIN)/win64
-MASTER_ANCHOR_DIR         = 
+MASTER_ANCHOR_DIR         =
 START_DIR                 = C:/WPy64-3910/notebooks/python_SimulinkDLL/Example1
 ARCH                      = win64
-SOLVER                    = 
-SOLVER_OBJ                = 
+SOLVER                    =
+SOLVER_OBJ                =
 CLASSIC_INTERFACE         = 0
 TGT_FCN_LIB               = None
 MODEL_HAS_DYNAMICALLY_LOADED_SFCNS = 0
@@ -54,7 +54,7 @@ CPP_STANDARD_OPTS         = -std=c++98 -pedantic -Wno-long-long -fwrapv
 # Supported Version(s):    5.x
 # ToolchainInfo Version:   R2018b
 # Specification Revision:  1.0
-# 
+#
 #-------------------------------------------
 # Macros assumed to be defined elsewhere
 #-------------------------------------------
@@ -77,8 +77,8 @@ MEX_CPP_OPTS_FILE     = $(MATLAB_ROOT)/bin/win64/mexopts/mingw64_g++.xml
 MW_EXTERNLIB_DIR      = $(MATLAB_ROOT)/extern/lib/win64/mingw64
 SHELL                 = %SystemRoot%/system32/cmd.exe
 
-TOOLCHAIN_SRCS = 
-TOOLCHAIN_INCS = 
+TOOLCHAIN_SRCS =
+TOOLCHAIN_INCS =
 TOOLCHAIN_LIBS = -lws2_32
 
 #------------------------
@@ -244,19 +244,19 @@ ALL_OBJS = $(OBJS) $(MAIN_OBJ)
 ## PREBUILT OBJECT FILES
 ###########################################################################
 
-PREBUILT_OBJS = 
+PREBUILT_OBJS =
 
 ###########################################################################
 ## LIBRARIES
 ###########################################################################
 
-LIBS = 
+LIBS =
 
 ###########################################################################
 ## SYSTEM LIBRARIES
 ###########################################################################
 
-SYSTEM_LIBS = 
+SYSTEM_LIBS =
 
 ###########################################################################
 ## ADDITIONAL TOOLCHAIN FLAGS
@@ -320,7 +320,7 @@ all : build
 build : prebuild $(PRODUCT)
 
 
-prebuild : 
+prebuild :
 
 
 download : build
@@ -410,7 +410,7 @@ $(ALL_OBJS) : rtw_proj.tmw $(MAKEFILE)
 ## MISCELLANEOUS TARGETS
 ###########################################################################
 
-info : 
+info :
 	@echo "### PRODUCT = $(PRODUCT)"
 	@echo "### PRODUCT_TYPE = $(PRODUCT_TYPE)"
 	@echo "### BUILD_TYPE = $(BUILD_TYPE)"
@@ -438,10 +438,8 @@ info :
 	@echo "### MAKE_FLAGS = $(MAKE_FLAGS)"
 
 
-clean : 
+clean :
 	$(ECHO) "### Deleting all derived files..."
 	$(RM) $(subst /,\,$(PRODUCT))
 	$(RM) $(subst /,\,$(ALL_OBJS))
 	$(ECHO) "### Deleted all derived files."
-
-
