@@ -2,7 +2,9 @@ MinGW/
 castxml/
 DevelopmentScratch/
 
-
+*.mat
+*.slxc
+*.o
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
