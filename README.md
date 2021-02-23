@@ -19,7 +19,7 @@ Run your Simulink models & libraries in Python.
 
 ##  Disclaimer
 
-This repository is a set of instructions, with examples, on how to create a Pythonic wrapper for Simulink models. It is not a turnkey Python module to do this:
+This repository is a set of instructions, with examples, on how to create a Pythonic wrapper for Simulink models. It **is not** a turnkey Python module to do this:
 
 ```python
 import simulinkdll
