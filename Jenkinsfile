@@ -24,5 +24,11 @@ pipeline {
       }
     }
 
+    stage('') {
+      steps {
+        archiveArtifacts(artifacts: '*.dll, *.h', fingerprint: true, onlyIfSuccessful: true)
+      }
+    }
+
   }
 }
