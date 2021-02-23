@@ -24,7 +24,7 @@ pipeline {
       }
     }
 
-    stage('error') {
+    stage('Archive Artifacts') {
       steps {
         archiveArtifacts(artifacts: '**/*.dll, **/*.h', fingerprint: true, onlyIfSuccessful: true)
       }
