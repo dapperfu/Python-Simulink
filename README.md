@@ -48,7 +48,7 @@ For demonstrating minimal dll functionality and the steps required to run a mode
 
 A simple discrete transfer function. Compiled with a 1st order low pass filter.
 
-There are multiple examples. Windows & Linux examples are low level ctypes wrappers to run the transfer function. The Pythonic Example using a class in [discretetf.py](https://github.com/dapperfu/python_SimulinkDLL/blob/master/Example2/discretetf.py) to interact with the model in a more Pythonic way.
+There are multiple examples. Windows & Linux examples are low level ctypes wrappers to run the transfer function. The Pythonic Example uses a class defined in [discretetf.py](https://github.com/dapperfu/python_SimulinkDLL/blob/master/Example2/discretetf.py) to interact with the model in a more Pythonic way.
 
 - [Windows Example](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example2/discrete_tf.ipynb)
 - [Linux Example](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example2/discrete_tf-linux.ipynb)
