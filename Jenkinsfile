@@ -1,9 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('') {
+    stage('error') {
       steps {
-        runMATLABCommand 'Example1/dllModel_build.m'
+        runMATLABCommand 'Example1\\dllModel_build'
       }
     }
 
