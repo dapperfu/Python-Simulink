@@ -36,19 +36,25 @@ For a given library or model this should only need done when the Simulink interf
 
 # Examples
 
-### [Simple DLL Export](Example1)
+### [Simple DLL Export](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example1/dllModel.ipynb)
 
 For demonstrating minimal dll functionality and the steps required to run a model in Python.
 
 ![](Example1/dllModel.png)
 
-### [Discrete Transfer Function](Example2)
-
-A simple discrete transfer function. Compiled with a 1st order low pass filter.
+### [Discrete Transfer Function](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example2/discrete_tf-python_class.ipynb)
 
 ![](Example2/discrete_tf.png)
 
-### ![Bouncing Ball](Example3/)
+A simple discrete transfer function. Compiled with a 1st order low pass filter.
+
+There are multiple examples. Windows & Linux examples are low level ctypes wrappers to run the transfer function. The Pythonic Example using a class in [discretetf.py](https://github.com/dapperfu/python_SimulinkDLL/blob/master/Example2/discretetf.py) to interact with the model in a more Pythonic way.
+
+- [Windows Example](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example2/discrete_tf.ipynb)
+- [Linux Example](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example2/discrete_tf-linux.ipynb)
+- [Pythonic Example](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example2/discrete_tf-python_class.ipynb) - create a [TransferTF python](https://github.com/dapperfu/python_SimulinkDLL/blob/master/Example2/discretetf.py) class to interact with the model.
+
+### ![Bouncing Ball](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example3/bouncing_ball.ipynb)
 
 Adapted from [Mathworks's Simulation of a Bouncing Ball](https://www.mathworks.com/help/simulink/slref/simulation-of-a-bouncing-ball.html)
 
