@@ -3,7 +3,7 @@ import os
 import platform
 
 import pandas as pd
-from rtwtypes import *
+from rtwtypes import real_T
 
 
 class DiscreteTF:
@@ -23,9 +23,11 @@ class DiscreteTF:
         self.__step = getattr(self.dll, f"{model}_step")
         self.__model_terminate = getattr(self.dll, f"{model}_terminate")
 
+        # Model signals
         self._output = real_T.in_dll(self.dll, "OutputSignal")
         self._time = real_T.in_dll(self.dll, "SimTime")
 
+        # Model Parameters
         self._input_signal = real_T.in_dll(self.dll, "InputSignal")
         self._num = (real_T * 2).in_dll(self.dll, "num")
         self._den = (real_T * 2).in_dll(self.dll, "den")
@@ -67,11 +69,12 @@ class DiscreteTF:
     # Signals
     @property
     def output(self):
-        # Return a Python data type
+        # Model output, return a Python datatype
         return float(self._output.value)
 
     @property
     def time(self):
+        # Model time, return a Python datatype
         return float(self._time.value)
 
     # Parameters

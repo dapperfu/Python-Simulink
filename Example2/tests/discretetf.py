@@ -3,14 +3,14 @@ import os
 import platform
 
 import pandas as pd
-from rtwtypes import *
+from rtwtypes import real_T
 
 
 class DiscreteTF:
     def __init__(self, model="discrete_tf"):
         self.model = model
         if platform.system() == "Linux":
-            self.dll_path = os.path.abspath("discrete_tf.so")
+            self.dll_path = os.path.abspath(f"{model}.so")
             self.dll = ctypes.cdll.LoadLibrary(self.dll_path)
         elif platform.system() == "Windows":
             self.dll_path = os.path.abspath(f"{model}_win64.dll")
@@ -23,22 +23,24 @@ class DiscreteTF:
         self.__step = getattr(self.dll, f"{model}_step")
         self.__model_terminate = getattr(self.dll, f"{model}_terminate")
 
+        # Model signals
         self._output = real_T.in_dll(self.dll, "OutputSignal")
         self._time = real_T.in_dll(self.dll, "SimTime")
 
+        # Model Parameters
         self._input_signal = real_T.in_dll(self.dll, "InputSignal")
         self._num = (real_T * 2).in_dll(self.dll, "num")
         self._den = (real_T * 2).in_dll(self.dll, "den")
 
     def initialize(self):
         """Initialize the Model."""
-        self.step_num = -1
         self.__initialize()
+        self.step_num = -1
 
     def step(self):
         """Step through the model Model."""
-        self.step_num += 1
         self.__step()
+        self.step_num += 1
 
     def terminate(self):
         """Terminate the model Model."""
@@ -69,11 +71,12 @@ class DiscreteTF:
     # Signals
     @property
     def output(self):
-        # Return a Python data type
+        # Model output, return a Python datatype
         return float(self._output.value)
 
     @property
     def time(self):
+        # Model time, return a Python datatype
         return float(self._time.value)
 
     # Parameters
