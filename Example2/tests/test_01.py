@@ -27,7 +27,7 @@ def test_control_num(mdl):
     assert np.isclose(mdl.den, sysd.den).all()
 
 
-def test_time(mdl):
+def test_steady_state(mdl):
     mdl.initialize()
     mdl.input_signal = 1.0
     for step in range(int(1e5)):
