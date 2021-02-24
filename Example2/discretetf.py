@@ -10,7 +10,7 @@ class DiscreteTF:
     def __init__(self, model="discrete_tf"):
         self.model = model
         if platform.system() == "Linux":
-            self.dll_path = os.path.abspath("discrete_tf.so")
+            self.dll_path = os.path.abspath(f"{model}.so")
             self.dll = ctypes.cdll.LoadLibrary(self.dll_path)
         elif platform.system() == "Windows":
             self.dll_path = os.path.abspath(f"{model}_win64.dll")

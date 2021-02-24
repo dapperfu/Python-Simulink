@@ -4,6 +4,9 @@
 bdclose('all');
 % Clear matlab environment.
 clear;
+% Change to the build script folder
+cd(fileparts(mfilename('fullpath')));
+
 % Determine model name from the build script name
 model = 'bouncing_ball';
 % Run the model init script.

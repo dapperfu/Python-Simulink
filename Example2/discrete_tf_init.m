@@ -1,13 +1,15 @@
-%% Tunable parameters.
-sys = tf(3, [2, 1])
-sysd = c2d(sys,1e-3)
+%% Transfer Function Definition
+sys = tf(3, [2, 1]);
+sysd = c2d(sys,1e-3);
+% Plot a step function
+step(sys, sysd);
+% Save plot
+print(gcf, '-dpng', 'step_response.png')
 
-step(sys, sysd)
+% Model Run Speed.
+Ts=1e-3;
 
-Ts = Simulink.Parameter;
-Ts.Value=1e-3;
-Ts.CoderInfo.StorageClass='ExportedGlobal';
-
+%% Parameters
 num=Simulink.Parameter;
 num.Value=sysd.Numerator{1};
 num.CoderInfo.StorageClass='ExportedGlobal';
