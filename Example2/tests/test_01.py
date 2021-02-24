@@ -33,3 +33,19 @@ def test_steady_state(mdl):
     for step in range(int(1e5)):
         mdl.step()
     assert np.isclose(mdl.output, mdl.input_signal * 3)
+
+
+def test_sine_response(mdl):
+    mdl.initialize()
+    rows = list()
+    f = 0.5  # Hz
+    for step in range(int(10 * 1e3)):
+        InputSignal.value = np.sin(2 * np.pi * step * f / 1e3)
+        row_tmp = {
+            "step": model_step(),
+            "time": float(SimTime.value),
+            "input": float(InputSignal.value),
+            "output": float(OutputSignal.value),
+        }
+        rows.append(row_tmp)
+    df = pd.DataFrame(rows)
