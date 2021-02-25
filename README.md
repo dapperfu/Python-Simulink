@@ -92,6 +92,12 @@ Jenkins Artifacts:
 
 https://github.com/AutomotiveDevops/python_SimulinkDLL/issues
 
+# Training or Consulting
+
+If you or your company need training or consulting, contact via
+
+- [LinkedIn](https://www.linkedin.com/in/jed-f-906315205/)
+- [e-mail: python_simulink@eabi.xyz](mailto:python_simulink@eabi.xyz)
 
 Google Indexing:
 
