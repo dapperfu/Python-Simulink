@@ -1,3 +1,5 @@
+
+
 # Python SimulinkDLL
 
 Run your Simulink models & libraries in Python.
@@ -48,17 +50,37 @@ For demonstrating minimal dll functionality and the steps required to run a mode
 
 A simple discrete transfer function. Compiled with a 1st order low pass filter.
 
-There are multiple examples. Windows & Linux examples are low level ctypes wrappers to run the transfer function. The Pythonic Example uses a class defined in [discretetf.py](https://github.com/dapperfu/python_SimulinkDLL/blob/master/Example2/discretetf.py) to interact with the model in a more Pythonic way.
+There are two example notebooks for Example 2. 
 
-- [Windows Example](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example2/discrete_tf.ipynb)
-- [Linux Example](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example2/discrete_tf-linux.ipynb)
-- [Pythonic Example](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example2/discrete_tf-python_class.ipynb) - create a [TransferTF python](https://github.com/dapperfu/python_SimulinkDLL/blob/master/Example2/discretetf.py) class to interact with the model.
+1. [Simple Example](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example2/discrete_tf.ipynb) - A simple low-level ctypes wrapper.
+2. [Pythonic Example](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example2/discrete_tf-python_class.ipynb) - Use Python syntactic sugar to create a high level [TransferTF python](https://github.com/dapperfu/python_SimulinkDLL/blob/master/Example2/discretetf.py) class to interact with the model. Adds datalogging and pandas integration.
 
 ### [Bouncing Ball](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example3/bouncing_ball.ipynb)
 
 Adapted from [Mathworks's Simulation of a Bouncing Ball](https://www.mathworks.com/help/simulink/slref/simulation-of-a-bouncing-ball.html)
 
 ![](Example3/bouncing_ball.png)
+
+| Time Step | Simulink Duration (s) | Python Duration (s) |
+| --------- | --------------------- | ------------------- |
+| 1e-4      | 0.5905                | 0.06                |
+| 1e-5      | 1.0461                | 0.61                |
+| 1e-6      | 8.1991                | 6.08                |
+| 1e-7      | 78.9901               | 60.18               |
+
+# Jenkins Build Automation
+
+This project also serves as a proof of concept for using [CI/CD devops techniques](https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment) with Simulink Models. There is a [`Jenkinsfile` ](Jenkinsfile) that will build each of the examples and archives the the shared library (`.dll`) and header files (`.h`)
+
+Jenkins Pipeline:
+
+![Jenkins pipeline screenshot](jenkins_pipeline.png)
+
+
+
+Jenkins Artifacts:
+
+![Jenkins artifacts](jenkins_artifacts.png)
 
 # Questions, Issues, & Feedback
 
