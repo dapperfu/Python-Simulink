@@ -48,7 +48,7 @@ def test_sine_response(mdl, sysd, Ts):
         mdl.input_signal = np.sin(2 * np.pi * step * f * Ts)
         mdl.step_log()
     df = mdl.dataframe
-    _, yout = control.forced_response(sysd, df.time, df.input)
+    _, yout, _ = control.forced_response(sysd, df.time, df.input)
     np.allclose(yout, df.output)
 
 
