@@ -88,10 +88,16 @@ Jenkins Artifacts:
 
 ![Jenkins artifacts](jenkins_artifacts.png)
 
+# Training or Consulting
+
+If you or your company need training or consulting, contact via
+
+- [LinkedIn](https://www.linkedin.com/in/jed-f-906315205/)
+- [e-mail: python_simulink@eabi.xyz](mailto:python_simulink@eabi.xyz)
+
 # Questions, Issues, & Feedback
 
-https://github.com/AutomotiveDevops/python_SimulinkDLL/issues
-
+https://github.com/dapperfu/python_SimulinkDLL/issues
 
 Google Indexing:
 
