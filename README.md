@@ -15,7 +15,7 @@ Run your Simulink models & libraries in Python.
 ## Use cases
 
 1. Use Python and it's ecosystem to run complex Simulink models.
-2. Use Python & pytest to run Model-in-the-Loop (MIL) tests on Simulink subsystems.
+2. Use Python & `pytest` to run Model-in-the-Loop (MIL) tests on Simulink subsystems.
 3. Give Simulink algorithms to developers without Matlab/Simulink licenses to use.
 4. Start a programming language war at your company.
 
@@ -28,13 +28,13 @@ import simulinkdll
 simulinkdll.run("my_model.slx")
 ```
 
-For a given library or model this should only need done when the Simulink interface changes.
+For a given library or model configuring the Python should only need done when the Simulink interface changes.
 
 ### High level instructions.
 
 1. [Create a shared library in Simulink.](https://www.mathworks.com/help/ecoder/ug/creating-and-using-host-based-shared-libraries.html)
 2. Create Python representations of all items in the header file.
-3. Open the DLL in Python and run the model.
+3. Open the shared library (`.dll`, `.so`) in Python and run the model.
 
 # Examples
 
@@ -55,11 +55,17 @@ There are two example notebooks for Example 2.
 1. [Simple Example](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example2/discrete_tf.ipynb) - A simple low-level ctypes wrapper.
 2. [Pythonic Example](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example2/discrete_tf-python_class.ipynb) - Use Python syntactic sugar to create a high level [TransferTF python](https://github.com/dapperfu/python_SimulinkDLL/blob/master/Example2/discretetf.py) class to interact with the model. Adds datalogging and pandas integration.
 
+Example 2 also contains sample `pytest` tests in the [`tests`](https://github.com/dapperfu/python_SimulinkDLL/tree/master/Example2/tests) directory. This demonstrates how you can use `pytest` to test Simulink models. Sample test results are shown shown in [Example2/test_results.md.](https://github.com/dapperfu/python_SimulinkDLL/blob/master/Example2/test_results.md)
+
 ### [Bouncing Ball](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example3/bouncing_ball.ipynb)
 
 Adapted from [Mathworks's Simulation of a Bouncing Ball](https://www.mathworks.com/help/simulink/slref/simulation-of-a-bouncing-ball.html)
 
 ![](Example3/bouncing_ball.png)
+
+Running a Simulation in Simulink also has some overhead. By compiling the model to a shared library and executing it, this overhead is eliminated. 
+
+`bouncing_ball_benchmark.m` benchmarks the model by testing increasingly smaller time steps. The model was then compiled and tested in Python and the corresponding times are recorded below.
 
 | Time Step | Simulink Duration (s) | Python Duration (s) |
 | --------- | --------------------- | ------------------- |
