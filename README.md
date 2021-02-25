@@ -88,12 +88,9 @@ Jenkins Artifacts:
 
 ![Jenkins artifacts](jenkins_artifacts.png)
 
-# Training or Consulting
+# Contact
 
-If you or your company need training or consulting, contact via
-
-- [LinkedIn](https://www.linkedin.com/in/jed-f-906315205/)
-- [e-mail: python_simulink@eabi.xyz](mailto:python_simulink@eabi.xyz)
+If you or your company need training or consulting, contact via e-mail: [python_simulink@eabi.xyz](mailto:python_simulink@eabi.xyz)
 
 # Questions, Issues, & Feedback
 
@@ -101,8 +98,8 @@ https://github.com/dapperfu/python_SimulinkDLL/issues
 
 Google Indexing:
 
-MIL Python, Model-In-The-Loop Python.
-SIL Python, Software-In-The-Loop Python.
-Model-in-the-loop testing with Python.
-Software-in-the-loop testing with Python.
-Using Python for SIL testing. Using Python for MIL testing.
+- MIL Python, Model-In-The-Loop Python.
+- SIL Python, Software-In-The-Loop Python.
+- Model-in-the-loop testing with Python.
+- Software-in-the-loop testing with Python.
+- Using Python for SIL testing. Using Python for MIL testing.
