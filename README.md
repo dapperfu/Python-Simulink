@@ -57,7 +57,7 @@ There are two example notebooks for Example 2.
 
 Example 2 also contains sample `pytest` tests in the [`tests`](https://github.com/dapperfu/python_SimulinkDLL/tree/master/Example2/tests) directory. This demonstrates how you can use `pytest` to test Simulink models. Sample test results are shown shown in [Example2/test_results.md.](https://github.com/dapperfu/python_SimulinkDLL/blob/master/Example2/test_results.md)
 
-Tests can be run on [GitHub actions](https://github.com/features/actions) as well.
+Tests can be run on [GitHub actions](https://github.com/features/actions) as well. An example of how is in [.github/workflows/blank.yml](https://github.com/dapperfu/python_SimulinkDLL/blob/master/.github/workflows/blank.yml).
 
 ![](GitHub_Actions.png)
 
@@ -85,8 +85,6 @@ This project also serves as a proof of concept for using [CI/CD devops technique
 Jenkins Pipeline:
 
 ![Jenkins pipeline screenshot](jenkins_pipeline.png)
-
-
 
 Jenkins Artifacts:
 
