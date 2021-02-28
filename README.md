@@ -1,6 +1,4 @@
-
-
-# Python SimulinkDLL
+# Python-Simulink
 
 Run your Simulink models & libraries in Python.
 
@@ -12,12 +10,15 @@ Run your Simulink models & libraries in Python.
 
 3. Testing can be distributed to machines without Matlab/Simulink licenses.
 
+4. There are more and more Python developers. Being able to hand off a Simulink Library for further use there is a good feature.
+
 ## Use cases
 
 1. Use Python and it's ecosystem to run complex Simulink models.
 2. Use Python & `pytest` to run Model-in-the-Loop (MIL) tests on Simulink subsystems.
 3. Give Simulink algorithms to developers without Matlab/Simulink licenses to use.
-4. Start a programming language war at your company.
+4. Use GitHub/GitLab actions and Python to automate testing in the cloud.
+5. Start a programming language war at your company.
 
 ##  Disclaimer
 
@@ -26,9 +27,10 @@ This repository is a set of instructions, with examples, on how to create a Pyth
 ```python
 import simulinkdll
 simulinkdll.run("my_model.slx")
+do_stuff()
 ```
 
-For a given library or model configuring the Python should only need done when the Simulink interface changes.
+For a given library or model configuring the Python should only need done when the Simulink Parameters/Signals change. The end developer will then be able do a `import simulink_model`, but it takes development time.
 
 ### High level instructions.
 
@@ -40,7 +42,8 @@ For a given library or model configuring the Python should only need done when t
 
 ### [Simple DLL Export](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example1/dllModel.ipynb)
 
-For demonstrating minimal dll functionality and the steps required to run a model in Python.
+- For demonstrating minimal dll functionality and the steps required to run a model in Python.
+- Demonstrate implementions of `SimulinkGlobal` vs  `ExportedGlobal` in `Simulink.Parameter` and `Simulink.Signal` variables.
 
 ![](Example1/dllModel.png)
 
@@ -55,9 +58,11 @@ There are two example notebooks for Example 2.
 1. [Simple Example](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example2/discrete_tf.ipynb) - A simple low-level ctypes wrapper.
 2. [Pythonic Example](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example2/discrete_tf-python_class.ipynb) - Use Python syntactic sugar to create a high level [TransferTF python](https://github.com/dapperfu/python_SimulinkDLL/blob/master/Example2/discretetf.py) class to interact with the model. Adds datalogging and pandas integration.
 
-Example 2 also contains sample `pytest` tests in the [`tests`](https://github.com/dapperfu/python_SimulinkDLL/tree/master/Example2/tests) directory. This demonstrates how you can use `pytest` to test Simulink models. Sample test results are shown shown in [Example2/test_results.md.](https://github.com/dapperfu/python_SimulinkDLL/blob/master/Example2/test_results.md)
+- Example 2 also contains sample `pytest` tests in the [`tests`](https://github.com/dapperfu/python_SimulinkDLL/tree/master/Example2/tests) directory. This demonstrates how you can use `pytest` to test Simulink models. Sample test results are shown shown in [Example2/test_results.md.](https://github.com/dapperfu/python_SimulinkDLL/blob/master/Example2/test_results.md)
 
-Tests can be run on [GitHub actions](https://github.com/features/actions) as well. An example of how is in [.github/workflows/blank.yml](https://github.com/dapperfu/python_SimulinkDLL/blob/master/.github/workflows/blank.yml).
+- Tests can be run on [GitHub actions](https://github.com/features/actions) as well. An example of pipeline file is provided: [.github/workflows/blank.yml](https://github.com/dapperfu/python_SimulinkDLL/blob/master/.github/workflows/blank.yml).
+
+  This is an example badge: [![Simulink DLL Test](https://github.com/dapperfu/python_SimulinkDLL/actions/workflows/blank.yml/badge.svg)](https://github.com/dapperfu/python_SimulinkDLL/actions/workflows/blank.yml)
 
 ![](GitHub_Actions.png)
 
