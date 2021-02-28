@@ -85,23 +85,22 @@ Running a Simulation in Simulink also has some overhead. By compiling the model 
 
 # Jenkins Build Automation
 
-This project also serves as a proof of concept for using [CI/CD devops techniques](https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment) with Simulink Models. There is a [`Jenkinsfile` ](Jenkinsfile) that will build each of the examples and archives the the shared library (`.dll`) and header files (`.h`)
+This project also serves as a proof of concept for using [CI/CD devops techniques](https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment) with Simulink Models. There is a [`Jenkinsfile` ](Jenkinsfile) that will build each of the examples and archive the artifacts:
 
-Jenkins Pipeline:
+- shared library (`.dll`) 
+- header files (`.h`)
+
+Jenkins Pipeline screenshot:
 
 ![Jenkins pipeline screenshot](jenkins_pipeline.png)
 
-Jenkins Artifacts:
+Jenkins Artifacts screenshot:
 
 ![Jenkins artifacts](jenkins_artifacts.png)
 
-# Contact
-
-If you or your company need training or consulting, contact via e-mail: [python_simulink@eabi.xyz](mailto:python_simulink@eabi.xyz)
-
 # Questions, Issues, & Feedback
 
-https://github.com/dapperfu/python_SimulinkDLL/issues
+https://github.com/dapperfu/python_SimulinkDLL/issues - [python_simulink@eabi.xyz](mailto:python_simulink@eabi.xyz)
 
 Google Indexing:
 
