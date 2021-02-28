@@ -53,7 +53,7 @@ For a given library or model configuring the Python should only need done when t
 
 A simple discrete transfer function. Compiled with a 1st order low pass filter.
 
-There are two example notebooks for Example 2. 
+There are two example notebooks for Example 2.
 
 1. [Simple Example](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example2/discrete_tf.ipynb) - A simple low-level ctypes wrapper.
 2. [Pythonic Example](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example2/discrete_tf-python_class.ipynb) - Use Python syntactic sugar to create a high level [TransferTF python](https://github.com/dapperfu/python_SimulinkDLL/blob/master/Example2/discretetf.py) class to interact with the model. Adds datalogging and pandas integration.
@@ -72,7 +72,7 @@ Adapted from [Mathworks's Simulation of a Bouncing Ball](https://www.mathworks.c
 
 ![](Example3/bouncing_ball.png)
 
-Running a Simulation in Simulink also has some overhead. By compiling the model to a shared library and executing it, this overhead is eliminated. 
+Running a Simulation in Simulink also has some overhead. By compiling the model to a shared library and executing it, this overhead is eliminated.
 
 `bouncing_ball_benchmark.m` benchmarks the model by testing increasingly smaller time steps. The model was then compiled and tested in Python and the corresponding times are recorded below.
 
@@ -87,7 +87,7 @@ Running a Simulation in Simulink also has some overhead. By compiling the model 
 
 This project also serves as a proof of concept for using [CI/CD devops techniques](https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment) with Simulink Models. There is a [`Jenkinsfile` ](Jenkinsfile) that will build each of the examples and archive the artifacts:
 
-- shared library (`.dll`) 
+- shared library (`.dll`)
 - header files (`.h`)
 
 Jenkins Pipeline screenshot:

@@ -21,7 +21,7 @@ SimTime.CoderInfo.StorageClass='ExportedGlobal';
 idx=1;
 results=zeros(4,10);
 for Ts = [1e-4, 1e-5, 1e-6, 1e-7]
-    
+
     for i = 1:10
         tic
         sim('bouncing_ball', 25)

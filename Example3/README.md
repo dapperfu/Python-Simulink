@@ -4,7 +4,7 @@ Adapted from [Mathworks's Simulation of a Bouncing Ball](https://www.mathworks.c
 
 ![](bouncing_ball.png)
 
-Running a Simulation in Simulink also has some overhead. By compiling the model to a shared library and executing it, this overhead is eliminated. 
+Running a Simulation in Simulink also has some overhead. By compiling the model to a shared library and executing it, this overhead is eliminated.
 
 `bouncing_ball_benchmark.m` benchmarks the model by testing increasingly smaller time steps. The model was then compiled and tested in Python and the corresponding times are recorded below.
 

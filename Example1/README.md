@@ -3,4 +3,3 @@
 For demonstrating minimal dll functionality and the steps required to run a model in Python.
 
 ![](dllModel.png)
-
