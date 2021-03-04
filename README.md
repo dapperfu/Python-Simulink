@@ -100,7 +100,9 @@ Jenkins Artifacts screenshot:
 
 # Questions, Issues, & Feedback
 
-https://github.com/dapperfu/python_SimulinkDLL/issues - [python_simulink@eabi.xyz](mailto:python_simulink@eabi.xyz)
+- https://github.com/dapperfu/python_SimulinkDLL/issues 
+
+- [python_simulink@eabi.xyz](mailto:python_simulink@eabi.xyz)
 
 Google Indexing:
 
