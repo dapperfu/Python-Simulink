@@ -102,8 +102,6 @@ Jenkins Artifacts screenshot:
 
 - https://github.com/dapperfu/python_SimulinkDLL/issues 
 
-- [python_simulink@eabi.xyz](mailto:python_simulink@eabi.xyz)
-
 Google Indexing:
 
 - MIL Python, Model-In-The-Loop Python.
