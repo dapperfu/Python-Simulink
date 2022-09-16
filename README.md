@@ -98,9 +98,9 @@ Jenkins Artifacts screenshot:
 
 ![Jenkins artifacts](jenkins_artifacts.png)
 
-# Questions, Issues, & Feedback
+# Discussion, Questions & Feedback
 
-- https://github.com/dapperfu/python_SimulinkDLL/issues 
+- https://github.com/dapperfu/Python-Simulink/discussions
 
 Google Indexing:
 
