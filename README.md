@@ -4,7 +4,7 @@ Run your Simulink models & libraries in Python.
 
 ## Motivation
 
-1. Running model in the loop tests with Simulink becomes time consuming with Matlab & Simulink overhead. There are ways to reduce it (Model reference, etc) however nothing has shown to be as fast as a precompiled shared library.
+1. Running software-in-the-loop tests with Simulink becomes time consuming with Matlab & Simulink overhead. There are ways to reduce it (Model reference, etc) however nothing has shown to be as fast as a precompiled shared library.
 
 2. Python has a very mature set of tools and packages to automate testing.
 
@@ -15,7 +15,7 @@ Run your Simulink models & libraries in Python.
 ## Use cases
 
 1. Use Python and it's ecosystem to run complex Simulink models.
-2. Use Python & `pytest` to run Model-in-the-Loop (MIL) tests on Simulink subsystems.
+2. Use Python & `pytest` to run Software-in-the-Loop (SIL) tests on Simulink subsystems.
 3. Give Simulink algorithms to developers without Matlab/Simulink licenses to use.
 4. Use GitHub/GitLab actions and Python to automate testing in the cloud.
 5. Start a programming language war at your company.
@@ -101,11 +101,3 @@ Jenkins Artifacts screenshot:
 # Discussion, Questions & Feedback
 
 - https://github.com/dapperfu/Python-Simulink/discussions
-
-Google Indexing:
-
-- MIL Python, Model-In-The-Loop Python.
-- SIL Python, Software-In-The-Loop Python.
-- Model-in-the-loop testing with Python.
-- Software-in-the-loop testing with Python.
-- Using Python for SIL testing. Using Python for MIL testing.
