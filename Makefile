@@ -11,6 +11,10 @@ help:
 	@echo "  lint       - Run linting checks"
 	@echo "  clean      - Clean build artifacts"
 	@echo "  build      - Build the package"
+	@echo "  build-all-so - Build all shared libraries from RTW source"
+	@echo "  build-example1-so - Build Example1 shared library from RTW source"
+	@echo "  build-example2-so - Build Example2 shared library from RTW source"
+	@echo "  build-example3-so - Build Example3 shared library from RTW source"
 	@echo "  check-so-files - Check if shared libraries exist"
 	@echo "  check-all-so - Check all shared libraries"
 	@echo "  build-examples - Build everything needed for examples"
@@ -110,18 +114,112 @@ validate:
 	python -m py_compile test_all_examples.py
 	@echo "All Python files compile successfully!"
 
-# Check if shared libraries exist (they should be pre-built from _ert_shrlib_rtw source)
+# Build shared libraries from _ert_shrlib_rtw source code
+build-example1-so:
+	@echo "Building Example1 shared library from RTW source..."
+	@if [ -f Example1/dllModel_ert_shrlib_rtw/dllModel.mk ]; then \
+		cd Example1/dllModel_ert_shrlib_rtw && \
+		MATLAB_ROOT=/usr/local/MATLAB/R2018a make -f dllModel.mk || \
+		echo "MATLAB build failed, using manual build..."; \
+	fi
+	@if [ ! -f Example1/dllModel.so ]; then \
+		echo "Manual build for Example1..."; \
+		cd Example1/dllModel_ert_shrlib_rtw && \
+		gcc -fPIC -shared -o ../dllModel.so \
+			-I. \
+			-DMODEL=dllModel \
+			-DNUMST=1 \
+			-DNCSTATES=0 \
+			-DHAVESTDIO \
+			-DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0 \
+			-DCLASSIC_INTERFACE=0 \
+			-DALLOCATIONFCN=0 \
+			-DTID01EQ=0 \
+			-DTERMFCN=1 \
+			-DONESTEPFCN=1 \
+			-DMAT_FILE=0 \
+			-DMULTI_INSTANCE_CODE=0 \
+			-DINTEGER_CODE=0 \
+			-DMT=0 \
+			-DUNIX \
+			dllModel.c dllModel_data.c ert_main.c \
+			-lm; \
+	fi
+	@echo "✓ Example1/dllModel.so built successfully"
+
+build-example2-so:
+	@echo "Building Example2 shared library from RTW source..."
+	@if [ -f Example2/discrete_tf_ert_shrlib_rtw/discrete_tf.mk ]; then \
+		cd Example2/discrete_tf_ert_shrlib_rtw && \
+		MATLAB_ROOT=/usr/local/MATLAB/R2018a make -f discrete_tf.mk || \
+		echo "MATLAB build failed, using manual build..."; \
+	fi
+	@if [ ! -f Example2/discrete_tf.so ]; then \
+		echo "Manual build for Example2..."; \
+		cd Example2/discrete_tf_ert_shrlib_rtw && \
+		gcc -fPIC -shared -o ../discrete_tf.so \
+			-I. \
+			-DMODEL=discrete_tf \
+			-DNUMST=1 \
+			-DNCSTATES=0 \
+			-DHAVESTDIO \
+			-DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0 \
+			-DCLASSIC_INTERFACE=0 \
+			-DALLOCATIONFCN=0 \
+			-DTID01EQ=0 \
+			-DTERMFCN=1 \
+			-DONESTEPFCN=1 \
+			-DMAT_FILE=0 \
+			-DMULTI_INSTANCE_CODE=0 \
+			-DINTEGER_CODE=0 \
+			-DMT=0 \
+			-DUNIX \
+			discrete_tf.c ert_main.c \
+			-lm; \
+	fi
+	@echo "✓ Example2/discrete_tf.so built successfully"
+
+build-example3-so:
+	@echo "Building Example3 shared library from RTW source..."
+	@if [ -f Example3/bouncing_ball_ert_shrlib_rtw/bouncing_ball.mk ]; then \
+		cd Example3/bouncing_ball_ert_shrlib_rtw && \
+		MATLAB_ROOT=/usr/local/MATLAB/R2018a make -f bouncing_ball.mk || \
+		echo "MATLAB build failed, using manual build..."; \
+	fi
+	@if [ ! -f Example3/bouncing_ball.so ]; then \
+		echo "Manual build for Example3..."; \
+		cd Example3/bouncing_ball_ert_shrlib_rtw && \
+		gcc -fPIC -shared -o ../bouncing_ball.so \
+			-I. \
+			-DMODEL=bouncing_ball \
+			-DNUMST=1 \
+			-DNCSTATES=0 \
+			-DHAVESTDIO \
+			-DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0 \
+			-DCLASSIC_INTERFACE=0 \
+			-DALLOCATIONFCN=0 \
+			-DTID01EQ=0 \
+			-DTERMFCN=1 \
+			-DONESTEPFCN=1 \
+			-DMAT_FILE=0 \
+			-DMULTI_INSTANCE_CODE=0 \
+			-DINTEGER_CODE=0 \
+			-DMT=0 \
+			-DUNIX \
+			bouncing_ball.c ert_main.c \
+			-lm; \
+	fi
+	@echo "✓ Example3/bouncing_ball.so built successfully"
+
+# Check if shared libraries exist
 check-so-files:
-	@echo "Checking for pre-built shared libraries..."
+	@echo "Checking for shared libraries..."
 	@echo "Example1:"
 	@ls -la Example1/*.so 2>/dev/null || echo "  No .so file found"
 	@echo "Example2:"
 	@ls -la Example2/*.so 2>/dev/null || echo "  No .so file found"
 	@echo "Example3:"
 	@ls -la Example3/*.so 2>/dev/null || echo "  No .so file found"
-	@echo ""
-	@echo "Note: .so files should be built from _ert_shrlib_rtw source code using MATLAB/Simulink"
-	@echo "The source code is available in each example's _ert_shrlib_rtw directory"
 
 # Create virtual environment
 venv:
@@ -133,6 +231,10 @@ install-example-deps: venv
 	@echo "Installing missing dependencies for examples..."
 	venv/bin/pip install pandas numpy matplotlib scipy control pytest pytest-cov
 	@echo "✓ Example dependencies installed"
+
+# Build all shared libraries from RTW source
+build-all-so: build-example1-so build-example2-so build-example3-so
+	@echo "All shared libraries built from RTW source"
 
 # Check all shared libraries
 check-all-so: check-so-files
