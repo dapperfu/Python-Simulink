@@ -11,8 +11,8 @@ help:
 	@echo "  lint       - Run linting checks"
 	@echo "  clean      - Clean build artifacts"
 	@echo "  build      - Build the package"
-	@echo "  build-all-so - Build all missing shared libraries for Linux"
-	@echo "  build-example1-so - Build Example1 shared library for Linux"
+	@echo "  check-so-files - Check if shared libraries exist"
+	@echo "  check-all-so - Check all shared libraries"
 	@echo "  build-examples - Build everything needed for examples"
 	@echo "  install-example-deps - Install missing dependencies for examples"
 	@echo "  docs       - Build documentation"
@@ -110,38 +110,18 @@ validate:
 	python -m py_compile test_all_examples.py
 	@echo "All Python files compile successfully!"
 
-# Build missing shared libraries for Linux
-build-example1-so:
-	@echo "Building Example1 shared library for Linux..."
-	@mkdir -p Example1/build
-	cd Example1/dllModel_ert_shrlib_rtw && \
-	gcc -fPIC -shared -o ../dllModel.so \
-		-I. \
-		-DMODEL=dllModel \
-		-DNUMST=1 \
-		-DNCSTATES=0 \
-		-DHAVESTDIO \
-		-DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0 \
-		-DCLASSIC_INTERFACE=0 \
-		-DALLOCATIONFCN=0 \
-		-DTID01EQ=0 \
-		-DTERMFCN=1 \
-		-DONESTEPFCN=1 \
-		-DMAT_FILE=0 \
-		-DMULTI_INSTANCE_CODE=0 \
-		-DINTEGER_CODE=0 \
-		-DMT=0 \
-		-DUCHAR_MAX=0xFFU \
-		-DSCHAR_MAX=0x7F \
-		-DUSHRT_MAX=0xFFFFU \
-		-DSHRT_MAX=0x7FFF \
-		-DUINT_MAX=0xFFFFFFFFU \
-		-DINT_MAX=0x7FFFFFFF \
-		-DULONG_MAX=0xFFFFFFFFU \
-		-DLONG_MAX=0x7FFFFFFF \
-		dllModel.c dllModel_data.c ert_main.c \
-		-lm
-	@echo "✓ Example1/dllModel.so built successfully"
+# Check if shared libraries exist (they should be pre-built from _ert_shrlib_rtw source)
+check-so-files:
+	@echo "Checking for pre-built shared libraries..."
+	@echo "Example1:"
+	@ls -la Example1/*.so 2>/dev/null || echo "  No .so file found"
+	@echo "Example2:"
+	@ls -la Example2/*.so 2>/dev/null || echo "  No .so file found"
+	@echo "Example3:"
+	@ls -la Example3/*.so 2>/dev/null || echo "  No .so file found"
+	@echo ""
+	@echo "Note: .so files should be built from _ert_shrlib_rtw source code using MATLAB/Simulink"
+	@echo "The source code is available in each example's _ert_shrlib_rtw directory"
 
 # Create virtual environment
 venv:
@@ -154,13 +134,13 @@ install-example-deps: venv
 	venv/bin/pip install pandas numpy matplotlib scipy control pytest pytest-cov
 	@echo "✓ Example dependencies installed"
 
-# Build all missing shared libraries
-build-all-so: build-example1-so
-	@echo "All shared libraries built successfully"
+# Check all shared libraries
+check-all-so: check-so-files
+	@echo "All shared library checks completed"
 
 # Build everything needed for examples
-build-examples: install-example-deps build-all-so
-	@echo "All examples built and ready"
+build-examples: install-example-deps check-all-so
+	@echo "All examples ready"
 
 # CI/CD tasks
 ci: install lint test-all
