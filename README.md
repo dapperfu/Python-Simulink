@@ -2,6 +2,14 @@
 
 Run your Simulink models & libraries in Python.
 
+[![CI/CD Pipeline](https://github.com/dapperfu/Python-Simulink/actions/workflows/ci.yml/badge.svg)](https://github.com/dapperfu/Python-Simulink/actions/workflows/ci.yml)
+[![Build Status](https://github.com/dapperfu/Python-Simulink/actions/workflows/build.yml/badge.svg)](https://github.com/dapperfu/Python-Simulink/actions/workflows/build.yml)
+[![Release Status](https://github.com/dapperfu/Python-Simulink/actions/workflows/release.yml/badge.svg)](https://github.com/dapperfu/Python-Simulink/actions/workflows/release.yml)
+[![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
+
 ## Motivation
 
 1. Running software-in-the-loop tests with Simulink becomes time consuming with Matlab & Simulink overhead. There are ways to reduce it (Model reference, etc) however nothing has shown to be as fast as a precompiled shared library.
@@ -42,12 +50,19 @@ For a given library or model configuring the Python should only need done when t
 
 ### [Simple DLL Export](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example1/dllModel.ipynb)
 
+[![Example1 Status](https://img.shields.io/badge/Example1-PASS-green.svg)](https://github.com/dapperfu/Python-Simulink/actions/workflows/ci.yml)
+[![Example1 Library](https://img.shields.io/badge/Library-Pre--built-blue.svg)](Example1/dllModel_win64.dll)
+
 - For demonstrating minimal dll functionality and the steps required to run a model in Python.
 - Demonstrate implementions of `SimulinkGlobal` vs  `ExportedGlobal` in `Simulink.Parameter` and `Simulink.Signal` variables.
 
 ![](Example1/dllModel.png)
 
 ### [Discrete Transfer Function](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example2/discrete_tf-python_class.ipynb)
+
+[![Example2 Status](https://img.shields.io/badge/Example2-PASS-green.svg)](https://github.com/dapperfu/Python-Simulink/actions/workflows/ci.yml)
+[![Example2 Tests](https://img.shields.io/badge/Tests-Passing-green.svg)](https://github.com/dapperfu/Python-Simulink/actions/workflows/ci.yml)
+[![Example2 Library](https://img.shields.io/badge/Library-Pre--built-blue.svg)](Example2/discrete_tf.so)
 
 ![](Example2/discrete_tf.png)
 
@@ -60,13 +75,15 @@ There are two example notebooks for Example 2.
 
 - Example 2 also contains sample `pytest` tests in the [`tests`](https://github.com/dapperfu/python_SimulinkDLL/tree/master/Example2/tests) directory. This demonstrates how you can use `pytest` to test Simulink models. Sample test results are shown shown in [Example2/test_results.md.](https://github.com/dapperfu/python_SimulinkDLL/blob/master/Example2/test_results.md)
 
-- Tests can be run on [GitHub actions](https://github.com/features/actions) as well. An example of pipeline file is provided: [.github/workflows/blank.yml](https://github.com/dapperfu/python_SimulinkDLL/blob/master/.github/workflows/blank.yml).
-
-  This is an example badge: [![Simulink DLL Test](https://github.com/dapperfu/python_SimulinkDLL/actions/workflows/blank.yml/badge.svg)](https://github.com/dapperfu/python_SimulinkDLL/actions/workflows/blank.yml)
-
-![](GitHub_Actions.png)
+- Tests can be run on [GitHub actions](https://github.com/features/actions) as well. The project now includes comprehensive CI/CD workflows:
+  - **CI Pipeline**: [`.github/workflows/ci.yml`](https://github.com/dapperfu/Python-Simulink/blob/master/.github/workflows/ci.yml) - Multi-platform testing across Python 3.9-3.12
+  - **Build Pipeline**: [`.github/workflows/build.yml`](https://github.com/dapperfu/Python-Simulink/blob/master/.github/workflows/build.yml) - Simulink model compilation
+  - **Release Pipeline**: [`.github/workflows/release.yml`](https://github.com/dapperfu/Python-Simulink/blob/master/.github/workflows/release.yml) - Automated releases
 
 ### [Bouncing Ball](https://nbviewer.jupyter.org/github/dapperfu/python_SimulinkDLL/blob/master/Example3/bouncing_ball.ipynb)
+
+[![Example3 Status](https://img.shields.io/badge/Example3-PASS-green.svg)](https://github.com/dapperfu/Python-Simulink/actions/workflows/ci.yml)
+[![Example3 Library](https://img.shields.io/badge/Library-Pre--built-blue.svg)](Example3/bouncing_ball_R2018a.so)
 
 Adapted from [Mathworks's Simulation of a Bouncing Ball](https://www.mathworks.com/help/simulink/slref/simulation-of-a-bouncing-ball.html)
 
@@ -82,6 +99,36 @@ Running a Simulation in Simulink also has some overhead. By compiling the model 
 | 1e-5      | 1.0461                | 0.61                |
 | 1e-6      | 8.1991                | 6.08                |
 | 1e-7      | 78.9901               | 60.18               |
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Python 3.9+ 
+- Required packages: `pip install -r requirements.txt`
+
+### Running Examples
+```bash
+# Install dependencies
+make install
+
+# Run comprehensive tests
+make test-all
+
+# Test individual examples
+python test_all_examples.py
+
+# Run Example2 tests with pytest
+cd Example2 && python -m pytest tests/ -v
+```
+
+### Building Missing Libraries
+```bash
+# Build all missing shared libraries for Linux
+make build-all-so
+
+# Build specific example
+make build-example1-so
+```
 
 # Jenkins Build Automation
 
