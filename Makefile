@@ -13,14 +13,16 @@ help:
 	@echo "  build      - Build the package"
 	@echo "  build-all-so - Build all missing shared libraries for Linux"
 	@echo "  build-example1-so - Build Example1 shared library for Linux"
+	@echo "  build-examples - Build everything needed for examples"
+	@echo "  install-example-deps - Install missing dependencies for examples"
 	@echo "  docs       - Build documentation"
 	@echo "  check      - Run all checks (lint + test)"
 
 # Install dependencies
-install:
-	python -m pip install --upgrade pip
-	pip install -r requirements.txt
-	pip install -e .[dev]
+install: venv
+	venv/bin/python -m pip install --upgrade pip
+	venv/bin/pip install -r requirements.txt
+	venv/bin/pip install -e .[dev]
 
 # Run tests
 test:
@@ -44,6 +46,8 @@ clean:
 	rm -rf *.egg-info/
 	rm -rf __pycache__/
 	rm -rf .pytest_cache/
+	rm -rf Example1/build/
+	rm -f Example1/dllModel.so
 	find . -type d -name __pycache__ -exec rm -rf {} +
 	find . -type f -name "*.pyc" -delete
 
@@ -61,8 +65,8 @@ docs:
 check: lint test
 
 # Install development dependencies
-dev-install:
-	pip install -e .[dev]
+dev-install: venv
+	venv/bin/pip install -e .[dev]
 
 # Run security checks
 security:
@@ -127,13 +131,36 @@ build-example1-so:
 		-DMULTI_INSTANCE_CODE=0 \
 		-DINTEGER_CODE=0 \
 		-DMT=0 \
+		-DUCHAR_MAX=0xFFU \
+		-DSCHAR_MAX=0x7F \
+		-DUSHRT_MAX=0xFFFFU \
+		-DSHRT_MAX=0x7FFF \
+		-DUINT_MAX=0xFFFFFFFFU \
+		-DINT_MAX=0x7FFFFFFF \
+		-DULONG_MAX=0xFFFFFFFFU \
+		-DLONG_MAX=0x7FFFFFFF \
 		dllModel.c dllModel_data.c ert_main.c \
 		-lm
 	@echo "✓ Example1/dllModel.so built successfully"
 
+# Create virtual environment
+venv:
+	python3 -m venv venv
+	@echo "✓ Virtual environment created"
+
+# Install missing dependencies for examples
+install-example-deps: venv
+	@echo "Installing missing dependencies for examples..."
+	venv/bin/pip install pandas numpy matplotlib scipy control pytest pytest-cov
+	@echo "✓ Example dependencies installed"
+
 # Build all missing shared libraries
 build-all-so: build-example1-so
 	@echo "All shared libraries built successfully"
+
+# Build everything needed for examples
+build-examples: install-example-deps build-all-so
+	@echo "All examples built and ready"
 
 # CI/CD tasks
 ci: install lint test-all

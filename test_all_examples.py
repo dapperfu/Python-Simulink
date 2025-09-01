@@ -50,8 +50,16 @@ def test_library_loading(example_path: str, library_name: str) -> bool:
 def test_example2_discretetf(example_path: str) -> bool:
     """Test Example2's DiscreteTF class."""
     try:
-        sys.path.insert(0, example_path)
-        from discretetf import DiscreteTF
+        # Change to the example directory so the library can be found
+        original_cwd = os.getcwd()
+        os.chdir(example_path)
+        
+        # Import the module using importlib
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("discretetf", "discretetf.py")
+        discretetf = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(discretetf)
+        DiscreteTF = discretetf.DiscreteTF
         
         # Test basic functionality
         mdl = DiscreteTF()
@@ -64,8 +72,16 @@ def test_example2_discretetf(example_path: str) -> bool:
         print(f"  - Time: {mdl.time}")
         
         mdl.terminate()
+        
+        # Restore original working directory
+        os.chdir(original_cwd)
         return True
     except Exception as e:
+        # Restore original working directory even if there's an error
+        try:
+            os.chdir(original_cwd)
+        except:
+            pass
         print(f"✗ {example_path}/discretetf.py test failed: {e}")
         return False
 
