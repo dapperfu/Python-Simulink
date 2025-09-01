@@ -195,9 +195,9 @@ ALL_SRCS = $(SRCS) $(MAIN_SRC)
 ## OBJECTS
 ###########################################################################
 
-OBJS = bouncing_ball.obj
+OBJS = bouncing_ball.o
 
-MAIN_OBJ = ert_main.obj
+MAIN_OBJ = ert_main.o
 
 ALL_OBJS = $(OBJS) $(MAIN_OBJ)
 
@@ -217,7 +217,7 @@ LIBS =
 ## SYSTEM LIBRARIES
 ###########################################################################
 
-SYSTEM_LIBS = 
+SYSTEM_LIBS =  -lm 
 
 ###########################################################################
 ## ADDITIONAL TOOLCHAIN FLAGS
@@ -308,207 +308,207 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 # SOURCE-TO-OBJECT
 #---------------------
 
-%.obj : %.c
+%.o : %.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : %.cpp
+%.o : %.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : %.cc
+%.o : %.cc
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : %.cp
+%.o : %.cp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : %.cxx
+%.o : %.cxx
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : %.CPP
+%.o : %.CPP
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : %.c++
+%.o : %.c++
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.c
+%.o : $(RELATIVE_PATH_TO_ANCHOR)/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.cpp
+%.o : $(RELATIVE_PATH_TO_ANCHOR)/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.cc
+%.o : $(RELATIVE_PATH_TO_ANCHOR)/%.cc
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.cp
+%.o : $(RELATIVE_PATH_TO_ANCHOR)/%.cp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.cxx
+%.o : $(RELATIVE_PATH_TO_ANCHOR)/%.cxx
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.CPP
+%.o : $(RELATIVE_PATH_TO_ANCHOR)/%.CPP
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.c++
+%.o : $(RELATIVE_PATH_TO_ANCHOR)/%.c++
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/%.c
+%.o : $(START_DIR)/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/%.cpp
+%.o : $(START_DIR)/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/%.cc
+%.o : $(START_DIR)/%.cc
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/%.cp
+%.o : $(START_DIR)/%.cp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/%.cxx
+%.o : $(START_DIR)/%.cxx
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/%.CPP
+%.o : $(START_DIR)/%.CPP
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/%.c++
+%.o : $(START_DIR)/%.c++
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/%.c
+%.o : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/%.cpp
+%.o : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/%.cc
+%.o : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/%.cc
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/%.cp
+%.o : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/%.cp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/%.cxx
+%.o : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/%.cxx
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/%.CPP
+%.o : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/%.CPP
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/%.c++
+%.o : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/%.c++
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/rtw/c/src/%.c
+%.o : $(MATLAB_ROOT)/rtw/c/src/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/rtw/c/src/%.cpp
+%.o : $(MATLAB_ROOT)/rtw/c/src/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/rtw/c/src/%.cc
+%.o : $(MATLAB_ROOT)/rtw/c/src/%.cc
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/rtw/c/src/%.cp
+%.o : $(MATLAB_ROOT)/rtw/c/src/%.cp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/rtw/c/src/%.cxx
+%.o : $(MATLAB_ROOT)/rtw/c/src/%.cxx
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/rtw/c/src/%.CPP
+%.o : $(MATLAB_ROOT)/rtw/c/src/%.CPP
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/rtw/c/src/%.c++
+%.o : $(MATLAB_ROOT)/rtw/c/src/%.c++
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/simulink/src/%.c
+%.o : $(MATLAB_ROOT)/simulink/src/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/simulink/src/%.cpp
+%.o : $(MATLAB_ROOT)/simulink/src/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/simulink/src/%.cc
+%.o : $(MATLAB_ROOT)/simulink/src/%.cc
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/simulink/src/%.cp
+%.o : $(MATLAB_ROOT)/simulink/src/%.cp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/simulink/src/%.cxx
+%.o : $(MATLAB_ROOT)/simulink/src/%.cxx
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/simulink/src/%.CPP
+%.o : $(MATLAB_ROOT)/simulink/src/%.CPP
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/simulink/src/%.c++
+%.o : $(MATLAB_ROOT)/simulink/src/%.c++
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.c
+%.o : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.cpp
+%.o : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.cc
+%.o : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.cc
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.cp
+%.o : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.cp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.cxx
+%.o : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.cxx
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.CPP
+%.o : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.CPP
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.c++
+%.o : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.c++
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-bouncing_ball.obj : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/bouncing_ball.c
+bouncing_ball.o : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/bouncing_ball.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-ert_main.obj : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/ert_main.c
+ert_main.o : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/ert_main.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
@@ -533,7 +533,7 @@ info :
 	@echo "### ALL_OBJS = $(ALL_OBJS)"
 	@echo "### LIBS = $(LIBS)"
 	@echo "### MODELREF_LIBS = $(MODELREF_LIBS)"
-	@echo "### SYSTEM_LIBS = $(SYSTEM_LIBS)"
+	@echo "### SYSTEM_LIBS =  -lm $(SYSTEM_LIBS)"
 	@echo "### TOOLCHAIN_LIBS = $(TOOLCHAIN_LIBS)"
 	@echo "### CFLAGS = $(CFLAGS)"
 	@echo "### LDFLAGS = $(LDFLAGS)"

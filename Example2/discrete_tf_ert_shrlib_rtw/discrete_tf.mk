@@ -240,7 +240,7 @@ LIBS =
 ## SYSTEM LIBRARIES
 ###########################################################################
 
-SYSTEM_LIBS =  -lm
+SYSTEM_LIBS =  -lm  -lm
 
 ###########################################################################
 ## ADDITIONAL TOOLCHAIN FLAGS
@@ -380,7 +380,7 @@ info :
 	@echo "### ALL_OBJS = $(ALL_OBJS)"
 	@echo "### LIBS = $(LIBS)"
 	@echo "### MODELREF_LIBS = $(MODELREF_LIBS)"
-	@echo "### SYSTEM_LIBS = $(SYSTEM_LIBS)"
+	@echo "### SYSTEM_LIBS =  -lm $(SYSTEM_LIBS)"
 	@echo "### TOOLCHAIN_LIBS = $(TOOLCHAIN_LIBS)"
 	@echo "### CFLAGS = $(CFLAGS)"
 	@echo "### LDFLAGS = $(LDFLAGS)"
