@@ -1,0 +1,126 @@
+name: Build and Release .so Files
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - '**/*.c'
+      - '**/*.h'
+      - '**/*.mk'
+      - 'Makefile'
+      - '**/dllModel_ert_shrlib_rtw/**'
+      - '**/discrete_tf_ert_shrlib_rtw/**'
+      - '**/bouncing_ball_ert_shrlib_rtw/**'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - '**/*.c'
+      - '**/*.h'
+      - '**/*.mk'
+      - 'Makefile'
+      - '**/dllModel_ert_shrlib_rtw/**'
+      - '**/discrete_tf_ert_shrlib_rtw/**'
+      - '**/bouncing_ball_ert_shrlib_rtw/**'
+  workflow_dispatch:
+  release:
+    types: [published]
+
+jobs:
+  build-so-files:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Build all .so files
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        # Build all missing .so files using our Makefile targets
+        make build-examples
+        echo "✓ All .so files built successfully"
+
+    - name: Verify .so files
+      run: |
+        echo "Verifying generated .so files..."
+        make check-libs
+        # Test that the libraries can be loaded
+        python test_all_examples.py
+        echo "✓ All .so files verified and tested"
+
+    - name: Create release artifacts
+      run: |
+        echo "Creating release artifacts..."
+        mkdir -p release-artifacts
+        # Copy all .so files to release artifacts
+        cp Example1/*.so release-artifacts/ 2>/dev/null || echo "No Example1 .so files"
+        cp Example2/*.so release-artifacts/ 2>/dev/null || echo "No Example2 .so files"
+        cp Example3/*.so release-artifacts/ 2>/dev/null || echo "No Example3 .so files"
+        # Create build info
+        echo "Build completed at $(date)" > release-artifacts/build-info.txt
+        echo "Python version: $(python --version)" >> release-artifacts/build-info.txt
+        echo "Platform: $(uname -a)" >> release-artifacts/build-info.txt
+        echo "Generated .so files:" >> release-artifacts/build-info.txt
+        ls -la release-artifacts/*.so >> release-artifacts/build-info.txt 2>/dev/null || echo "No .so files found" >> release-artifacts/build-info.txt
+
+    - name: Upload .so files as artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: linux-shared-libraries
+        path: release-artifacts/
+        retention-days: 90
+
+  release-so-files:
+    needs: build-so-files
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Download .so files
+      uses: actions/download-artifact@v3
+      with:
+        name: linux-shared-libraries
+        path: release-artifacts/
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: release-artifacts/*.so
+        body: |
+          ## Linux Shared Libraries Release
+          
+          This release contains pre-built Linux shared libraries (.so files) for all Simulink examples.
+          
+          ### Included Libraries:
+          - Example1: dllModel.so
+          - Example2: discrete_tf.so  
+          - Example3: bouncing_ball_R2018a.so
+          
+          ### Build Information:
+          ```
+          $(cat release-artifacts/build-info.txt)
+          ```
+          
+          ### Usage:
+          Download the appropriate .so file for your example and place it in the corresponding example directory.
+          
+          ### Compatibility:
+          - Built on Ubuntu Linux
+          - Compatible with x86_64 architecture
+          - Tested with Python 3.9-3.12
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

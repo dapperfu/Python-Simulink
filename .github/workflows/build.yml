@@ -28,10 +28,12 @@ jobs:
       with:
         python-version: "3.11"
 
-    - name: Install dependencies
+    - name: Install dependencies and build .so files
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        # Build all missing .so files using our Makefile targets
+        make build-examples
 
     - name: Check for MATLAB/Simulink
       run: |
@@ -47,12 +49,7 @@ jobs:
     - name: Check existing builds
       run: |
         echo "Checking existing compiled models..."
-        echo "Example1:"
-        ls -la Example1/*.dll Example1/*.so 2>/dev/null || echo "No compiled models found"
-        echo "Example2:"
-        ls -la Example2/*.dll Example2/*.so 2>/dev/null || echo "No compiled models found"
-        echo "Example3:"
-        ls -la Example3/*.dll Example3/*.so 2>/dev/null || echo "No compiled models found"
+        make check-libs
 
     - name: Validate build scripts
       run: |
@@ -71,10 +68,16 @@ jobs:
         echo "Build completed at $(date)" > build-artifacts/build-info.txt
         echo "Python version: $(python --version)" >> build-artifacts/build-info.txt
         echo "Platform: $(uname -a)" >> build-artifacts/build-info.txt
+        echo "Generated .so files:" >> build-artifacts/build-info.txt
+        ls -la Example1/*.so Example2/*.so Example3/*.so >> build-artifacts/build-info.txt 2>/dev/null || echo "No .so files found" >> build-artifacts/build-info.txt
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
         name: build-artifacts
-        path: build-artifacts/
+        path: |
+          build-artifacts/
+          Example1/*.so
+          Example2/*.so
+          Example3/*.so
         retention-days: 30

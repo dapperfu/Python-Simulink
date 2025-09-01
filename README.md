@@ -130,7 +130,49 @@ make build-all-so
 make build-example1-so
 ```
 
-# Jenkins Build Automation
+# Build Automation
+
+This project includes comprehensive CI/CD automation for building and testing Simulink models.
+
+## GitHub Actions
+
+The project uses GitHub Actions for automated building and testing:
+
+### CI Workflow (`.github/workflows/ci.yml`)
+- **Triggers**: Push to main/develop, pull requests
+- **Features**:
+  - Multi-platform testing (Ubuntu, Windows)
+  - Multi-Python version testing (3.9-3.12)
+  - Automatic .so file generation for Linux
+  - Comprehensive example testing
+  - Linting and validation
+  - Artifact upload for generated .so files
+
+### Build Workflow (`.github/workflows/build.yml`)
+- **Triggers**: Changes to Simulink models (.slx, .mdl, .m files)
+- **Features**:
+  - Automatic .so file generation
+  - Build validation
+  - Artifact creation and upload
+
+### .so Files Build Workflow (`.github/workflows/build-so-files.yml`)
+- **Triggers**: Changes to source files, manual dispatch, releases
+- **Features**:
+  - Dedicated .so file generation
+  - Library verification and testing
+  - Automatic GitHub releases with .so files
+  - Long-term artifact storage (90 days)
+
+### Usage
+
+The .so files are automatically generated in GitHub Actions whenever:
+- Source files are modified
+- A pull request is created
+- A release is published
+
+You can also manually trigger the workflow using the "workflow_dispatch" trigger.
+
+## Jenkins Build Automation
 
 This project also serves as a proof of concept for using [CI/CD devops techniques](https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment) with Simulink Models. There is a [`Jenkinsfile` ](Jenkinsfile) that will build each of the examples and archive the artifacts:
 

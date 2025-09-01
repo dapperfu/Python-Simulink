@@ -37,10 +37,14 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pip-${{ matrix.python-version }}-
 
-    - name: Install dependencies
+    - name: Install dependencies and build .so files
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        # Build missing .so files for Linux
+        if [[ "${{ matrix.os }}" == "ubuntu-latest" ]]; then
+          make build-example1-so
+        fi
 
     - name: Run linting
       run: |
@@ -48,33 +52,20 @@ jobs:
         python -m flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         python -m flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
-    - name: Test Example2 (Discrete Transfer Function)
+    - name: Test all examples
+      run: |
+        # Install additional dependencies for testing
+        pip install pandas numpy matplotlib scipy control pytest pytest-cov
+        # Test all examples using our comprehensive test script
+        python test_all_examples.py
+
+    - name: Test Example2 with pytest
       run: |
         cd Example2
         python -m pytest tests/ -v --tb=short
       env:
         # Set environment variable to handle .so file loading
         LD_LIBRARY_PATH: ${{ github.workspace }}/Example2
-
-    - name: Test Example2 Python class
-      run: |
-        cd Example2
-        python -c "
-        import sys
-        sys.path.append('.')
-        from discretetf import DiscreteTF
-        import numpy as np
-        
-        # Test basic functionality
-        mdl = DiscreteTF()
-        mdl.initialize()
-        mdl.input_signal = 1.0
-        mdl.step()
-        print(f'Output: {mdl.output}')
-        print(f'Time: {mdl.time}')
-        mdl.terminate()
-        print('Test passed!')
-        "
 
   build-check:
     runs-on: ubuntu-latest
@@ -88,29 +79,32 @@ jobs:
       with:
         python-version: "3.11"
 
-    - name: Install dependencies
+    - name: Build all examples and libraries
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        # Build all missing .so files and install dependencies
+        make build-examples
 
     - name: Check for pre-built libraries
       run: |
         echo "Checking for pre-built libraries..."
-        echo "Example1:"
-        ls -la Example1/*.dll Example1/*.so 2>/dev/null || echo "No pre-built libraries found"
-        echo "Example2:"
-        ls -la Example2/*.dll Example2/*.so 2>/dev/null || echo "No pre-built libraries found"
-        echo "Example3:"
-        ls -la Example3/*.dll Example3/*.so 2>/dev/null || echo "No pre-built libraries found"
+        make check-libs
 
     - name: Validate Python files
       run: |
         echo "Validating Python files..."
-        python -m py_compile Example1/rtwtypes.py
-        python -m py_compile Example2/rtwtypes.py
-        python -m py_compile Example2/discretetf.py
-        python -m py_compile Example3/rtwtypes.py
-        echo "All Python files compile successfully!"
+        make validate
+
+    - name: Upload generated .so files as artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: linux-shared-libraries
+        path: |
+          Example1/dllModel.so
+          Example2/discrete_tf.so
+          Example3/bouncing_ball_R2018a.so
+        retention-days: 30
 
   documentation:
     runs-on: ubuntu-latest

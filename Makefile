@@ -119,7 +119,7 @@ build-example1-so:
 	@echo "Building Example1 shared library from RTW source..."
 	@if [ -f Example1/dllModel_ert_shrlib_rtw/dllModel.mk ]; then \
 		cd Example1/dllModel_ert_shrlib_rtw && \
-		MATLAB_ROOT=/usr/local/MATLAB/R2018a make -f dllModel.mk || \
+		MATLAB_ROOT=/opt/MATLAB/R2018a make -f dllModel.mk || \
 		echo "MATLAB build failed, using manual build..."; \
 	fi
 	@if [ ! -f Example1/dllModel.so ]; then \
@@ -151,7 +151,7 @@ build-example2-so:
 	@echo "Building Example2 shared library from RTW source..."
 	@if [ -f Example2/discrete_tf_ert_shrlib_rtw/discrete_tf.mk ]; then \
 		cd Example2/discrete_tf_ert_shrlib_rtw && \
-		MATLAB_ROOT=/usr/local/MATLAB/R2018a make -f discrete_tf.mk || \
+		MATLAB_ROOT=/opt/MATLAB/R2018a MATLAB_BIN=/opt/MATLAB/R2018a/bin MATLAB_ARCH_BIN=/opt/MATLAB/R2018a/bin/glnxa64 make -f discrete_tf.mk || \
 		echo "MATLAB build failed, using manual build..."; \
 	fi
 	@if [ ! -f Example2/discrete_tf.so ]; then \
@@ -159,6 +159,11 @@ build-example2-so:
 		cd Example2/discrete_tf_ert_shrlib_rtw && \
 		gcc -fPIC -shared -o ../discrete_tf.so \
 			-I. \
+			-I/opt/MATLAB/R2018a/extern/include \
+			-I/opt/MATLAB/R2018a/simulink/include \
+			-I/opt/MATLAB/R2018a/rtw/c/src \
+			-I/opt/MATLAB/R2018a/rtw/c/src/ext_mode/common \
+			-I/opt/MATLAB/R2018a/rtw/c/ert \
 			-DMODEL=discrete_tf \
 			-DNUMST=1 \
 			-DNCSTATES=0 \
@@ -183,7 +188,7 @@ build-example3-so:
 	@echo "Building Example3 shared library from RTW source..."
 	@if [ -f Example3/bouncing_ball_ert_shrlib_rtw/bouncing_ball.mk ]; then \
 		cd Example3/bouncing_ball_ert_shrlib_rtw && \
-		MATLAB_ROOT=/usr/local/MATLAB/R2018a make -f bouncing_ball.mk || \
+		MATLAB_ROOT=/opt/MATLAB/R2018a make -f bouncing_ball.mk || \
 		echo "MATLAB build failed, using manual build..."; \
 	fi
 	@if [ ! -f Example3/bouncing_ball.so ]; then \

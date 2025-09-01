@@ -152,18 +152,66 @@ venv/bin/python -m pytest Example2/tests/ -v
 ```
 
 #### For CI/CD
-The build targets can be integrated into CI/CD pipelines:
+The build targets are automatically integrated into GitHub Actions CI/CD pipelines:
+
+**Automatic .so File Generation**: The .so files are automatically generated in GitHub Actions whenever:
+- Source files are modified
+- A pull request is created
+- A release is published
+
+**Manual Trigger**: You can also manually trigger the workflow using the "workflow_dispatch" trigger.
+
+**Artifact Storage**: Generated .so files are stored as GitHub Actions artifacts and can be downloaded for use.
+
+**GitHub Releases**: When a release is published, the .so files are automatically included in the release assets.
+
+#### Local CI/CD Integration
 ```bash
 # Install dependencies and build libraries
 make build-examples
 
 # Run tests
 make test-all
+
+# Check library status
+make check-libs
 ```
 
-### 8. Maintenance
+### 8. GitHub Actions Integration
 
-#### Adding New Examples
+The build system is fully integrated with GitHub Actions for automated .so file generation:
+
+#### Workflows
+
+1. **CI Workflow** (`.github/workflows/ci.yml`):
+   - Runs on every push and pull request
+   - Multi-platform testing (Ubuntu, Windows)
+   - Multi-Python version testing (3.9-3.12)
+   - Automatic .so file generation for Linux
+   - Comprehensive example testing
+   - Artifact upload for generated .so files
+
+2. **Build Workflow** (`.github/workflows/build.yml`):
+   - Triggers on Simulink model changes
+   - Automatic .so file generation
+   - Build validation
+   - Artifact creation and upload
+
+3. **.so Files Build Workflow** (`.github/workflows/build-so-files.yml`):
+   - Dedicated .so file generation
+   - Library verification and testing
+   - Automatic GitHub releases with .so files
+   - Long-term artifact storage (90 days)
+
+#### Benefits
+
+- **Automatic Generation**: .so files are built automatically without manual intervention
+- **Cross-Platform Testing**: Ensures compatibility across different platforms
+- **Artifact Storage**: Generated files are stored and can be downloaded
+- **Release Integration**: .so files are automatically included in GitHub releases
+- **Quality Assurance**: All libraries are tested before being made available
+
+### 9. Maintenance
 To add new examples that need .so file generation:
 
 1. Add source files to the example's `*_ert_shrlib_rtw/` directory
