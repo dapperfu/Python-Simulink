@@ -28,12 +28,13 @@ jobs:
       with:
         python-version: "3.11"
 
-    - name: Install dependencies and build .so files
+    - name: Install dependencies and build libraries
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        # Build all missing .so files using our Makefile targets
-        make build-examples
+        # Build all libraries with fallback support (MATLAB if available, manual build otherwise)
+        echo "Building libraries with fallback support..."
+        make build-libraries || make build-all-libs || make build-examples
 
     - name: Check for MATLAB/Simulink
       run: |
@@ -49,7 +50,7 @@ jobs:
     - name: Check existing builds
       run: |
         echo "Checking existing compiled models..."
-        make check-libs
+        make check-all-libs
 
     - name: Validate build scripts
       run: |
@@ -68,8 +69,11 @@ jobs:
         echo "Build completed at $(date)" > build-artifacts/build-info.txt
         echo "Python version: $(python --version)" >> build-artifacts/build-info.txt
         echo "Platform: $(uname -a)" >> build-artifacts/build-info.txt
-        echo "Generated .so files:" >> build-artifacts/build-info.txt
+        echo "Generated libraries:" >> build-artifacts/build-info.txt
+        echo "Shared libraries (.so):" >> build-artifacts/build-info.txt
         ls -la Example1/*.so Example2/*.so Example3/*.so >> build-artifacts/build-info.txt 2>/dev/null || echo "No .so files found" >> build-artifacts/build-info.txt
+        echo "Static libraries (.a):" >> build-artifacts/build-info.txt
+        ls -la Example1/*.a Example2/*.a Example3/*.a >> build-artifacts/build-info.txt 2>/dev/null || echo "No .a files found" >> build-artifacts/build-info.txt
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
@@ -78,6 +82,9 @@ jobs:
         path: |
           build-artifacts/
           Example1/*.so
+          Example1/*.a
           Example2/*.so
+          Example2/*.a
           Example3/*.so
+          Example3/*.a
         retention-days: 30

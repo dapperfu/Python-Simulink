@@ -37,13 +37,14 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pip-${{ matrix.python-version }}-
 
-    - name: Install dependencies and build .so files
+    - name: Install dependencies and build libraries
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        # Build missing .so files for Linux
+        # Build libraries with fallback support (MATLAB if available, manual build otherwise)
         if [[ "${{ matrix.os }}" == "ubuntu-latest" ]]; then
-          make build-example1-so
+          echo "Building libraries with fallback support..."
+          make build-libraries || make build-all-so
         fi
 
     - name: Run linting
@@ -83,27 +84,31 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        # Build all missing .so files and install dependencies
-        make build-examples
+        # Build all libraries with fallback support (MATLAB if available, manual build otherwise)
+        echo "Building all libraries with fallback support..."
+        make build-libraries || make build-all-libs || make build-examples
 
     - name: Check for pre-built libraries
       run: |
         echo "Checking for pre-built libraries..."
-        make check-libs
+        make check-all-libs
 
     - name: Validate Python files
       run: |
         echo "Validating Python files..."
         make validate
 
-    - name: Upload generated .so files as artifacts
+    - name: Upload generated libraries as artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: linux-shared-libraries
+        name: linux-libraries
         path: |
-          Example1/dllModel.so
-          Example2/discrete_tf.so
-          Example3/bouncing_ball_R2018a.so
+          Example1/*.so
+          Example1/*.a
+          Example2/*.so
+          Example2/*.a
+          Example3/*.so
+          Example3/*.a
         retention-days: 30
 
   documentation:

@@ -24,10 +24,13 @@ jobs:
       with:
         python-version: "3.11"
 
-    - name: Install dependencies
+    - name: Install dependencies and build libraries
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        # Build all libraries with fallback support for release
+        echo "Building libraries for release with fallback support..."
+        make build-libraries || make build-all-libs || make build-examples
 
     - name: Run tests
       run: |
@@ -54,7 +57,7 @@ jobs:
         asset_name: dllModel_win64.dll
         asset_content_type: application/octet-stream
 
-    - name: Upload Example2 assets
+    - name: Upload Example2 shared library
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -64,12 +67,32 @@ jobs:
         asset_name: discrete_tf.so
         asset_content_type: application/octet-stream
 
-    - name: Upload Example3 assets
+    - name: Upload Example2 static library
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./Example3/bouncing_ball_R2018a.so
-        asset_name: bouncing_ball_R2018a.so
+        asset_path: ./Example2/libdiscrete_tf.a
+        asset_name: libdiscrete_tf.a
+        asset_content_type: application/octet-stream
+
+    - name: Upload Example3 shared library
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./Example3/bouncing_ball.so
+        asset_name: bouncing_ball.so
+        asset_content_type: application/octet-stream
+
+    - name: Upload Example3 static library
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./Example3/libbouncing_ball.a
+        asset_name: libbouncing_ball.a
         asset_content_type: application/octet-stream
