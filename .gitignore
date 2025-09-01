@@ -52,6 +52,7 @@ nosetests.xml
 coverage.xml
 *.cover
 .hypothesis/
+.pytest_cache/
 
 # Translations
 *.mo
@@ -106,6 +107,28 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+build-artifacts/
+
+# GitHub Actions artifacts
+*.tar.gz
+*.zip
+
+# Temporary files
+*.tmp
+*.temp
 
 **/castxml/*
 **/dllModel/*

@@ -1,0 +1,166 @@
+/*
+ * File: bouncing_ball_R2018a.c
+ *
+ * Code generated for Simulink model 'bouncing_ball_R2018a'.
+ *
+ * Model version                  : 1.0
+ * Simulink Coder version         : 8.14 (R2018a) 06-Feb-2018
+ * C/C++ source code generated on : Fri Apr 18 23:50:09 2025
+ *
+ * Target selection: ert_shrlib.tlc
+ * Embedded hardware selection: Intel->x86-64 (Windows64)
+ * Emulation hardware selection:
+ *    Differs from embedded hardware (MATLAB Host)
+ * Code generation objectives: Unspecified
+ * Validation result: Not run
+ */
+
+#include "bouncing_ball_R2018a.h"
+#include "bouncing_ball_R2018a_private.h"
+
+/* Exported block signals */
+real_T SimTime;                        /* '<Root>/Digital Clock' */
+real32_T ball_position;                /* '<Root>/Velocity Integrator' */
+real32_T ball_velocity;                /* '<Root>/Acceleration Integrator' */
+
+/* Exported block parameters */
+real32_T coefficient_of_restitution = -0.8F;/* Variable: coefficient_of_restitution
+                                             * Referenced by: '<Root>/Constant1'
+                                             */
+real32_T gravitational_constant = -9.81F;/* Variable: gravitational_constant
+                                          * Referenced by: '<Root>/Constant'
+                                          */
+
+/* Block states (default storage) */
+DW_bouncing_ball_R2018a_T bouncing_ball_R2018a_DW;
+
+/* Real-time model */
+RT_MODEL_bouncing_ball_R2018a_T bouncing_ball_R2018a_M_;
+RT_MODEL_bouncing_ball_R2018a_T *const bouncing_ball_R2018a_M =
+  &bouncing_ball_R2018a_M_;
+
+/* Model step function */
+void bouncing_ball_R2018a_step(void)
+{
+  boolean_T rtb_Compare;
+  int32_T IC2;
+  real32_T IC;
+
+  /* RelationalOperator: '<S1>/Compare' incorporates:
+   *  Constant: '<S1>/Constant'
+   */
+  rtb_Compare = (bouncing_ball_R2018a_DW.VelocityIntegrator_DSTATE <= 0.0F);
+
+  /* InitialCondition: '<Root>/IC2' */
+  if (bouncing_ball_R2018a_DW.IC2_FirstOutputTime) {
+    bouncing_ball_R2018a_DW.IC2_FirstOutputTime = false;
+    IC2 = 10;
+  } else {
+    IC2 = 0;
+  }
+
+  /* End of InitialCondition: '<Root>/IC2' */
+
+  /* DiscreteIntegrator: '<Root>/Velocity Integrator' */
+  if (rtb_Compare && (bouncing_ball_R2018a_DW.VelocityIntegrator_PrevResetSta <=
+                      0)) {
+    bouncing_ball_R2018a_DW.VelocityIntegrator_DSTATE = (real32_T)IC2;
+  }
+
+  ball_position = bouncing_ball_R2018a_DW.VelocityIntegrator_DSTATE;
+
+  /* End of DiscreteIntegrator: '<Root>/Velocity Integrator' */
+
+  /* InitialCondition: '<Root>/IC' incorporates:
+   *  Constant: '<Root>/Constant1'
+   *  Product: '<Root>/Multiply'
+   */
+  if (bouncing_ball_R2018a_DW.IC_FirstOutputTime) {
+    bouncing_ball_R2018a_DW.IC_FirstOutputTime = false;
+    IC = 15.0F;
+  } else {
+    IC = coefficient_of_restitution *
+      bouncing_ball_R2018a_DW.AccelerationIntegrator_DSTATE;
+  }
+
+  /* End of InitialCondition: '<Root>/IC' */
+
+  /* DiscreteIntegrator: '<Root>/Acceleration Integrator' */
+  if (rtb_Compare && (bouncing_ball_R2018a_DW.AccelerationIntegrator_PrevRese <=
+                      0)) {
+    bouncing_ball_R2018a_DW.AccelerationIntegrator_DSTATE = IC;
+  }
+
+  ball_velocity = bouncing_ball_R2018a_DW.AccelerationIntegrator_DSTATE;
+
+  /* End of DiscreteIntegrator: '<Root>/Acceleration Integrator' */
+
+  /* DigitalClock: '<Root>/Digital Clock' */
+  SimTime = ((bouncing_ball_R2018a_M->Timing.clockTick0) * 0.001);
+
+  /* Update for DiscreteIntegrator: '<Root>/Velocity Integrator' */
+  bouncing_ball_R2018a_DW.VelocityIntegrator_DSTATE += 0.001F * ball_velocity;
+  bouncing_ball_R2018a_DW.VelocityIntegrator_PrevResetSta = (int8_T)rtb_Compare;
+
+  /* Update for DiscreteIntegrator: '<Root>/Acceleration Integrator' incorporates:
+   *  Constant: '<Root>/Constant'
+   */
+  bouncing_ball_R2018a_DW.AccelerationIntegrator_DSTATE += 0.001F *
+    gravitational_constant;
+  bouncing_ball_R2018a_DW.AccelerationIntegrator_PrevRese = (int8_T)rtb_Compare;
+
+  /* Update absolute time for base rate */
+  /* The "clockTick0" counts the number of times the code of this task has
+   * been executed. The resolution of this integer timer is 0.001, which is the step size
+   * of the task. Size of "clockTick0" ensures timer will not overflow during the
+   * application lifespan selected.
+   */
+  bouncing_ball_R2018a_M->Timing.clockTick0++;
+}
+
+/* Model initialize function */
+void bouncing_ball_R2018a_initialize(void)
+{
+  /* Registration code */
+
+  /* initialize real-time model */
+  (void) memset((void *)bouncing_ball_R2018a_M, 0,
+                sizeof(RT_MODEL_bouncing_ball_R2018a_T));
+
+  /* block I/O */
+
+  /* exported global signals */
+  SimTime = 0.0;
+  ball_position = 0.0F;
+  ball_velocity = 0.0F;
+
+  /* states (dwork) */
+  (void) memset((void *)&bouncing_ball_R2018a_DW, 0,
+                sizeof(DW_bouncing_ball_R2018a_T));
+
+  /* Start for InitialCondition: '<Root>/IC2' */
+  bouncing_ball_R2018a_DW.IC2_FirstOutputTime = true;
+
+  /* Start for InitialCondition: '<Root>/IC' */
+  bouncing_ball_R2018a_DW.IC_FirstOutputTime = true;
+
+  /* InitializeConditions for DiscreteIntegrator: '<Root>/Velocity Integrator' */
+  bouncing_ball_R2018a_DW.VelocityIntegrator_DSTATE = 10.0F;
+  bouncing_ball_R2018a_DW.VelocityIntegrator_PrevResetSta = 2;
+
+  /* InitializeConditions for DiscreteIntegrator: '<Root>/Acceleration Integrator' */
+  bouncing_ball_R2018a_DW.AccelerationIntegrator_DSTATE = 15.0F;
+  bouncing_ball_R2018a_DW.AccelerationIntegrator_PrevRese = 2;
+}
+
+/* Model terminate function */
+void bouncing_ball_R2018a_terminate(void)
+{
+  /* (no terminate code required) */
+}
+
+/*
+ * File trailer for generated code.
+ *
+ * [EOF]
+ */

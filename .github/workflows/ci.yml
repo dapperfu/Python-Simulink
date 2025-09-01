@@ -1,0 +1,159 @@
+name: Python-Simulink CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+        os: [ubuntu-latest, windows-latest]
+        exclude:
+          # Windows with Python 3.12 has some compatibility issues
+          - os: windows-latest
+            python-version: "3.12"
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ matrix.python-version }}-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-${{ matrix.python-version }}-
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run linting
+      run: |
+        python -m flake8 --version || pip install flake8
+        python -m flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        python -m flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+    - name: Test Example2 (Discrete Transfer Function)
+      run: |
+        cd Example2
+        python -m pytest tests/ -v --tb=short
+      env:
+        # Set environment variable to handle .so file loading
+        LD_LIBRARY_PATH: ${{ github.workspace }}/Example2
+
+    - name: Test Example2 Python class
+      run: |
+        cd Example2
+        python -c "
+        import sys
+        sys.path.append('.')
+        from discretetf import DiscreteTF
+        import numpy as np
+        
+        # Test basic functionality
+        mdl = DiscreteTF()
+        mdl.initialize()
+        mdl.input_signal = 1.0
+        mdl.step()
+        print(f'Output: {mdl.output}')
+        print(f'Time: {mdl.time}')
+        mdl.terminate()
+        print('Test passed!')
+        "
+
+  build-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Check for pre-built libraries
+      run: |
+        echo "Checking for pre-built libraries..."
+        echo "Example1:"
+        ls -la Example1/*.dll Example1/*.so 2>/dev/null || echo "No pre-built libraries found"
+        echo "Example2:"
+        ls -la Example2/*.dll Example2/*.so 2>/dev/null || echo "No pre-built libraries found"
+        echo "Example3:"
+        ls -la Example3/*.dll Example3/*.so 2>/dev/null || echo "No pre-built libraries found"
+
+    - name: Validate Python files
+      run: |
+        echo "Validating Python files..."
+        python -m py_compile Example1/rtwtypes.py
+        python -m py_compile Example2/rtwtypes.py
+        python -m py_compile Example2/discretetf.py
+        python -m py_compile Example3/rtwtypes.py
+        echo "All Python files compile successfully!"
+
+  documentation:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Check documentation
+      run: |
+        echo "Checking README files..."
+        test -f README.md && echo "Main README exists"
+        test -f Example1/README.md && echo "Example1 README exists"
+        test -f Example2/README.md && echo "Example2 README exists"
+        test -f Example3/README.md && echo "Example3 README exists"
+
+    - name: Validate notebook files
+      run: |
+        echo "Checking notebook files..."
+        test -f Example1/dllModel.ipynb && echo "Example1 notebook exists"
+        test -f Example2/discrete_tf.ipynb && echo "Example2 notebook exists"
+        test -f Example3/bouncing_ball.ipynb && echo "Example3 notebook exists"
+
+  security:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Run security scan
+      uses: snyk/actions/python@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        args: --severity-threshold=high

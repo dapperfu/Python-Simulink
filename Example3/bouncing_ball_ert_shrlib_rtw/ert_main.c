@@ -4,8 +4,8 @@
  * Code generated for Simulink model 'bouncing_ball'.
  *
  * Model version                  : 1.20
- * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
- * C/C++ source code generated on : Sat Feb  6 16:13:51 2021
+ * Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
+ * C/C++ source code generated on : Fri Apr 18 20:44:41 2025
  *
  * Target selection: ert_shrlib.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -14,9 +14,8 @@
  */
 
 #include <stddef.h>
-#include <stdio.h>                     /* This ert_main.c example uses printf/fflush */
-#include "bouncing_ball.h"             /* Model's header file */
-#include "rtwtypes.h"
+#include <stdio.h>            /* This example main program uses printf/fflush */
+#include "bouncing_ball.h"             /* Model header file */
 
 /*
  * Associating rt_OneStep with a real-time clock or interrupt service routine
@@ -62,9 +61,9 @@ void rt_OneStep(void)
 }
 
 /*
- * The example "main" function illustrates what is required by your
+ * The example main function illustrates what is required by your
  * application code to initialize, execute, and terminate the generated code.
- * Attaching rt_OneStep to a real-time clock is target specific.  This example
+ * Attaching rt_OneStep to a real-time clock is target specific. This example
  * illustrates how you do this relative to initializing the model.
  */
 int_T main(int_T argc, const char *argv[])
@@ -77,8 +76,8 @@ int_T main(int_T argc, const char *argv[])
   bouncing_ball_initialize();
 
   /* Attach rt_OneStep to a timer or interrupt service routine with
-   * period 0.001 seconds (the model's base sample time) here.  The
-   * call syntax for rt_OneStep is
+   * period 0.001 seconds (base rate of the model) here.
+   * The call syntax for rt_OneStep is
    *
    *  rt_OneStep();
    */
@@ -87,10 +86,8 @@ int_T main(int_T argc, const char *argv[])
          "To change this behavior select the 'MAT-file logging' option.\n");
   fflush((NULL));
   while (rtmGetErrorStatus(bouncing_ball_M) == (NULL)) {
-    /*  Perform other application tasks here */
+    /*  Perform application tasks here */
   }
-
-  /* Disable rt_OneStep() here */
 
   /* Terminate model */
   bouncing_ball_terminate();

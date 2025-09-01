@@ -1,0 +1,17 @@
+{
+global:
+bouncing_ball_R2018a_M_;
+bouncing_ball_R2018a_M;
+bouncing_ball_R2018a_initialize;
+bouncing_ball_R2018a_step;
+bouncing_ball_R2018a_terminate;
+
+
+SimTime;
+ball_position;
+ball_velocity;
+coefficient_of_restitution;
+gravitational_constant;
+local:
+		*;
+};

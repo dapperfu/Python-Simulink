@@ -1,13 +1,14 @@
-EXPORTS
-bouncing_ball_M_
-bouncing_ball_M
-bouncing_ball_initialize
-bouncing_ball_step
-bouncing_ball_terminate
+        EXPORTS
+        bouncing_ball_M
+    bouncing_ball_initialize
+            bouncing_ball_step
+        bouncing_ball_terminate
 
 
-SimTime
-ball_position
-ball_velocity
-coefficient_of_restitution
-gravitational_constant
+                            SimTime
+                        ball_velocity
+                        ball_position
+                            coefficient_of_restitution
+                        gravitational_constant
+
+

@@ -1,16 +1,11 @@
 ###########################################################################
-## Makefile generated for Simulink model 'bouncing_ball'.
-##
+## Makefile generated for component 'bouncing_ball'. 
+## 
 ## Makefile     : bouncing_ball.mk
-## Generated on : Sat Feb 06 16:13:33 2021
-## MATLAB Coder version: 4.1 (R2018b)
-##
-## Build Info:
-##
+## Generated on : Fri Apr 18 20:45:32 2025
 ## Final product: $(RELATIVE_PATH_TO_ANCHOR)/bouncing_ball_win64.dll
 ## Product type : shared library
-## Build type   : Shared Library Target
-##
+## 
 ###########################################################################
 
 ###########################################################################
@@ -20,22 +15,18 @@
 # Macro Descriptions:
 # PRODUCT_NAME            Name of the system to build
 # MAKEFILE                Name of this makefile
-# COMPUTER                Computer type. See the MATLAB "computer" command.
 # COMPILER_COMMAND_FILE   Compiler command listing model reference header paths
 # CMD_FILE                Command file
 # DEF_FILE                Definition file
 
 PRODUCT_NAME              = bouncing_ball
 MAKEFILE                  = bouncing_ball.mk
-COMPUTER                  = PCWIN64
-MATLAB_ROOT               = C:/R2018b
-MATLAB_BIN                = C:/R2018b/bin
+MATLAB_ROOT               = C:/PROGRA~1/MATLAB/R2023b
+MATLAB_BIN                = C:/PROGRA~1/MATLAB/R2023b/bin
 MATLAB_ARCH_BIN           = $(MATLAB_BIN)/win64
-MASTER_ANCHOR_DIR         =
-START_DIR                 = C:/WPy64-3910/notebooks/python_SimulinkDLL/Example3
-ARCH                      = win64
-SOLVER                    =
-SOLVER_OBJ                =
+START_DIR                 = Y:/Python-Simulink/Example3
+SOLVER                    = 
+SOLVER_OBJ                = 
 CLASSIC_INTERFACE         = 0
 TGT_FCN_LIB               = ISO_C
 MODEL_HAS_DYNAMICALLY_LOADED_SFCNS = 0
@@ -43,7 +34,7 @@ RELATIVE_PATH_TO_ANCHOR   = ..
 COMPILER_COMMAND_FILE     = bouncing_ball_comp.rsp
 CMD_FILE                  = bouncing_ball.rsp
 DEF_FILE                  = $(PRODUCT_NAME).def
-C_STANDARD_OPTS           = -std=c99 -pedantic -fwrapv
+C_STANDARD_OPTS           = -fwrapv
 CPP_STANDARD_OPTS         = -fwrapv
 
 ###########################################################################
@@ -51,10 +42,10 @@ CPP_STANDARD_OPTS         = -fwrapv
 ###########################################################################
 
 # Toolchain Name:          MinGW64 | gmake (64-bit Windows)
-# Supported Version(s):    5.x
-# ToolchainInfo Version:   R2018b
+# Supported Version(s):    8.x
+# ToolchainInfo Version:   2023b
 # Specification Revision:  1.0
-#
+# 
 #-------------------------------------------
 # Macros assumed to be defined elsewhere
 #-------------------------------------------
@@ -72,13 +63,11 @@ WARN_FLAGS            = -Wall -W -Wwrite-strings -Winline -Wstrict-prototypes -W
 WARN_FLAGS_MAX        = $(WARN_FLAGS) -Wcast-qual -Wshadow
 CPP_WARN_FLAGS        = -Wall -W -Wwrite-strings -Winline -Wpointer-arith -Wcast-align
 CPP_WARN_FLAGS_MAX    = $(CPP_WARN_FLAGS) -Wcast-qual -Wshadow
-MEX_OPTS_FILE         = $(MATLAB_ROOT)/bin/win64/mexopts/mingw64.xml
-MEX_CPP_OPTS_FILE     = $(MATLAB_ROOT)/bin/win64/mexopts/mingw64_g++.xml
 MW_EXTERNLIB_DIR      = $(MATLAB_ROOT)/extern/lib/win64/mingw64
 SHELL                 = %SystemRoot%/system32/cmd.exe
 
-TOOLCHAIN_SRCS =
-TOOLCHAIN_INCS =
+TOOLCHAIN_SRCS = 
+TOOLCHAIN_INCS = 
 TOOLCHAIN_LIBS = -lws2_32
 
 #------------------------
@@ -106,7 +95,7 @@ AR_PATH = $(MINGW_ROOT)
 AR = "$(AR_PATH)/ar"
 
 # MEX Tool: MEX Tool
-MEX_PATH = $(MATLAB_BIN)/win64
+MEX_PATH = $(MATLAB_ARCH_BIN)
 MEX = "$(MEX_PATH)/mex"
 
 # Download: Download
@@ -116,8 +105,8 @@ DOWNLOAD =
 EXECUTE = $(PRODUCT)
 
 # Builder: GMAKE Utility
-MAKE_PATH = %MATLAB%/bin/win64
-MAKE = "$(MAKE_PATH)/gmake"
+MAKE_PATH = $(MINGW_ROOT)
+MAKE = "$(MAKE_PATH)/mingw32-make.exe"
 
 
 #-------------------------
@@ -149,49 +138,20 @@ CFLAGS               = -c $(MINGW_C_STANDARD_OPTS) -m64 \
                        -O3 -fno-loop-optimize -fno-aggressive-loop-optimizations
 CPPFLAGS             = -c $(CPP_STANDARD_OPTS) -m64 \
                        -O3 -fno-loop-optimize -fno-aggressive-loop-optimizations
-CPP_LDFLAGS          = -Wl,-rpath,"$(MATLAB_ARCH_BIN)",-L"$(MATLAB_ARCH_BIN)" -static -m64
-CPP_SHAREDLIB_LDFLAGS  = -shared -Wl,-rpath,"$(MATLAB_ARCH_BIN)",-L"$(MATLAB_ARCH_BIN)" -Wl,--no-undefined \
-                         -Wl,--out-implib,$(basename $(PRODUCT))$(STATICLIB_EXT)
+CPP_LDFLAGS          =  -static -m64
+CPP_SHAREDLIB_LDFLAGS  = -shared -Wl,--no-undefined \
+                         -Wl,--out-implib,$(notdir $(basename $(PRODUCT))).lib
 DOWNLOAD_FLAGS       =
 EXECUTE_FLAGS        =
-LDFLAGS              = -Wl,-rpath,"$(MATLAB_ARCH_BIN)",-L"$(MATLAB_ARCH_BIN)" -static -m64
-MEX_CPPFLAGS         = -R2018a -MATLAB_ARCH=$(ARCH) $(INCLUDES) \
-                         \
-                       CXXOPTIMFLAGS="$(MINGW_C_STANDARD_OPTS)  \
-                       -O3 -fno-loop-optimize -fno-aggressive-loop-optimizations \
-                        $(DEFINES)" \
-                         \
-                       -silent
-MEX_CPPLDFLAGS       = LDFLAGS=='$$LDFLAGS'
-MEX_CFLAGS           = -R2018a -MATLAB_ARCH=$(ARCH) $(INCLUDES) \
-                         \
-                       COPTIMFLAGS="$(MINGW_C_STANDARD_OPTS)  \
-                       -O3 -fno-loop-optimize -fno-aggressive-loop-optimizations \
-                        $(DEFINES)" \
-                         \
-                       -silent
-MEX_LDFLAGS          = LDFLAGS=='$$LDFLAGS'
+LDFLAGS              =  -static -m64
+MEX_CPPFLAGS         =
+MEX_CPPLDFLAGS       =
+MEX_CFLAGS           =
+MEX_LDFLAGS          =
 MAKE_FLAGS           = -f $(MAKEFILE)
-SHAREDLIB_LDFLAGS    = -shared -Wl,-rpath,"$(MATLAB_ARCH_BIN)",-L"$(MATLAB_ARCH_BIN)" -Wl,--no-undefined \
-                       -Wl,--out-implib,$(basename $(PRODUCT))$(STATICLIB_EXT)
+SHAREDLIB_LDFLAGS    = -shared -Wl,--no-undefined \
+                       -Wl,--out-implib,$(notdir $(basename $(PRODUCT))).lib
 
-#--------------------
-# File extensions
-#--------------------
-
-H_EXT               = .h
-OBJ_EXT             = .obj
-C_EXT               = .c
-EXE_EXT             = .exe
-SHAREDLIB_EXT       = .dll
-HPP_EXT             = .hpp
-OBJ_EXT             = .obj
-CPP_EXT             = .cpp
-EXE_EXT             = .exe
-SHAREDLIB_EXT       = .dll
-STATICLIB_EXT       = .lib
-MEX_EXT             = .mexw64
-MAKE_EXT            = .mk
 
 
 ###########################################################################
@@ -206,7 +166,7 @@ BUILD_TYPE = "Shared Library Target"
 ## INCLUDE PATHS
 ###########################################################################
 
-INCLUDES_BUILDINFO = -I$(START_DIR) -I$(START_DIR)/bouncing_ball_ert_shrlib_rtw -I$(MATLAB_ROOT)/extern/include -I$(MATLAB_ROOT)/simulink/include -I$(MATLAB_ROOT)/rtw/c/src -I$(MATLAB_ROOT)/rtw/c/src/ext_mode/common -I$(MATLAB_ROOT)/rtw/c/ert
+INCLUDES_BUILDINFO = 
 
 INCLUDES = $(INCLUDES_BUILDINFO)
 
@@ -215,10 +175,11 @@ INCLUDES = $(INCLUDES_BUILDINFO)
 ###########################################################################
 
 DEFINES_BUILD_ARGS = -DCLASSIC_INTERFACE=0 -DALLOCATIONFCN=0 -DTERMFCN=1 -DONESTEPFCN=1 -DMAT_FILE=0 -DMULTI_INSTANCE_CODE=0 -DINTEGER_CODE=0 -DMT=0
-DEFINES_IMPLIED = -DTID01EQ=0
+DEFINES_CUSTOM = 
+DEFINES_OPTS = -DTID01EQ=0
 DEFINES_STANDARD = -DMODEL=bouncing_ball -DNUMST=1 -DNCSTATES=0 -DHAVESTDIO -DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0
 
-DEFINES = $(DEFINES_BUILD_ARGS) $(DEFINES_IMPLIED) $(DEFINES_STANDARD)
+DEFINES = $(DEFINES_BUILD_ARGS) $(DEFINES_CUSTOM) $(DEFINES_OPTS) $(DEFINES_STANDARD)
 
 ###########################################################################
 ## SOURCE FILES
@@ -244,19 +205,19 @@ ALL_OBJS = $(OBJS) $(MAIN_OBJ)
 ## PREBUILT OBJECT FILES
 ###########################################################################
 
-PREBUILT_OBJS =
+PREBUILT_OBJS = 
 
 ###########################################################################
 ## LIBRARIES
 ###########################################################################
 
-LIBS =
+LIBS = 
 
 ###########################################################################
 ## SYSTEM LIBRARIES
 ###########################################################################
 
-SYSTEM_LIBS =
+SYSTEM_LIBS = 
 
 ###########################################################################
 ## ADDITIONAL TOOLCHAIN FLAGS
@@ -299,11 +260,7 @@ MEX_CFLAGS += $(MEX_Compiler_BASIC)
 ###########################################################################
 
 
-ifdef SIM_TARGET_BUILD
-MINGW_C_STANDARD_OPTS = $(filter-out -ansi, $(C_STANDARD_OPTS))
-else
 MINGW_C_STANDARD_OPTS = $(C_STANDARD_OPTS)
-endif
 
 
 ###########################################################################
@@ -320,10 +277,10 @@ all : build
 build : prebuild $(PRODUCT)
 
 
-prebuild :
+prebuild : 
 
 
-download : build
+download : $(PRODUCT)
 
 
 execute : download
@@ -359,11 +316,51 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
+%.obj : %.cc
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : %.cp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : %.cxx
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : %.CPP
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : %.c++
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
 %.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
 %.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.cc
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.cp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.cxx
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.CPP
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.c++
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
@@ -375,11 +372,51 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
+%.obj : $(START_DIR)/%.cc
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(START_DIR)/%.cp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(START_DIR)/%.cxx
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(START_DIR)/%.CPP
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(START_DIR)/%.c++
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
 %.obj : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
 %.obj : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/%.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/%.cc
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/%.cp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/%.cxx
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/%.CPP
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/%.c++
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
@@ -391,6 +428,26 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
+%.obj : $(MATLAB_ROOT)/rtw/c/src/%.cc
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(MATLAB_ROOT)/rtw/c/src/%.cp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(MATLAB_ROOT)/rtw/c/src/%.cxx
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(MATLAB_ROOT)/rtw/c/src/%.CPP
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(MATLAB_ROOT)/rtw/c/src/%.c++
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
 %.obj : $(MATLAB_ROOT)/simulink/src/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
@@ -399,18 +456,74 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
+%.obj : $(MATLAB_ROOT)/simulink/src/%.cc
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(MATLAB_ROOT)/simulink/src/%.cp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(MATLAB_ROOT)/simulink/src/%.cxx
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(MATLAB_ROOT)/simulink/src/%.CPP
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(MATLAB_ROOT)/simulink/src/%.c++
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.c
+	$(CC) $(CFLAGS) -o "$@" "$<"
+
+
+%.obj : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.cc
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.cp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.cxx
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.CPP
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.obj : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.c++
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+bouncing_ball.obj : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/bouncing_ball.c
+	$(CC) $(CFLAGS) -o "$@" "$<"
+
+
+ert_main.obj : $(START_DIR)/bouncing_ball_ert_shrlib_rtw/ert_main.c
+	$(CC) $(CFLAGS) -o "$@" "$<"
+
+
 ###########################################################################
 ## DEPENDENCIES
 ###########################################################################
 
-$(ALL_OBJS) : rtw_proj.tmw $(MAKEFILE)
+$(ALL_OBJS) : rtw_proj.tmw $(COMPILER_COMMAND_FILE) $(MAKEFILE)
 
 
 ###########################################################################
 ## MISCELLANEOUS TARGETS
 ###########################################################################
 
-info :
+info : 
 	@echo "### PRODUCT = $(PRODUCT)"
 	@echo "### PRODUCT_TYPE = $(PRODUCT_TYPE)"
 	@echo "### BUILD_TYPE = $(BUILD_TYPE)"
@@ -438,8 +551,10 @@ info :
 	@echo "### MAKE_FLAGS = $(MAKE_FLAGS)"
 
 
-clean :
-	$(ECHO) "### Deleting all derived files..."
+clean : 
+	$(ECHO) "### Deleting all derived files ..."
 	$(RM) $(subst /,\,$(PRODUCT))
 	$(RM) $(subst /,\,$(ALL_OBJS))
 	$(ECHO) "### Deleted all derived files."
+
+

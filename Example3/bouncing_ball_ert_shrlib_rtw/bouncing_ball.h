@@ -4,8 +4,8 @@
  * Code generated for Simulink model 'bouncing_ball'.
  *
  * Model version                  : 1.20
- * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
- * C/C++ source code generated on : Sat Feb  6 16:13:51 2021
+ * Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
+ * C/C++ source code generated on : Fri Apr 18 20:44:41 2025
  *
  * Target selection: ert_shrlib.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -15,31 +15,31 @@
 
 #ifndef RTW_HEADER_bouncing_ball_h_
 #define RTW_HEADER_bouncing_ball_h_
-#include <string.h>
 #ifndef bouncing_ball_COMMON_INCLUDES_
-# define bouncing_ball_COMMON_INCLUDES_
+#define bouncing_ball_COMMON_INCLUDES_
 #include "rtwtypes.h"
 #endif                                 /* bouncing_ball_COMMON_INCLUDES_ */
 
 #include "bouncing_ball_types.h"
+#include <string.h>
 
 /* Macros for accessing real-time model data structure */
 #ifndef rtmGetErrorStatus
-# define rtmGetErrorStatus(rtm)        ((rtm)->errorStatus)
+#define rtmGetErrorStatus(rtm)         ((rtm)->errorStatus)
 #endif
 
 #ifndef rtmSetErrorStatus
-# define rtmSetErrorStatus(rtm, val)   ((rtm)->errorStatus = (val))
+#define rtmSetErrorStatus(rtm, val)    ((rtm)->errorStatus = (val))
 #endif
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
-  real32_T VelocityIntegrator_DSTATE;  /* '<Root>/Velocity Integrator' */
   real32_T AccelerationIntegrator_DSTATE;/* '<Root>/Acceleration Integrator' */
-  int8_T VelocityIntegrator_PrevResetSta;/* '<Root>/Velocity Integrator' */
+  real32_T VelocityIntegrator_DSTATE;  /* '<Root>/Velocity Integrator' */
   int8_T AccelerationIntegrator_PrevRese;/* '<Root>/Acceleration Integrator' */
-  boolean_T IC2_FirstOutputTime;       /* '<Root>/IC2' */
+  int8_T VelocityIntegrator_PrevResetSta;/* '<Root>/Velocity Integrator' */
   boolean_T IC_FirstOutputTime;        /* '<Root>/IC' */
+  boolean_T IC2_FirstOutputTime;       /* '<Root>/IC2' */
 } DW_bouncing_ball_T;
 
 /* Real-time Model Data Structure */
@@ -68,8 +68,8 @@ extern DW_bouncing_ball_T bouncing_ball_DW;
  *
  */
 extern real_T SimTime;                 /* '<Root>/Digital Clock' */
-extern real32_T ball_position;         /* '<Root>/Velocity Integrator' */
 extern real32_T ball_velocity;         /* '<Root>/Acceleration Integrator' */
+extern real32_T ball_position;         /* '<Root>/Velocity Integrator' */
 
 /*
  * Exported Global Parameters

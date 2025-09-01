@@ -1,12 +1,13 @@
-@if not "%MINGW_ROOT%" == "" (@set "PATH=%PATH%;%MINGW_ROOT%")
+
+call "setup_mingw.bat"
 
 cd .
 
-if "%1"=="" ("C:\R2018b\bin\win64\gmake"  -f bouncing_ball.mk all) else ("C:\R2018b\bin\win64\gmake"  -f bouncing_ball.mk %1)
+if "%1"=="" ("%MINGW_ROOT%\mingw32-make.exe"  -f bouncing_ball.mk all) else ("%MINGW_ROOT%\mingw32-make.exe"  -f bouncing_ball.mk %1)
 @if errorlevel 1 goto error_exit
 
 exit /B 0
 
 :error_exit
 echo The make command returned an error of %errorlevel%
-An_error_occurred_during_the_call_to_make
+exit /B 1

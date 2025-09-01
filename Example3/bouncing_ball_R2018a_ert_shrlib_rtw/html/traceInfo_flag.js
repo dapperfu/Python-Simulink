@@ -1,0 +1,49 @@
+function TraceInfoFlag() {
+    this.traceFlag = new Array();
+    this.traceFlag["bouncing_ball_R2018a.c:52c68"]=1;
+    this.traceFlag["bouncing_ball_R2018a.c:65c19"]=1;
+    this.traceFlag["bouncing_ball_R2018a.c:65c79"]=1;
+    this.traceFlag["bouncing_ball_R2018a.c:82c37"]=1;
+    this.traceFlag["bouncing_ball_R2018a.c:89c19"]=1;
+    this.traceFlag["bouncing_ball_R2018a.c:89c79"]=1;
+    this.traceFlag["bouncing_ball_R2018a.c:99c58"]=1;
+    this.traceFlag["bouncing_ball_R2018a.c:102c53"]=1;
+    this.traceFlag["bouncing_ball_R2018a.c:102c63"]=1;
+    this.traceFlag["bouncing_ball_R2018a.c:108c57"]=1;
+    this.traceFlag["bouncing_ball_R2018a.c:108c67"]=1;
+}
+top.TraceInfoFlag.instance = new TraceInfoFlag();
+function TraceInfoLineFlag() {
+    this.lineTraceFlag = new Array();
+    this.lineTraceFlag["bouncing_ball_R2018a.c:52"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:55"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:56"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:57"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:59"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:65"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:66"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:67"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:70"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:78"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:79"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:80"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:82"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:83"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:89"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:90"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:91"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:94"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:99"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:102"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:103"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:108"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:109"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:110"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:142"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:145"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:148"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:149"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:152"]=1;
+    this.lineTraceFlag["bouncing_ball_R2018a.c:153"]=1;
+}
+top.TraceInfoLineFlag.instance = new TraceInfoLineFlag();
