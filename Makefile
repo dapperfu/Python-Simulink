@@ -11,12 +11,19 @@ help:
 	@echo "  lint       - Run linting checks"
 	@echo "  clean      - Clean build artifacts"
 	@echo "  build      - Build the package"
+	@echo "  build-libraries - Build both shared and static libraries using MATLAB"
+	@echo "  build-all-libs - Build all shared and static libraries from RTW source"
 	@echo "  build-all-so - Build all shared libraries from RTW source"
+	@echo "  build-all-static - Build all static libraries from RTW source"
 	@echo "  build-example1-so - Build Example1 shared library from RTW source"
 	@echo "  build-example2-so - Build Example2 shared library from RTW source"
 	@echo "  build-example3-so - Build Example3 shared library from RTW source"
+	@echo "  build-example1-static - Build Example1 static library from RTW source"
+	@echo "  build-example2-static - Build Example2 static library from RTW source"
+	@echo "  build-example3-static - Build Example3 static library from RTW source"
 	@echo "  check-so-files - Check if shared libraries exist"
 	@echo "  check-all-so - Check all shared libraries"
+	@echo "  check-all-libs - Check all libraries (shared and static)"
 	@echo "  build-examples - Build everything needed for examples"
 	@echo "  install-example-deps - Install missing dependencies for examples"
 	@echo "  docs       - Build documentation"
@@ -114,7 +121,21 @@ validate:
 	python -m py_compile test_all_examples.py
 	@echo "All Python files compile successfully!"
 
-# Build shared libraries from _ert_shrlib_rtw source code
+# Build both shared (.so) and static (.a) libraries from RTW source code
+build-libraries:
+	@echo "Building both shared and static libraries from RTW source..."
+	@if [ -f /opt/MATLAB/R2018a/bin/matlab ]; then \
+		echo "Using MATLAB to build libraries..."; \
+		/opt/MATLAB/R2018a/bin/matlab -nodesktop -sd ${CURDIR} -r "build_libraries; exit"; \
+	elif command -v matlab &> /dev/null; then \
+		echo "Using MATLAB to build libraries..."; \
+		matlab -nodesktop -sd ${CURDIR} -r "build_libraries; exit"; \
+	else \
+		echo "MATLAB not available, using manual build process..."; \
+		${MAKE} build-all-so; \
+	fi
+	@echo "✓ All libraries built successfully"
+
 build-example1-so:
 	@echo "Building Example1 shared library from RTW source..."
 	@if [ -f Example1/dllModel_ert_shrlib_rtw/dllModel.mk ]; then \
@@ -248,6 +269,61 @@ check-all-so: check-so-files
 # Build everything needed for examples
 build-examples: install-example-deps check-all-so
 	@echo "All examples ready"
+
+# Build static libraries from RTW source code
+build-example1-static:
+	@echo "Building Example1 static library from RTW source..."
+	@if [ -f Example1/dllModel_ert_shrlib_rtw/dllModel.o ]; then \
+		cd Example1 && \
+		ld -r -o combined.o dllModel_ert_shrlib_rtw/*.o && \
+		ar rcs libdllModel.a combined.o && \
+		rm combined.o; \
+		echo "✓ Example1/libdllModel.a built successfully"; \
+	else \
+		echo "No object files found for Example1"; \
+	fi
+
+build-example2-static:
+	@echo "Building Example2 static library from RTW source..."
+	@if [ -f Example2/discrete_tf_ert_shrlib_rtw/discrete_tf.o ]; then \
+		cd Example2 && \
+		ld -r -o combined.o discrete_tf_ert_shrlib_rtw/*.o && \
+		ar rcs libdiscrete_tf.a combined.o && \
+		rm combined.o; \
+		echo "✓ Example2/libdiscrete_tf.a built successfully"; \
+	else \
+		echo "No object files found for Example2"; \
+	fi
+
+build-example3-static:
+	@echo "Building Example3 static library from RTW source..."
+	@if [ -f Example3/bouncing_ball_ert_shrlib_rtw/bouncing_ball.o ]; then \
+		cd Example3 && \
+		ld -r -o combined.o bouncing_ball_ert_shrlib_rtw/*.o && \
+		ar rcs libbouncing_ball.a combined.o && \
+		rm combined.o; \
+		echo "✓ Example3/libbouncing_ball.a built successfully"; \
+	else \
+		echo "No object files found for Example3"; \
+	fi
+
+# Build all static libraries
+build-all-static: build-example1-static build-example2-static build-example3-static
+	@echo "All static libraries built from RTW source"
+
+# Build both shared and static libraries
+build-all-libs: build-all-so build-all-static
+	@echo "All libraries (shared and static) built from RTW source"
+
+# Check all libraries
+check-all-libs: check-so-files
+	@echo "Checking for static libraries..."
+	@echo "Example1:"
+	@ls -la Example1/*.a 2>/dev/null || echo "  No .a file found"
+	@echo "Example2:"
+	@ls -la Example2/*.a 2>/dev/null || echo "  No .a file found"
+	@echo "Example3:"
+	@ls -la Example3/*.a 2>/dev/null || echo "  No .a file found"
 
 # CI/CD tasks
 ci: install lint test-all
